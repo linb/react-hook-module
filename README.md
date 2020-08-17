@@ -62,5 +62,5 @@ export const Module2 = (props) => {
 ```javascript
 // TODO
 ```
-![react-module-hook MUI demo](https://github.com/linb/react-module-hook/images/demo1.png "react-module-hook MUI demo")
+![react-module-hook MUI demo](https://raw.githubusercontent.com/linb/react-module-hook/master/image/demo1.png "react-module-hook MUI demo")
 [Open the demo in CodeSandbox](https://codesandbox.io/s/thirsty-swirles-4iomy "react-module-hook MUI demo")
