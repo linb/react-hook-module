@@ -54,7 +54,7 @@ export const Module2 = (props) => {
   );
 };
 ```
-![react-module-hook basic demo](https://github.com/linb/react-module-hook/images/demo1.png "react-module-hook basic demo")
+![react-module-hook basic demo](https://github.com/linb/react-module-hook/image/demo1.png "react-module-hook basic demo")
 [Open the demo in CodeSandbox](https://codesandbox.io/s/thirsty-swirles-4iomy "react-module-hook basic demo")
 
 
