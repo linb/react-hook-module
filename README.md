@@ -1,7 +1,198 @@
 # react-module-hook
 A react module hook for real configurable app with stateful persistent module tree and peer-to-peer messaging mechanism
 
-## Basic Demo
+## Usage
+## Install
+```javascript
+npm install react-module-hook
+```
+
+### import
+```javascript
+import useModule from "react-module-hook";
+```
+### use it in a render function
+```javascript
+const ReactComponent = props => {
+  const module = useAsModule(props, {
+    state:{}     // the default state for this module
+    props:{},    // the default props for this module
+    actions:{},  // actions for this module,
+    tagVar:{}    // for extra data
+  }); 
+
+  // ...
+  // return JSX;
+};
+```
+### For the global variable useAsModule
+##### </> getRootModule ()
+```javascript
+  // to get the root module
+  const rootModule = useAsModule.getRootModule();
+  // to print the module tree in the console
+  rootModule.printTree();
+```
+##### </> getModule (idOrAlias /*String*/) 
+```javascript
+  // to get a module with usemodule_uid="global_uid1"
+  const module1 = useAsModule.getModule("global_uid1");
+  // to get a module(in the root module) with usemodule_alias="alias1"
+  const module2 = useAsModule.getModule("alias1");
+  // to get a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  const module3 = useAsModule.getModule("alias_in_root.alias_in_level1.alias_in_level2");  
+```
+##### </> sendMessageTo: (receiver /*String, or Object*/, message /Any*/) 
+```javascript
+  // to sent a message to module1
+  const result1 = useAsModule.sendMessageTo(module1, "message");
+  // to sent a message to a module with usemodule_uid="global_uid1"
+  const resul2 = useAsModule.sendMessageTo("global_uid1", "message");
+  // to sent a message to a module(in the root module) with usemodule_alias="alias1"
+  const resul3 = useAsModule.sendMessageTo("alias1", "message");
+  // to sent a message to a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  const resul4 = useAsModule.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
+```
+
+##### </> dispatchActionTo: (receiver /*String, or Object*/, message /Any*/) 
+```javascript
+  // to dispatch an action of module1
+  const result1 = useAsModule.dispatchActionTo(module1, "actionName", [/*parameters*/]);
+  // to dispatch an action of a module with usemodule_uid="global_uid1"
+  const resul2 = useAsModule.dispatchActionTo("global_uid1", "actionName", [/*parameters*/]);
+  // to dispatch an action of a module (in the root module) with usemodule_alias="alias1"
+  const resul3 = useAsModule.dispatchActionTo("alias1", "actionName", [/*parameters*/]);
+  // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  const resul4 = useAsModule.dispatchActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
+```
+ ##### </> updateStateFor: (target /*String, or Object*/, path /*Object, or [String...]/, state /Any*/, force /*Booelan*/) 
+```javascript
+  // to update state for module1
+  useAsModule.updateStateFor(module1, { key:"value" });
+  // to update state for a module with usemodule_uid="global_uid1"
+  useAsModule.updateStateFor("global_uid1", "key", "value");
+  // to update state for a module (in the root module) with usemodule_alias="alias1"
+  useAsModule.updateStateFor("alias1", "keylevel1.keylevel2.keylevel3", "any");
+  // to update state for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  useAsModule.updateStateFor("alias_in_root.alias_in_level1.alias_in_level2", "key", "value");
+```
+  ##### </> fireEventFor: (target /*String, or Object*/, eventName/*String*/, params /*Array/) 
+```javascript
+  // to fire an event for module1
+  const result1 = useAsModule.fireEventFor(module1, "eventName", [/*parameters*/]);
+  // to dispatch an action for a module with usemodule_uid="global_uid1"
+  const resul2 = useAsModule.fireEventFor("global_uid1", "eventName", [/*parameters*/]);
+  // to dispatch an action for a module (in the root module) with usemodule_alias="alias1"
+  const resul3 = useAsModule.fireEventFor("alias1", "eventName", [/*parameters*/]);
+  // to dispatch an action for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  const resul4 = useAsModule.fireEventFor("alias_in_root.alias_in_level1.alias_in_level2", "eventName", [/*parameters*/]);
+```
+  ##### </> broadcast: (message /Any*/) 
+```javascript
+  // to broadcast an message to all modules
+  useAsModule.broadcast("message");
+```
+
+### For the module instance
+##### </> getRootModule ()
+```javascript
+  // to get the root module
+  const rootModule = module.getRootModule();
+  // to print the module tree in the console
+  rootModule.printTree();
+```
+##### </> getModule (idOrAlias /*String*/) 
+```javascript
+  // to get a module with usemodule_uid="global_uid1"
+  const module1 = module.getModule("global_uid1");
+  // to get a module(in the root module) with usemodule_alias="alias1"
+  const module2 = module.getModule("alias1");
+  // to get a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  const module3 = module.getModule("alias_in_root.alias_in_level1.alias_in_level2");  
+```
+##### </> sendMessageTo: (receiver /*String, or Object*/, message /Any*/) 
+```javascript
+  // to sent a message to module1
+  const result1 = module.sendMessageTo(module1, "message");
+  // to sent a message to a module with usemodule_uid="global_uid1"
+  const resul2 = module.sendMessageTo("global_uid1", "message");
+  // to sent a message to a module(in the root module) with usemodule_alias="alias1"
+  const resul3 = module.sendMessageTo("alias1", "message");
+  // to sent a message to a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  const resul4 = module.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
+```
+
+##### </> dispatchActionTo: (receiver /*String, or Object*/, message /Any*/) 
+```javascript
+  // to dispatch an action of module1
+  const result1 = module.dispatchActionTo(module1, "actionName", [/*parameters*/]);
+  // to dispatch an action of a module with usemodule_uid="global_uid1"
+  const resul2 = module.dispatchActionTo("global_uid1", "actionName", [/*parameters*/]);
+  // to dispatch an action of a module (in the root module) with usemodule_alias="alias1"
+  const resul3 = module.dispatchActionTo("alias1", "actionName", [/*parameters*/]);
+  // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  const resul4 = module.dispatchActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
+```
+ ##### </> updateStateFor: (target /*String, or Object*/, path /*Object, or [String...]/, state /Any*/, force /*Booelan*/) 
+```javascript
+  // to update state for module1
+  module.updateStateFor(module1, { key:"value" });
+  // to update state for a module with usemodule_uid="global_uid1"
+  module.updateStateFor("global_uid1", "key", "value");
+  // to update state for a module (in the root module) with usemodule_alias="alias1"
+  module.updateStateFor("alias1", "keylevel1.keylevel2.keylevel3", "any");
+  // to update state for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  module.updateStateFor("alias_in_root.alias_in_level1.alias_in_level2", "key", "value");
+```
+  ##### </> fireEventFor: (target /*String, or Object*/, eventName/*String*/, params /*Array/) 
+```javascript
+  // to fire an event for module1
+  const result1 = module.fireEventFor(module1, "eventName", [/*parameters*/]);
+  // to dispatch an action for a module with usemodule_uid="global_uid1"
+  const resul2 = module.fireEventFor("global_uid1", "eventName", [/*parameters*/]);
+  // to dispatch an action for a module (in the root module) with usemodule_alias="alias1"
+  const resul3 = module.fireEventFor("alias1", "eventName", [/*parameters*/]);
+  // to dispatch an action for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  const resul4 = module.fireEventFor("alias_in_root.alias_in_level1.alias_in_level2", "eventName", [/*parameters*/]);
+```
+  ##### </> broadcast: (message /Any*/) 
+```javascript
+  // to broadcast an message to all modules
+  module.broadcast("message");
+```
+
+##### </> sendMessageTo: (essage /Any*/) 
+```javascript
+  // to sent a message
+  const result = module.sendMessage("message");
+```
+##### </> dispatchAction: (actionName /*String*/, params /*Array/) 
+```javascript
+  // to dispatch an action
+  const result = module.dispatchAction("actionName", [/*parameters*/]);
+```
+ ##### </> updateState: (path /*Object, or [String...]/, state /Any*/, force /*Booelan*/) 
+```javascript
+  // to update state
+  module.updateState({ key:"value" });
+  module.updateState("key", "value");
+  module.updateState("keylevel1.keylevel2.keylevel3", "any");
+```
+ ##### </> fireEvent: (eventName/*String*/, params /*Array/) 
+```javascript
+  // to fire an event
+  const result = module.fireEvent("eventName", [/*parameters*/]);
+```
+ ##### </> useModuleRef: (refName/*String*/, value /*Any/) 
+```javascript
+  // to use a ref
+  module.useModuleRef("refName", "init vaule");
+  // to get the ref
+  const ref = module.refs["refName"];
+```
+  
+## Quickstart
+### Basic Demo
 ```javascript
 import React from "react";
 import useModule from "react-module-hook";
@@ -60,7 +251,7 @@ export const Module2 = (props) => {
 [Open the demo in CodeSandbox](https://codesandbox.io/s/thirsty-swirles-4iomy "react-module-hook basic demo")
 
 
-## Meterial UI Demo
+### Meterial UI Demo
 ```javascript
 import React from "react";
 import useModule from "react-module-hook";
