@@ -2,7 +2,7 @@
 A react module hook for real configurable app with stateful persistent module tree and peer-to-peer messaging mechanism
 
 ## Usage
-## Install
+### Install
 ```javascript
 npm install react-module-hook
 ```
