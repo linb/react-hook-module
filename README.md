@@ -424,3 +424,6 @@ export const Prompt = props => {
 
 [Open the demo in CodeSandbox](https://codesandbox.io/s/strange-thompson-g4op5 "react-module-hook Materail-UI demo")
  
+## npm
+[npm](https://www.npmjs.com/package/react-module-hook "react-module-hook NPM")
+
