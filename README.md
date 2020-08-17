@@ -42,7 +42,7 @@ const ReactComponent = props => {
   // to get a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const module3 = useAsModule.getModule("alias_in_root.alias_in_level1.alias_in_level2");  
 ```
-##### </> sendMessageTo: (receiver /*String, or Object*/, message /Any*/) 
+##### </> sendMessageTo: (receiver /*String, or Object*/, message /*Any*/) 
 ```javascript
   // to sent a message to module1
   const result1 = useAsModule.sendMessageTo(module1, "message");
@@ -54,7 +54,7 @@ const ReactComponent = props => {
   const resul4 = useAsModule.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
 ```
 
-##### </> dispatchActionTo: (receiver /*String, or Object*/, message /Any*/) 
+##### </> dispatchActionTo: (receiver /*String, or Object*/, message /*Any*/) 
 ```javascript
   // to dispatch an action of module1
   const result1 = useAsModule.dispatchActionTo(module1, "actionName", [/*parameters*/]);
@@ -65,7 +65,7 @@ const ReactComponent = props => {
   // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.dispatchActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
 ```
- ##### </> updateStateFor: (target /*String, or Object*/, path /*Object, or [String...]/, state /Any*/, force /*Booelan*/) 
+ ##### </> updateStateFor: (target /*String, or Object*/, path /*Object, or [String...]/, state /*Any*/, force /*Booelan*/) 
 ```javascript
   // to update state for module1
   useAsModule.updateStateFor(module1, { key:"value" });
@@ -87,7 +87,7 @@ const ReactComponent = props => {
   // to dispatch an action for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.fireEventFor("alias_in_root.alias_in_level1.alias_in_level2", "eventName", [/*parameters*/]);
 ```
-  ##### </> broadcast: (message /Any*/) 
+  ##### </> broadcast: (message /*Any*/) 
 ```javascript
   // to broadcast an message to all modules
   useAsModule.broadcast("message");
@@ -105,41 +105,41 @@ const ReactComponent = props => {
 ```javascript
   // to get a module with usemodule_uid="global_uid1"
   const module1 = module.getModule("global_uid1");
-  // to get a module(in the root module) with usemodule_alias="alias1"
+  // to get a module(in the current module) with usemodule_alias="alias1"
   const module2 = module.getModule("alias1");
   // to get a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const module3 = module.getModule("alias_in_root.alias_in_level1.alias_in_level2");  
 ```
-##### </> sendMessageTo: (receiver /*String, or Object*/, message /Any*/) 
+##### </> sendMessageTo: (receiver /*String, or Object*/, message /*Any*/) 
 ```javascript
   // to sent a message to module1
   const result1 = module.sendMessageTo(module1, "message");
   // to sent a message to a module with usemodule_uid="global_uid1"
   const resul2 = module.sendMessageTo("global_uid1", "message");
-  // to sent a message to a module(in the root module) with usemodule_alias="alias1"
+  // to sent a message to a module(in the current module) with usemodule_alias="alias1"
   const resul3 = module.sendMessageTo("alias1", "message");
   // to sent a message to a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = module.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
 ```
 
-##### </> dispatchActionTo: (receiver /*String, or Object*/, message /Any*/) 
+##### </> dispatchActionTo: (receiver /*String, or Object*/, message /*Any*/) 
 ```javascript
   // to dispatch an action of module1
   const result1 = module.dispatchActionTo(module1, "actionName", [/*parameters*/]);
   // to dispatch an action of a module with usemodule_uid="global_uid1"
   const resul2 = module.dispatchActionTo("global_uid1", "actionName", [/*parameters*/]);
-  // to dispatch an action of a module (in the root module) with usemodule_alias="alias1"
+  // to dispatch an action of a module (in the current module) with usemodule_alias="alias1"
   const resul3 = module.dispatchActionTo("alias1", "actionName", [/*parameters*/]);
   // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = module.dispatchActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
 ```
- ##### </> updateStateFor: (target /*String, or Object*/, path /*Object, or [String...]/, state /Any*/, force /*Booelan*/) 
+ ##### </> updateStateFor: (target /*String, or Object*/, path /*Object, or [String...]/, state /*Any*/, force /*Booelan*/) 
 ```javascript
   // to update state for module1
   module.updateStateFor(module1, { key:"value" });
   // to update state for a module with usemodule_uid="global_uid1"
   module.updateStateFor("global_uid1", "key", "value");
-  // to update state for a module (in the root module) with usemodule_alias="alias1"
+  // to update state for a module (in the current module) with usemodule_alias="alias1"
   module.updateStateFor("alias1", "keylevel1.keylevel2.keylevel3", "any");
   // to update state for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   module.updateStateFor("alias_in_root.alias_in_level1.alias_in_level2", "key", "value");
@@ -150,18 +150,18 @@ const ReactComponent = props => {
   const result1 = module.fireEventFor(module1, "eventName", [/*parameters*/]);
   // to dispatch an action for a module with usemodule_uid="global_uid1"
   const resul2 = module.fireEventFor("global_uid1", "eventName", [/*parameters*/]);
-  // to dispatch an action for a module (in the root module) with usemodule_alias="alias1"
+  // to dispatch an action for a module (in the current module) with usemodule_alias="alias1"
   const resul3 = module.fireEventFor("alias1", "eventName", [/*parameters*/]);
   // to dispatch an action for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = module.fireEventFor("alias_in_root.alias_in_level1.alias_in_level2", "eventName", [/*parameters*/]);
 ```
-  ##### </> broadcast: (message /Any*/) 
+  ##### </> broadcast: (message /*Any*/) 
 ```javascript
   // to broadcast an message to all modules
   module.broadcast("message");
 ```
 
-##### </> sendMessageTo: (essage /Any*/) 
+##### </> sendMessageTo: (essage /*Any*/) 
 ```javascript
   // to sent a message
   const result = module.sendMessage("message");
@@ -171,19 +171,19 @@ const ReactComponent = props => {
   // to dispatch an action
   const result = module.dispatchAction("actionName", [/*parameters*/]);
 ```
- ##### </> updateState: (path /*Object, or [String...]/, state /Any*/, force /*Booelan*/) 
+ ##### </> updateState: (path /*Object, or [String...]/, state /*Any*/, force /*Booelan*/) 
 ```javascript
   // to update state
   module.updateState({ key:"value" });
   module.updateState("key", "value");
   module.updateState("keylevel1.keylevel2.keylevel3", "any");
 ```
- ##### </> fireEvent: (eventName/*String*/, params /*Array/) 
+ ##### </> fireEvent: (eventName /*String*/, params /*Array/) 
 ```javascript
   // to fire an event
   const result = module.fireEvent("eventName", [/*parameters*/]);
 ```
- ##### </> useModuleRef: (refName/*String*/, value /*Any/) 
+ ##### </> useModuleRef: (refName /*String*/, value /*Any*/) 
 ```javascript
   // to use a ref
   module.useModuleRef("refName", "init vaule");
