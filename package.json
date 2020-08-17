@@ -1,0 +1,30 @@
+{
+  "name": "react-module-hook",
+  "version": "0.1.2",
+  "description": "A react module hook for real configurable app with stateful persistent module tree and peer-to-peer messaging mechanism",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pub": "npm run build && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linb/react-module-hook.git"
+  },
+  "keywords": [
+    "react",
+    "configurable",
+    "stateful",
+    "predictable",
+    "messaging"
+  ],
+  "author": "linb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/linb/react-module-hook/issues"
+  },
+  "homepage": "https://github.com/linb/react-module-hook#readme",
+  "dependencies": {
+    "react": "^16.13.1"
+  }
+}
