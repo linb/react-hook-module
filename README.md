@@ -11,18 +11,35 @@ npm install react-module-hook
 ```javascript
 import useModule from "react-module-hook";
 ```
-### 3. Use it in a render function
+### 3. Call it in a render function
 ```javascript
+...
 const ReactComponent = props => {
   const module = useAsModule(props, {
     state:{}     // the default state for this module
     props:{},    // the default props for this module
-    actions:{},  // actions for this module,
+    actions:{"actionName":()=>()},  // actions for this module,
     tagVar:{}    // for extra data
   }); 
 
   // ...
   // return JSX;
+};
+```
+### 4. Use the component
+```javascript
+...
+const ReactApp = props => {
+  const module = useAsModule(props, { }); 
+  // module.updateStateFor("alias", "key", "value");
+  // module.postMessageTo("alias", "message");
+  // moudle.dispatchActionTo("uid", "actionName", []);
+  // module.getModule("uid").fireEvent("onXXX",[]);
+  return (
+    <div>
+      <ReactComponent usemodule_alias="alias" usemodule_uid="uid" usemodule_parent={module}/>
+    </div>
+  );
 };
 ```
 ### API 
