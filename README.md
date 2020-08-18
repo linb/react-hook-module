@@ -162,7 +162,7 @@ const ReactComponent = props => {
   module.broadcast("message");
 ```
 
-###### </> sendMessageTo (essage / * Any * /) 
+###### </> sendMessage (essage / * Any * /) 
 ```javascript
   // to sent a message
   const result = module.sendMessage("message");
