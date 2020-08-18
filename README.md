@@ -263,9 +263,19 @@ export const Module2 = (props) => {
   );
 };
 ```
-
+#### Screenshot
 <img src="https://raw.githubusercontent.com/linb/react-module-hook/master/image/demo1.png"  width="600">
 
+#### Module Tree
+```
+[root]
+  │  
+  ├─<Module1>
+  │     │  
+  │     └<Module2 usemodule_alias="alias_in_parent">
+  │      
+  └<Module2 usemodule_uid="global_uid">
+ ```
 [Open the demo in CodeSandbox](https://codesandbox.io/s/thirsty-swirles-4iomy "react-module-hook basic demo")
 
 
@@ -443,8 +453,21 @@ export const Prompt = props => {
     ;
 };
 ```
-
+#### Screenshot
 <img src="https://raw.githubusercontent.com/linb/react-module-hook/master/image/demo2.png"  width="600">
+
+#### Module Tree
+```
+[root]
+  │  
+  └─<Module_Dialog >
+         │  
+         ├<Alert usemodule_alias="Alert_1">
+         │  
+         ├<Confirm usemodule_alias="Confirm_1">
+         │  
+         └<Prompt usemodule_uid="Prompt_uid">
+```
 
 [Open the demo in CodeSandbox](https://codesandbox.io/s/strange-thompson-g4op5 "react-module-hook Materail-UI demo")
  
