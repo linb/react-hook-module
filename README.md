@@ -354,12 +354,14 @@ export const Confirm = props => {
 
     return <React.Fragment>
             <Dialog open={module.props.open || module.state.open} onClose={() => module.dispatchAction("close")} fullWidth aria-labelledby="confirm_jlh80pil_title" aria-describedby="confirm_jlh80pil_description" key="2h6e3jqi">
-                <DialogTitle id="confirm_jlh80pil_title">{props.title}</DialogTitle>
+                <DialogTitle>{props.title}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="confirm_jlh80pil_description">{props.description}</DialogContentText>
+                    <DialogContentText>{props.description}</DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => {module.props.onCancel();module.dispatchAction("close");}} color="secondary">Cancel</Button>
+                    <Button onClick={() => {
+                      module.props.onCancel();module.dispatchAction("close");
+                    }} color="secondary">Cancel</Button>
                     <Button onClick={() => {module.props.onOK();module.dispatchAction("close");}} color="primary">OK</Button>
                 </DialogActions>
             </Dialog>
@@ -406,14 +408,18 @@ export const Prompt = props => {
 
     return <React.Fragment>
             <Dialog open={module.props.open || module.state.open} onClose={() => module.dispatchAction("close")} fullWidth aria-labelledby="prompt_fn69vqpc_title" aria-describedby="prompt_fn69vqpc_description" key="blg87o2c">
-                <DialogTitle id="prompt_fn69vqpc_title">{props.title}</DialogTitle>
+                <DialogTitle>{props.title}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="prompt_fn69vqpc_description">{props.description}</DialogContentText>
-                    <TextField autoFocus margin="dense" defaultValue="" fullWidth onChange={e => setDefaultState(Object.assign({}, defaultState, { text: e.target.value }))}></TextField>
+                    <DialogContentText>{props.description}</DialogContentText>
+                    <TextField autoFocus margin="dense" defaultValue="" fullWidth onChange={e => 
+                      setDefaultState(Object.assign({}, defaultState, { text: e.target.value }))
+                    }></TextField>
                 </DialogContent>
                 <DialogActions>
                     <Button color="secondary" onClick={() => props.onCancel()}>Cancel</Button>
-                    <Button onClick={() => {props.onOK(defaultState.text);module.dispatchAction("close");}} color="primary">OK</Button>
+                    <Button onClick={() => {
+                      props.onOK(defaultState.text);module.dispatchAction("close");
+                    }} color="primary">OK</Button>
                 </DialogActions>
             </Dialog>
         </React.Fragment>
