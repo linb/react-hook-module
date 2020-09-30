@@ -44,9 +44,9 @@ const ReactApp = props => {
 ```
 ### API 
 ### For the global variable useAsModule
-* **getRootModule**
-###### </> getRootModule ()
+###### getRootModule
 ----
+* **</> getRootModule ()**
 ```javascript
   // to get the root module
   const rootModule = useAsModule.getRootModule();
