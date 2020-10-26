@@ -101,7 +101,9 @@ To get the root module
   // to print the module tree in the console
   rootModule.printTree();
 ```
-###### </> getModule (idOrAlias / * String * /) 
+#### getModule
+----
+**getModule (idOrAlias / * String * /) **
 ```javascript
   // to get a module with usemodule_uid="global_uid1"
   const module1 = useAsModule.getModule("global_uid1");
