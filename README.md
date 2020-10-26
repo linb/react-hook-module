@@ -405,7 +405,7 @@ export const Alert = props => {
 
 export const Confirm = props => {
     const style_modal = useStyles4Modal();
-    const module = useModule(props, {
+    const { module } = useModule(props, {
         props: {
             open: true,
             title: "Title",
@@ -448,7 +448,7 @@ export const Confirm = props => {
 
 export const Prompt = props => {
     const style_modal = useStyles4Modal();
-    const module = useModule(props, {
+    const { module } = useModule(props, {
         "props": {
             "open": true,
             "title": "Title",
