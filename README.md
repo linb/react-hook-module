@@ -94,7 +94,7 @@ const ReactCom = props => {
 ### For the global variable useAsModule
 #### useModule.getRootModule
 ----
-To get the root module
+getRootModule( )
 ```javascript
   // to get the root module
   const rootModule = useAsModule.getRootModule();
@@ -184,6 +184,34 @@ broadcast (message / * Any * /)
 ```javascript
   // to broadcast an message to all modules
   useAsModule.broadcast("message");
+```
+#### useModule.printModulesTree
+----
+printModulesTree ( )
+```javascript
+  // to print the module tree onto the console
+  useAsModule.printModulesTree( );
+```
+#### useModule.resolveURL
+----
+resolveURL (relPath / * String * /) 
+```javascript
+  // to resolve a relative path for the resource url
+  useAsModule.resolveURL("./img/pic.png");
+```
+#### useModule.getDataFromStore
+----
+getDataFromStore (path / * String or Array * /)
+```javascript
+  // to get data from the global store
+  useAsModule.getDataFromStore("path_level1.path_level2");
+```
+#### useModule.setDataToStore
+----
+setDataToStore (path / * String or Array * /, value / * Any * /, clonePath / * Boolean * /) 
+```javascript
+  // to get data from the global store
+  useAsModule.setDataToStore("path_level1.path_level2", {data:"value"}, false);
 ```
 
 #### For the module instance
