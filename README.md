@@ -1,4 +1,5 @@
 
+
 # react-module-hook
 A react module hook for real configurable app with stateful persistent module tree and peer-to-peer messaging mechanism
 
@@ -558,7 +559,7 @@ const ReactCom = props => {
 >  **[return]**  
 > &emsp;&emsp;*Object, the request result.*  
 > **[parameters]**  
-> * **url** [reqired] : *String, The url for an [axios reqeust](https://github.com/axios/axios#request-config)* 
+> * **url** [required] : *String, The url for an [axios reqeust](https://github.com/axios/axios#request-config)* 
 > * **data** [optional] : *Object/String, The data (ArrayBuffer, ArrayBufferView, URLSearchParams, FormData, File, Blob, or queryString) for an  [axios reqeust](https://github.com/axios/axios#request-config) Default is null.* 
 > * **method** [optional] : *String, The method (get/post/put/delete/patch/head/options) for an  [axios reqeust](https://github.com/axios/axios#request-config). Default is 'get'.*   
 > * **baseURL** [optional] : *String, The base URL for an  [axios reqeust](https://github.com/axios/axios#request-config). Default is empty string.*  
@@ -571,14 +572,14 @@ const ReactCom = props => {
   import "react-module-hook/plugin_request";
   //...
   const App = props => {
-	  // If no 'req_url', the request will be undefined 
-	  const { module } = useModule(props, { }); 
+      // If no 'req_url', the request will be undefined 
+      const { module } = useModule(props, { }); 
       return (
         <div>
           <button onClick={async () => {
-	        const  result  =  await  module.request(useModule.resolveURL("./service/endpointn"));
+            const  result  =  await  module.request(useModule.resolveURL("./service/endpoint"));
             console.log( result );
-          }}>request</button>
+          }}>module.request</button>
         </div>
       );
   };
@@ -596,13 +597,13 @@ const ReactCom = props => {
   import "react-module-hook/plugin_request";
   //...
   const App = props => {
-	  // If no 'req_url', the request will be undefined 
-	  const { module, request } = useModule(props, {
-		  props:{
-			  req_url: useModule.resolveUrl("./service/endpoint"),
-			  req_execute: false
-		  }
-	  }); 
+      // If no 'req_url', the request will be undefined 
+      const { module, request } = useModule(props, {
+        props:{
+          req_url: useModule.resolveUrl("./service/endpoint"),
+          req_execute: false
+        }
+      }); 
       return (
         <div>
           <div>Status: [{request.status}]</div>
@@ -613,9 +614,9 @@ const ReactCom = props => {
             data: {request.response && JSON.stringify(request.response)}
           </If>
           <button onClick={async () => {
-	        const result = await request.fetch();
+            const result = await request.fetch();
             console.log( result );
-          }}>request again</button>
+          }}>request.fetch()</button>
         </div>
       );
   };
@@ -630,19 +631,185 @@ const ReactCom = props => {
   import "react-module-hook/plugin_request";
   //...
   const App = props => {
-	  // If no 'req_url', the request will be undefined 
-	  const { module, request } = useModule(props, {
-		  props:{
-			  req_url: useModule.resolveUrl("./service/endpoint")
-		  }
-	  }); 
-	  // cancel the useModule's default request
-	  React.useEffect(() => request.cancel(), [request]);
+    // If no 'req_url', the request will be undefined 
+    const { module, request } = useModule(props, {
+      props:{
+        req_url: useModule.resolveUrl("./service/endpoint")
+      }
+    }); 
+    // cancel the useModule's default request
+    React.useEffect(() => request.cancel(), [request]);
       return (
         <div>
           <div>Status: [{request.status}]</div>
         </div>
       );
+  };
+```
+### For useModule instance with router plugin
+#### `router.navigate`
+ ----
+> **router.navigate ( route, state )**  
+> &emsp;&emsp;*[for useModule router plugin] To navigate to target route (document). *  
+> **[parameters]**  
+> * **route** [required] : *String, The route path.* 
+> * **state** [optional] : *Object/Any, The state. [router.navigate('/', {replace: true})] equals to [router.replace('/')] .* 
+```javascript
+  import { useModule } from "react-module-hook";
+  // must import request plugin
+  import "react-module-hook/plugin_router";
+  //...
+  const App = props => {
+      // If no 'router' in props, or 'props.router' is false, the router will be undefined 
+      const { module, router } = useModule(props, {
+        props:{
+          router : true
+        }
+      }); 
+      return (
+        <div>
+          <button onClick={() => {
+            router.navigate('/about');
+          }}>Route to "/about"</button>
+        </div>
+      );
+  };
+```
+#### `router.replace`
+ ----
+> **router.replace( route )**  
+> &emsp;&emsp;*[for useModule router plugin] To replace to target route (document). *  
+> **[parameters]**  
+> * **route** [required] : *String, The route path.* 
+```javascript
+  import { useModule } from "react-module-hook";
+  // must import request plugin
+  import "react-module-hook/plugin_router";
+  //...
+  const App = props => {
+      // If no 'router' in props, or 'props.router' is false, the router will be undefined 
+      const { module, router } = useModule(props, {
+        props:{
+          router : true
+        }
+      }); 
+      return (
+        <div>
+          <button onClick={() => {
+            router.replace('/about');
+          }}>Route to "/about", replace</button>
+        </div>
+      );
+  };
+```
+#### `router.setSearchParams`
+ ----
+> **router.setSearchParams( params )**  
+> &emsp;&emsp;*[for useModule router plugin] To update the search parameters. *  
+> **[parameters]**  
+> * **params** [required] : *Object/String, The search params. Object or queryString.* 
+```javascript
+  import { useModule } from "react-module-hook";
+  // must import request plugin
+  import "react-module-hook/plugin_router";
+  //...
+  const App = props => {
+      // If no 'router' in props, or 'props.router' is false, the router will be undefined 
+      const { module, router } = useModule(props, {
+        props:{
+          router : true
+        }
+      }); 
+      return (
+        <div>
+          <button onClick={() => {
+            router.setSearchParams('k1=v1&k2=v2');
+          }}>setSearchParams</button>
+        </div>
+      );
+  };
+```
+### For useModule instance with auth plugin
+#### `auth.signIn`
+ ----
+> **auth.signIn (  )**  
+> &emsp;&emsp;*[for useModule auth plugin] To trigger sign in action.*    
+#### `auth.signOut `
+ ----
+> **auth.signOut (  )**  
+> &emsp;&emsp;*[for useModule auth plugin] To trigger sign out action.*  
+#### `auth.signUp `
+ ----
+> **auth.signUp(  )**  
+> &emsp;&emsp;*[for useModule auth plugin] To trigger sign up action.*     
+
+**File - auth_fake.js**
+```javascript
+  import {utils} from "react-module-hook";
+  // singIn function
+  const signIn = function(){
+    const auth = this;
+    const user = {email:"fake@email.com"};
+    setTimeout(() => {
+      auth.setUser(user);
+      utils.setCookie("user", user);
+    }, 500);
+  };
+  // signOut function
+  const signOut = function(){
+    this.setUser(null);
+    utils.removeCookie("user");
+  };
+  // signUp function
+  const signUp = function(){
+    console.log("signUp function");
+  };  
+  const authInit = function(){
+    const auth = this;
+    const user = utils.getCookie("user");
+    user && auth.setUser(user);
+    return function(){
+      // nothing
+    };
+  };
+  export default {signIn, signOut, authInit};
+```
+**File - index.js**
+```javascript
+  import React from "react";
+  import ReactDOM from "react-dom";
+  import { useModule } from "react-module-hook";
+  import { ProvideAuth } from "react-module-hook/plugin_auth";
+  import App from "./App";
+  import configure from "./auth_fake.js";
+  ReactDOM.render( (
+    <React.StrictMode>
+      <ProvideAuth {...configure} >
+        <App path="/*" />
+      </ProvideAuth>
+    </React.StrictMode>
+  ), document.getElementById("root"));
+```
+**File - App.js**
+```javascript
+  import React from "react";
+  import { useModule } from "react-module-hook";
+  import { If } from "react-module-hook";
+  const App = props => {
+      // If no 'auth' in props, or 'props.auth' is false, the auth will be undefined 
+      const { module, auth } = useModule(props, { auth: true });
+      return (
+      <React.Fragment>
+        <If condition={auth && auth.user} >
+          <div> Signed in successfully!</div>
+          <div> User Email: {auth && auth.user && auth.user.email} </div>
+          <div> <button onClick={() => auth.signOut()}>Sign Out</button> </div>
+        </If>
+        <If condition={!auth || !auth.user} >
+          <div><button onClick={() => auth.signIn()}>Sign In</button></div>
+        </If>
+      </React.Fragment>
+    );
   };
 ```
 ## Quickstart
