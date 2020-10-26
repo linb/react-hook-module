@@ -111,7 +111,7 @@ const ReactCom = props => {
 > **[return]**  
 > &emsp;&emsp;*Object, The target module*  
 > **[parameters]**  
->> &emsp;idOrAlias: *String, The target useModule's uid or alias*  
+>> &emsp;**idOrAlias**: *String, The target useModule's uid or alias*  
 ```javascript
   // to get a module with usemodule_uid="global_uid1"
   const module1 = useAsModule.getModule("global_uid1");
@@ -128,9 +128,8 @@ const ReactCom = props => {
 > **[return]**  
 > &emsp;&emsp;*Object, The return value of target module's onMessage event*  
 > **[parameters]**  
->> &emsp;idOrAlias: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's a sub useModule added as a component in the root useModule ).*  
->> &emsp;message: *Object / Any, The message object, can be any value*
->> &emsp;from: *Object / Any, The from info that indicate who send the message or can be other info* 
+>> &emsp;**receiver**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's a sub useModule added as a component in the root useModule ).*  
+>> &emsp;message: *Object / Any, The message object, can be any value* 
 ```javascript
   // to sent a message to module1
   const result1 = useAsModule.sendMessageTo(module1, "message");
