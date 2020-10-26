@@ -1,6 +1,6 @@
 {
   "name": "react-module-hook",
-  "version": "0.1.2",
+  "version": "0.3.0",
   "description": "A react module hook for real configurable app with stateful persistent module tree and peer-to-peer messaging mechanism",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,12 @@
     "configurable",
     "stateful",
     "predictable",
-    "messaging"
+    "messaging",
+    "react-hook-form",
+    "react-router",
+    "axios",
+    "hotkeys-js",
+    "material-ui"
   ],
   "author": "linb",
   "license": "MIT",
@@ -25,6 +30,13 @@
   },
   "homepage": "https://github.com/linb/react-module-hook#readme",
   "dependencies": {
-    "react": "^16.13.1"
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
+    "react-hook-form": "6.9.6",
+    "history": "5.0.0",
+    "react-router-dom": "6.0.0-beta.0"
+    "hotkeys-js": "3.8.1",
+    "axios": "0.21.0",
+    "@material-ui/core": "4.11.0"
   }
 }
