@@ -1,3 +1,4 @@
+
 # react-module-hook
 A react module hook for real configurable app with stateful persistent module tree and peer-to-peer messaging mechanism
 
@@ -122,8 +123,7 @@ const ReactCom = props => {
 ```
 #### `useModule.sendMessageTo`
 ----
-----
-> **sendMessageTo (receiver, message )**  
+> **sendMessageTo ( receiver, message )**  
 > &emsp;&emsp;*Sends a message to the target useModule*  
 > **[return]**  
 > &emsp;&emsp;*Object, The return value of target module's onMessage event*  
@@ -141,9 +141,17 @@ const ReactCom = props => {
   const resul4 = useAsModule.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
 ```
 
-#### useModule.dispatchActionTo
+#### `useModule.dispatchActionTo`
 ----
-dispatchActionTo (receiver / * String, or Object * /, message / * Any * /) 
+> **dispatchActionTo ( receiver, actionName, params, from)**  
+> &emsp;&emsp;*Dispatches an action for the target useModule*  
+> **[return]**  
+> &emsp;&emsp;*Object, The target action's return value*  
+> **[parameters]**  
+> * **receiver**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's a sub useModule added as a component in the root useModule ).*  
+> * **actionName**: *String, The action name to be dispatched* 
+> * **params**: *Array, The parameters for the given action* 
+> * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to dispatch an action of module1
   const result1 = useAsModule.dispatchActionTo(module1, "actionName", [/*parameters*/]);
@@ -154,94 +162,146 @@ dispatchActionTo (receiver / * String, or Object * /, message / * Any * /)
   // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.dispatchActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
 ```
-#### useModule.dispatchAsyncActionTo
+#### `useModule.dispatchAsyncActionTo`
 ----
-dispatchAsyncActionTo (receiver / * String, or Object * /, message / * Any * /) 
+> **dispatchAsyncActionTo ( receiver, actionName, params, from)**  
+> &emsp;&emsp;*Dispatches an asynchronous action for the target useModule*  
+> **[return]**  
+> &emsp;&emsp;*Object, The target action's return value*  
+> **[parameters]**  
+> * **receiver**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's a sub useModule added as a component in the root useModule ).*  
+> * **actionName**: *String, The action name to be dispatched* 
+> * **params**: *Array, The parameters for the given action* 
+> * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
-  // to dispatch an action of module1, asynchronously
-  const result1 = useAsModule.dispatchAsyncActionTo(module1, "actionName", [/*parameters*/]);
+  // to dispatch an action of module1, 
+  const result1 = useAsModule.dispatchAsyncActionTo(module1, "asyncActionName", [/*parameters*/]);
   // to dispatch an action of a module with usemodule_uid="global_uid1"
-  const resul2 = useAsModule.dispatchAsyncActionTo("global_uid1", "actionName", [/*parameters*/]);
+  const resul2 = useAsModule.dispatchAsyncActionTo("global_uid1", "asyncActionName", [/*parameters*/]);
   // to dispatch an action of a module (in the root module) with usemodule_alias="alias1"
-  const resul3 = useAsModule.dispatchAsyncActionTo("alias1", "actionName", [/*parameters*/]);
+  const resul3 = useAsModule.dispatchAsyncActionTo("alias1", "asyncActionName", [/*parameters*/]);
   // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
-  const resul4 = useAsModule.dispatchAsyncActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
+  const resul4 = useAsModule.dispatchAsyncActionTo("alias_in_root.alias_in_level1.alias_in_level2", "asyncActionName", [/*parameters*/]);
 ```
-#### useModule.updateStateFor
+#### `useModule.updateStateFor`
 ----
-updateStateFor (target / * String, or Object * /, path / * Object, or [String...] * /, state / * Any * /, force / * Booelan * /) 
+> **updateStateFor ( target, path, state, force )**  
+> &emsp;&emsp;*Updates the module state for the target useModule*  
+> **[parameters]**  
+> * **target**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's a sub useModule added as a component in the root useModule ).*  
+> * **path**: *Object / Array< String > / String, **If it's an Array< String >: to** specify the path for updating the state; **If it's a string**: the string can be convert into an Array< String > after splitting by '.'; **If it's an object**: to specify the whole object to update the state, ignore the the 2nd parameter - state in this case.* 
+> * **state**: *Object/Any, The object to update the state in the given path* 
+> * **force**: *Boolean, Indicates whether force to update the state* 
 ```javascript
   // to update state for module1
   useAsModule.updateStateFor(module1, { key:"value" });
   // to update state for a module with usemodule_uid="global_uid1"
   useAsModule.updateStateFor("global_uid1", "key", "value");
   // to update state for a module (in the root module) with usemodule_alias="alias1"
-  useAsModule.updateStateFor("alias1", "keylevel1.keylevel2.keylevel3", "any");
+  useAsModule.updateStateFor("alias1", "keylevel1.keylevel2.keylevel3", "value");
   // to update state for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   useAsModule.updateStateFor("alias_in_root.alias_in_level1.alias_in_level2", "key", "value");
 ```
-#### useModule.fireEventFor
-----
-fireEventFor (target / * String, or Object * /, eventName/ * String * /, params / * Array * /) 
+#### `useModule.fireEventTo`
+ ----
+> **fireEventTo ( target, eventName, params, from)**  
+> &emsp;&emsp;*Fires an event for the target useModule*  
+>  **[return]**  
+> &emsp;&emsp;*Object, The return value of the target event*  
+> **[parameters]**  
+> * **target**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's a sub useModule added as a component in the root useModule ).*  
+> * **eventName**: *String, The action name to be dispatched* 
+> * **params**: *Array, The parameters for the given action* 
+> * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to fire an event for module1
   const result1 = useAsModule.fireEventFor(module1, "eventName", [/*parameters*/]);
-  // to dispatch an action for a module with usemodule_uid="global_uid1"
+  // to fire an event for a module with usemodule_uid="global_uid1"
   const resul2 = useAsModule.fireEventFor("global_uid1", "eventName", [/*parameters*/]);
-  // to dispatch an action for a module (in the root module) with usemodule_alias="alias1"
+  // to fire an event for a module (in the root module) with usemodule_alias="alias1"
   const resul3 = useAsModule.fireEventFor("alias1", "eventName", [/*parameters*/]);
-  // to dispatch an action for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  // to fire an evnt for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.fireEventFor("alias_in_root.alias_in_level1.alias_in_level2", "eventName", [/*parameters*/]);
 ```
-#### useModule.broadcast
-----
-broadcast (message / * Any * /) 
+#### `useModule.broadcast`
+ ----
+> **broadcast ( channelName, message)**  
+> &emsp;&emsp;* Broadcasts message to all useModules via a specified channel*  
+>  **[return]**  
+> &emsp;&emsp;*Object, The return value of the target event*  
+> **[parameters]**  
+> * **channelName**: *String, The channel name*  
+> * **message**: *Object / Any, The message object, can be any value* 
 ```javascript
   // to broadcast an message to all modules
   useAsModule.broadcast("message");
 ```
-#### useModule.printModulesTree
-----
-printModulesTree ( )
+#### `useModule.printModulesTree`
+ ----
+> **printModulesTree ( )**  
+> &emsp;&emsp;* Prints the module tree to the console window*  
 ```javascript
   // to print the module tree onto the console
   useAsModule.printModulesTree( );
 ```
-#### useModule.resolveURL
+#### `useModule.resolveURL`
 ----
-resolveURL (relPath / * String * /) 
+> **resolveURL ( relPath )**  
+> &emsp;&emsp;*Resolves an url from a relative path. You must use this to get the right url in the designer*  
+>  **[return]**  
+> &emsp;&emsp;*String, The resolved url*  
+> **[parameters]**  
+> * **relPath**: *String, The relative path for an url* 
 ```javascript
   // to resolve a relative path for the resource url
   useAsModule.resolveURL("./img/pic.png");
 ```
-#### useModule.getDataFromStore
-----
-getDataFromStore (path / * String, or [String...] * /)
+#### `useModule.getDataFromStore`
+ ----
+> **getDataFromStore ( path )**  
+> &emsp;&emsp;*Gets data from the global store according to the path*  
+>  **[return]**  
+> &emsp;&emsp;*Object, The result data*  
+> **[parameters]**  
+> * **path**: *Array< String > /  String, **If it's an Array< String >**: to specify the path for the data; **If it's a String**: the string can be convert into an Array< String > after splitting by '.'* 
 ```javascript
   // to get data from the global store
   useAsModule.getDataFromStore("path_level1.path_level2");
 ```
-#### useModule.setDataToStore
-----
-setDataToStore (path / * String, or [String...] * /, value / * Any * /, clonePath / * Boolean * /) 
+#### `useModule.setDataToStore`
+ ----
+> **setDataToStore ( path, value, clonePath )**  
+> &emsp;&emsp;*Sets data to the global store according to the path*    
+> **[parameters]**  
+> * **path**: *Array< String > /  String, **If it's an Array< String >**: to specify the path for the data; **If it's a String**: the string can be convert into an Array< String > after splitting by '.'* 
+> * **value**: *Object / Any, The object to set* 
+>  * **clonePath **: *Boolean,  Determines whether to clone the path or not* 
 ```javascript
   // to get data from the global store
   useAsModule.setDataToStore("path_level1.path_level2", {data:"value"}, false);
 ```
 
 ### For the module instance
-#### getRootModule
+#### `getRootModule`
 ----
-getRootModule ()
+> **getRootModule ( )**  
+> &emsp;&emsp;*Gets the root useModule*  
+> **[return]**  
+> &emsp;&emsp;*Object, The target module*  
 ```javascript
   // to get the root module
   const rootModule = module.getRootModule();
   // to print the module tree in the console
   rootModule.printTree();
 ```
-#### getModule
+#### `getModule`
 ----
-getModule (idOrAlias / * String * /) 
+> **getModule ( idOrAlias )**  
+> &emsp;&emsp;*Gets the useModule according to it's uid or alias (if it's a sub useModule added as a component in the root useModule )*  
+> **[return]**  
+> &emsp;&emsp;*Object, The target module*  
+> **[parameters]**  
+> * **idOrAlias**: *String, The target useModule's uid or alias*  
 ```javascript
   // to get a module with usemodule_uid="global_uid1"
   const module1 = module.getModule("global_uid1");
@@ -251,15 +311,25 @@ getModule (idOrAlias / * String * /)
   const module3 = module.getModule("alias_in_root.alias_in_level1.alias_in_level2");  
 ```
 #### getModuleByAlias
-----
-getModuleByAlias (alias / * String * /) 
+ ----
+> **getModuleByAlias ( alias )**  
+> &emsp;&emsp;*Gets a sub component by the given alias, which must be a useModule component and has an alias (usemodule_alias)*  
+> **[return]**  
+> &emsp;&emsp;*Object, The returned component*  
+> **[parameters]**  
+> * **alias**: *String, The alias of the sub component* 
 ```javascript
   // to get a module(in the current module) with usemodule_alias="alias1"
   const module2 = module.getModuleByAlias("alias1");
 ```
-#### sendMessageTo
+#### `sendMessageTo`
 ----
-sendMessageTo (receiver / * String, or Object * /, message / * Any * /) 
+> **sendMessageTo ( message )**  
+> &emsp;&emsp;*Sends a message to the current useModule*  
+> **[return]**  
+> &emsp;&emsp;*Object, The return value of the module's onMessage event*  
+> **[parameters]**  
+> * **message**: *Object / Any, The message object, can be any value* 
 ```javascript
   // to sent a message to module1
   const result1 = module.sendMessageTo(module1, "message");
@@ -270,111 +340,103 @@ sendMessageTo (receiver / * String, or Object * /, message / * Any * /)
   // to sent a message to a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = module.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
 ```
-#### dispatchActionTo
+#### `dispatchAction`
 ----
-dispatchActionTo (receiver / * String, or Object * /, message / * Any * /) 
+> **dispatchAction ( actionName, params, from)**  
+> &emsp;&emsp;*Dispatches an action for the target useModule*  
+> **[return]**  
+> &emsp;&emsp;*Object, The target action's return value*  
+> **[parameters]**  
+> * **actionName**: *String, The action name to be dispatched* 
+> * **params**: *Array, The parameters for the given action* 
+> * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to dispatch an action of module1
-  const result1 = module.dispatchActionTo(module1, "actionName", [/*parameters*/]);
-  // to dispatch an action of a module with usemodule_uid="global_uid1"
-  const resul2 = module.dispatchActionTo("global_uid1", "actionName", [/*parameters*/]);
-  // to dispatch an action of a module (in the current module) with usemodule_alias="alias1"
-  const resul3 = module.dispatchActionTo("alias1", "actionName", [/*parameters*/]);
-  // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
-  const resul4 = module.dispatchActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
+  const result1 = module.dispatchAction("actionName", [/*parameters*/]);
 ```
-#### dispatchAsyncAction
+#### `dispatchAsyncAction`
 ----
-dispatchAsyncAction (receiver / * String, or Object * /, message / * Any * /) 
+> **dispatchAsyncAction ( actionName, params, from)**  
+> &emsp;&emsp;*Dispatches an asynchronous action for the target useModule*  
+> **[return]**  
+> &emsp;&emsp;*Object, The target action's return value*  
+> **[parameters]**  
+> * **actionName**: *String, The action name to be dispatched* 
+> * **params**: *Array, The parameters for the given action* 
+> * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
-  // to dispatch an action of module1, asynchronously
-  const result1 = module.dispatchAsyncAction(module1, "actionName", [/*parameters*/]);
-  // to dispatch an action of a module with usemodule_uid="global_uid1"
-  const resul2 = module.dispatchAsyncAction("global_uid1", "actionName", [/*parameters*/]);
-  // to dispatch an action of a module (in the current module) with usemodule_alias="alias1"
-  const resul3 = module.dispatchAsyncAction("alias1", "actionName", [/*parameters*/]);
-  // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
-  const resul4 = module.dispatchAsyncAction("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
+  // to dispatch an action of module1
+  const result1 = module.dispatchAsyncAction("asyncActionName", [/*parameters*/]);
+``` 
+#### `updateState`
+----
+> **updateState ( path, state, force )**  
+> &emsp;&emsp;*Updates the module state for the current useModule*  
+> **[parameters]**  
+> * **path**: *Object / Array< String > / String, **If it's an Array< String >: to** specify the path for updating the state; **If it's a string**: the string can be convert into an Array< String > after splitting by '.'; **If it's an object**: to specify the whole object to update the state, ignore the the 2nd parameter - state in this case.* 
+> * **state**: *Object/Any, The object to update the state in the given path* 
+> * **force**: *Boolean, Indicates whether force to update the state*
+```javascript
+  // If the old state is {key:'ovalue',key1:{key2:'ovalue'}}
+  // to update the state by the given object
+  // the new state will be {key:'nvalue',key1:{key2:'ovalue'}}
+  module.updateState({ "key":"nvalue" });
+  // to update state by path "key1,key2"
+  // the new state will be {key:'nvalue',key1:{key2:'nvalue'}}
+  module.updateState("key1,key2", "nvalue");
 ```
-#### updateStateFor
+#### `fireEvent`
 ----
-updateStateFor (target / * String, or Object * /, path / * Object, or [String...] * /, state / * Any * /, force / * Booelan * /) 
+> **fireEvent ( eventName, params, from  )**  
+> &emsp;&emsp;*Fires a specified event for the current module*  
+>  **[return]**  
+> &emsp;&emsp;*Object, The return value of the target event*  
+> **[parameters]**  
+> * **eventName**: *String, The action name to be dispatched* 
+> * **params**: *Array, The parameters for the given action* 
+> * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
-  // to update state for module1
-  module.updateStateFor(module1, { key:"value" });
-  // to update state for a module with usemodule_uid="global_uid1"
-  module.updateStateFor("global_uid1", "key", "value");
-  // to update state for a module (in the current module) with usemodule_alias="alias1"
-  module.updateStateFor("alias1", "keylevel1.keylevel2.keylevel3", "any");
-  // to update state for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
-  module.updateStateFor("alias_in_root.alias_in_level1.alias_in_level2", "key", "value");
-```
-#### fireEventFor
-----
-fireEventFor (target / * String, or Object * /, eventName / * String * /, params / * Array * /) 
-```javascript
-  // to fire an event for module1
-  const result1 = module.fireEventFor(module1, "eventName", [/*parameters*/]);
-  // to dispatch an action for a module with usemodule_uid="global_uid1"
-  const resul2 = module.fireEventFor("global_uid1", "eventName", [/*parameters*/]);
-  // to dispatch an action for a module (in the current module) with usemodule_alias="alias1"
-  const resul3 = module.fireEventFor("alias1", "eventName", [/*parameters*/]);
-  // to dispatch an action for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
-  const resul4 = module.fireEventFor("alias_in_root.alias_in_level1.alias_in_level2", "eventName", [/*parameters*/]);
+  // to fire an event 
+  const result1 = module.fireEvent("eventName", [/*parameters*/]);
 ```
 #### broadcast
-----
-broadcast (message / * Any * /) 
+ ----
+> **broadcast ( channelName, message)**  
+> &emsp;&emsp;* Broadcasts message to all useModules via a specified channel*  
+>  **[return]**  
+> &emsp;&emsp;*Object, The return value of the target event*  
 ```javascript
   // to broadcast an message to all modules
   module.broadcast("message");
 ```
-
-#### sendMessage
-----
-sendMessage (essage / * Any * /) 
-```javascript
-  // to sent a message
-  const result = module.sendMessage("message");
-```
-#### dispatchAction
-----
-dispatchAction (actionName / * String * /, params / * Array * /) 
-```javascript
-  // to dispatch an action
-  const result = module.dispatchAction("actionName", [/*parameters*/]);
-```
-#### updateState
-----
-updateState (path / * Object, or [String...] * /, state / * Any * /, force / * Booelan * /) 
-```javascript
-  // to update state
-  module.updateState({ key:"value" });
-  module.updateState("key", "value");
-  module.updateState("keylevel1.keylevel2.keylevel3", "any");
-```
-#### fireEvent
-----
-fireEvent (eventName / * String * /, params / * Array * /) 
-```javascript
-  // to fire an event
-  const result = module.fireEvent("eventName", [/*parameters*/]);
-```
 #### useRef
-----
-useRef (refName / * String * /, value / * Any * /) 
+ ----
+> **useRef ( refName, value )**  
+> &emsp;&emsp;* Triggers a React.useRef to create a ref, which initialial value is 'value' , and can be retrieved by module.getRef('refName') .*  
+>  **[return]**  
+> &emsp;&emsp;*Object, The ref*  
+> **[parameters]**  
+> * **refName **: *String, The ref name* 
+> * **value **: *Object/Any, The given initialial value* 
 ```javascript
   // to use a ref
-  module.useModuleRef("refName", "init vaule");
+  module.useRef("refName", "init vaule");
   // to get the ref
   const ref = module.refs["refName"];
+  // or
+  const ref = module.getRef("refName");  
 ```
 #### getRef
-----
-getRef (refName / * String * / ) 
+ ----
+> **useRef ( refName, value )**  
+> &emsp;&emsp;*Gets a specified ref by the given name, this ref was created by module.useRef('refName', 'value').*  
+>  **[return]**  
+> &emsp;&emsp;*Object, The ref*  
+> **[parameters]**  
+> * **refName**: *String, The ref name* 
 ```javascript
   // to get the ref
-  const ref = module.refs["refName"];
+  const ref = module.getRef("refName");
 ```
 
 ## Quickstart
