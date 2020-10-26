@@ -201,20 +201,20 @@ resolveURL (relPath / * String * /)
 ```
 #### useModule.getDataFromStore
 ----
-getDataFromStore (path / * String or Array * /)
+getDataFromStore (path / * String, or [String...] * /)
 ```javascript
   // to get data from the global store
   useAsModule.getDataFromStore("path_level1.path_level2");
 ```
 #### useModule.setDataToStore
 ----
-setDataToStore (path / * String or Array * /, value / * Any * /, clonePath / * Boolean * /) 
+setDataToStore (path / * String, or [String...] * /, value / * Any * /, clonePath / * Boolean * /) 
 ```javascript
   // to get data from the global store
   useAsModule.setDataToStore("path_level1.path_level2", {data:"value"}, false);
 ```
 
-#### For the module instance
+### For the module instance
 #### getRootModule
 ----
 getRootModule ()
@@ -224,7 +224,9 @@ getRootModule ()
   // to print the module tree in the console
   rootModule.printTree();
 ```
-###### </> getModule (idOrAlias / * String * /) 
+#### getModule
+----
+getModule (idOrAlias / * String * /) 
 ```javascript
   // to get a module with usemodule_uid="global_uid1"
   const module1 = module.getModule("global_uid1");
@@ -233,7 +235,9 @@ getRootModule ()
   // to get a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const module3 = module.getModule("alias_in_root.alias_in_level1.alias_in_level2");  
 ```
-###### </> sendMessageTo (receiver / * String, or Object * /, message / * Any * /) 
+#### sendMessageTo
+----
+sendMessageTo (receiver / * String, or Object * /, message / * Any * /) 
 ```javascript
   // to sent a message to module1
   const result1 = module.sendMessageTo(module1, "message");
@@ -244,8 +248,9 @@ getRootModule ()
   // to sent a message to a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = module.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
 ```
-
-###### </> dispatchActionTo (receiver / * String, or Object * /, message / * Any * /) 
+#### dispatchActionTo
+----
+dispatchActionTo (receiver / * String, or Object * /, message / * Any * /) 
 ```javascript
   // to dispatch an action of module1
   const result1 = module.dispatchActionTo(module1, "actionName", [/*parameters*/]);
@@ -256,7 +261,9 @@ getRootModule ()
   // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = module.dispatchActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
 ```
- ###### </> updateStateFor (target / * String, or Object * /, path / * Object, or [String...] * /, state / * Any * /, force / * Booelan * /) 
+#### updateStateFor
+----
+updateStateFor (target / * String, or Object * /, path / * Object, or [String...] * /, state / * Any * /, force / * Booelan * /) 
 ```javascript
   // to update state for module1
   module.updateStateFor(module1, { key:"value" });
@@ -267,7 +274,9 @@ getRootModule ()
   // to update state for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   module.updateStateFor("alias_in_root.alias_in_level1.alias_in_level2", "key", "value");
 ```
-  ###### </> fireEventFor (target / * String, or Object * /, eventName / * String * /, params / * Array * /) 
+#### fireEventFor
+----
+fireEventFor (target / * String, or Object * /, eventName / * String * /, params / * Array * /) 
 ```javascript
   // to fire an event for module1
   const result1 = module.fireEventFor(module1, "eventName", [/*parameters*/]);
@@ -278,35 +287,47 @@ getRootModule ()
   // to dispatch an action for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = module.fireEventFor("alias_in_root.alias_in_level1.alias_in_level2", "eventName", [/*parameters*/]);
 ```
-  ###### </> broadcast (message / * Any * /) 
+#### broadcast
+----
+broadcast (message / * Any * /) 
 ```javascript
   // to broadcast an message to all modules
   module.broadcast("message");
 ```
 
-###### </> sendMessage (essage / * Any * /) 
+#### sendMessage
+----
+sendMessage (essage / * Any * /) 
 ```javascript
   // to sent a message
   const result = module.sendMessage("message");
 ```
-###### </> dispatchAction (actionName / * String * /, params / * Array * /) 
+#### dispatchAction
+----
+dispatchAction (actionName / * String * /, params / * Array * /) 
 ```javascript
   // to dispatch an action
   const result = module.dispatchAction("actionName", [/*parameters*/]);
 ```
-###### </> updateState (path / * Object, or [String...] * /, state / * Any * /, force / * Booelan * /) 
+#### updateState
+----
+updateState (path / * Object, or [String...] * /, state / * Any * /, force / * Booelan * /) 
 ```javascript
   // to update state
   module.updateState({ key:"value" });
   module.updateState("key", "value");
   module.updateState("keylevel1.keylevel2.keylevel3", "any");
 ```
-###### </> fireEvent (eventName / * String * /, params / * Array * /) 
+#### fireEvent
+----
+fireEvent (eventName / * String * /, params / * Array * /) 
 ```javascript
   // to fire an event
   const result = module.fireEvent("eventName", [/*parameters*/]);
 ```
-###### </> useModuleRef (refName / * String * /, value / * Any * /) 
+#### useModuleRef
+----
+useModuleRef (refName / * String * /, value / * Any * /) 
 ```javascript
   // to use a ref
   module.useModuleRef("refName", "init vaule");
