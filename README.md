@@ -93,9 +93,9 @@ const ReactCom = props => {
 ## API 
 ### For the global variable useAsModule
 #### `useModule.getRootModule`
-> *Gets the root useModule*
 ----
 getRootModule( )
+> *Gets the root useModule*
 ```javascript
   // to get the root module
   const rootModule = useAsModule.getRootModule();
