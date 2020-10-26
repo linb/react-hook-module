@@ -261,6 +261,19 @@ dispatchActionTo (receiver / * String, or Object * /, message / * Any * /)
   // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = module.dispatchActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
 ```
+#### dispatchAsyncAction
+----
+dispatchAsyncAction (receiver / * String, or Object * /, message / * Any * /) 
+```javascript
+  // to dispatch an action of module1, asynchronously
+  const result1 = module.dispatchAsyncAction(module1, "actionName", [/*parameters*/]);
+  // to dispatch an action of a module with usemodule_uid="global_uid1"
+  const resul2 = module.dispatchAsyncAction("global_uid1", "actionName", [/*parameters*/]);
+  // to dispatch an action of a module (in the current module) with usemodule_alias="alias1"
+  const resul3 = module.dispatchAsyncAction("alias1", "actionName", [/*parameters*/]);
+  // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  const resul4 = module.dispatchAsyncAction("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
+```
 #### updateStateFor
 ----
 updateStateFor (target / * String, or Object * /, path / * Object, or [String...] * /, state / * Any * /, force / * Booelan * /) 
