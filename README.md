@@ -16,7 +16,7 @@ import useModule from "react-module-hook";
 ```javascript
 ...
 const ReactComponent = props => {
-  const { module, auth, router, request } = useAsModule(props, {
+  const { module, auth, router, request } = useModule(props, {
     // the default state for this module
     state:{},
     // the default props for this module
@@ -48,7 +48,7 @@ const ReactComponent = props => {
 ```javascript
 ...
 const ReactComSub1 = props => {
-  const module = useAsModule(props, { }); 
+  const module = useModule(props, { }); 
   return (
     <div>
       ReactComSub1
@@ -56,7 +56,7 @@ const ReactComSub1 = props => {
   );
 };
 const ReactComSub2 = props => {
-  const module = useAsModule(props, { }); 
+  const module = useModule(props, { }); 
   return (
     <div>
       ReactComSub2 - {props.name}
@@ -64,7 +64,7 @@ const ReactComSub2 = props => {
   );
 };
 const ReactCom = props => {
-  const module = useAsModule(props, {
+  const module = useModule(props, {
     state:{
       items:[{"name":"v1"},{"name":"v2"}]
     }
@@ -92,7 +92,7 @@ const ReactCom = props => {
 ```
 
 ## API 
-### For the global variable useAsModule
+### For the global variable useModule
 #### `useModule.getRootModule`
 ----
 > **getRootModule( )**  
@@ -101,7 +101,7 @@ const ReactCom = props => {
 > &emsp;&emsp;*Object, The root useModule element*  
 ```javascript
   // to get the root useModule element
-  const rootModule = useAsModule.getRootModule();
+  const rootModule = useModule.getRootModule();
   // to print the useModule tree in the console
   rootModule.printTree();
 ```
@@ -115,11 +115,11 @@ const ReactCom = props => {
 > * **idOrAlias** [required] : *String, The target useModule element's uid or alias*  
 ```javascript
   // to get an useModule element with usemodule_uid="global_uid1"
-  const module1 = useAsModule.getModule("global_uid1");
+  const module1 = useModule.getModule("global_uid1");
   // to get an useModule element(in the root useModule element) with usemodule_alias="alias1"
-  const module2 = useAsModule.getModule("alias1");
+  const module2 = useModule.getModule("alias1");
   // to get an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
-  const module3 = useAsModule.getModule("alias_in_root.alias_in_level1.alias_in_level2");  
+  const module3 = useModule.getModule("alias_in_root.alias_in_level1.alias_in_level2");  
 ```
 #### `useModule.sendMessageTo`
 ----
@@ -132,13 +132,13 @@ const ReactCom = props => {
 > * **message** [required] : *Object / Any, The message object, can be any value* 
 ```javascript
   // to sent a message to module1
-  const result1 = useAsModule.sendMessageTo(module1, "message");
+  const result1 = useModule.sendMessageTo(module1, "message");
   // to sent a message to an useModule element with usemodule_uid="global_uid1"
-  const resul2 = useAsModule.sendMessageTo("global_uid1", "message");
+  const resul2 = useModule.sendMessageTo("global_uid1", "message");
   // to sent a message to an useModule element(in the root useModule element) with usemodule_alias="alias1"
-  const resul3 = useAsModule.sendMessageTo("alias1", "message");
+  const resul3 = useModule.sendMessageTo("alias1", "message");
   // to sent a message to an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
-  const resul4 = useAsModule.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
+  const resul4 = useModule.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
 ```
 
 #### `useModule.dispatchActionTo`
@@ -154,13 +154,13 @@ const ReactCom = props => {
 > * **from** [optional] : *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to dispatch an action of module1
-  const result1 = useAsModule.dispatchActionTo(module1, "actionName", [/*parameters*/]);
+  const result1 = useModule.dispatchActionTo(module1, "actionName", [/*parameters*/]);
   // to dispatch an action of an useModule element with usemodule_uid="global_uid1"
-  const resul2 = useAsModule.dispatchActionTo("global_uid1", "actionName", [/*parameters*/]);
+  const resul2 = useModule.dispatchActionTo("global_uid1", "actionName", [/*parameters*/]);
   // to dispatch an action of an useModule element(in the root useModule element) with usemodule_alias="alias1"
-  const resul3 = useAsModule.dispatchActionTo("alias1", "actionName", [/*parameters*/]);
+  const resul3 = useModule.dispatchActionTo("alias1", "actionName", [/*parameters*/]);
   // to dispatch an action of an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
-  const resul4 = useAsModule.dispatchActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
+  const resul4 = useModule.dispatchActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
 ```
 #### `useModule.dispatchAsyncActionTo`
 ----
@@ -175,13 +175,13 @@ const ReactCom = props => {
 > * **from** [optional] : *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to dispatch an action of module1, 
-  const result1 = useAsModule.dispatchAsyncActionTo(module1, "asyncActionName", [/*parameters*/]);
+  const result1 = useModule.dispatchAsyncActionTo(module1, "asyncActionName", [/*parameters*/]);
   // to dispatch an action of an useModule element with usemodule_uid="global_uid1"
-  const resul2 = useAsModule.dispatchAsyncActionTo("global_uid1", "asyncActionName", [/*parameters*/]);
+  const resul2 = useModule.dispatchAsyncActionTo("global_uid1", "asyncActionName", [/*parameters*/]);
   // to dispatch an action of an useModule element (in the root useModule element) with usemodule_alias="alias1"
-  const resul3 = useAsModule.dispatchAsyncActionTo("alias1", "asyncActionName", [/*parameters*/]);
+  const resul3 = useModule.dispatchAsyncActionTo("alias1", "asyncActionName", [/*parameters*/]);
   // to dispatch an action of an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
-  const resul4 = useAsModule.dispatchAsyncActionTo("alias_in_root.alias_in_level1.alias_in_level2", "asyncActionName", [/*parameters*/]);
+  const resul4 = useModule.dispatchAsyncActionTo("alias_in_root.alias_in_level1.alias_in_level2", "asyncActionName", [/*parameters*/]);
 ```
 #### `useModule.updateStateFor`
 ----
@@ -194,13 +194,13 @@ const ReactCom = props => {
 > * **force** [optional] : *Boolean, Indicates whether force to update the state. Default is false* 
 ```javascript
   // to update state for module1
-  useAsModule.updateStateFor(module1, { key:"value" });
+  useModule.updateStateFor(module1, { key:"value" });
   // to update state for an useModule element with usemodule_uid="global_uid1"
-  useAsModule.updateStateFor("global_uid1", "key", "value");
+  useModule.updateStateFor("global_uid1", "key", "value");
   // to update state for an useModule element (in the root useModule element) with usemodule_alias="alias1"
-  useAsModule.updateStateFor("alias1", "keylevel1.keylevel2.keylevel3", "value");
+  useModule.updateStateFor("alias1", "keylevel1.keylevel2.keylevel3", "value");
   // to update state for an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
-  useAsModule.updateStateFor("alias_in_root.alias_in_level1.alias_in_level2", "key", "value");
+  useModule.updateStateFor("alias_in_root.alias_in_level1.alias_in_level2", "key", "value");
 ```
 #### `useModule.fireEventTo`
  ----
@@ -215,13 +215,13 @@ const ReactCom = props => {
 > * **from** [optional] : *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to fire an event for module1
-  const result1 = useAsModule.fireEventFor(module1, "eventName", [/*parameters*/]);
+  const result1 = useModule.fireEventFor(module1, "eventName", [/*parameters*/]);
   // to fire an event for an useModule element with usemodule_uid="global_uid1"
-  const resul2 = useAsModule.fireEventFor("global_uid1", "eventName", [/*parameters*/]);
+  const resul2 = useModule.fireEventFor("global_uid1", "eventName", [/*parameters*/]);
   // to fire an event for an useModule element (in the root useModule element) with usemodule_alias="alias1"
-  const resul3 = useAsModule.fireEventFor("alias1", "eventName", [/*parameters*/]);
+  const resul3 = useModule.fireEventFor("alias1", "eventName", [/*parameters*/]);
   // to fire an evnt for an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
-  const resul4 = useAsModule.fireEventFor("alias_in_root.alias_in_level1.alias_in_level2", "eventName", [/*parameters*/]);
+  const resul4 = useModule.fireEventFor("alias_in_root.alias_in_level1.alias_in_level2", "eventName", [/*parameters*/]);
 ```
 #### `useModule.broadcast`
  ----
@@ -232,7 +232,7 @@ const ReactCom = props => {
 > * **message** [required] : *Object / Any, The message object, can be any value* 
 ```javascript
   // to broadcast an message to all useModule elements
-  useAsModule.broadcast("channelName","message");
+  useModule.broadcast("channelName","message");
 ```
 #### `useModule.printModulesTree`
  ----
@@ -240,7 +240,7 @@ const ReactCom = props => {
 > &emsp;&emsp;*Prints the useModule element tree to the console window*  
 ```javascript
   // to print the useModule element tree onto the console
-  useAsModule.printModulesTree( );
+  useModule.printModulesTree( );
 ```
 #### `useModule.resolveURL`
 ----
@@ -252,7 +252,7 @@ const ReactCom = props => {
 > * **relPath** [required] : *String, The relative path for an url* 
 ```javascript
   // to resolve a relative path for the resource url
-  useAsModule.resolveURL("./img/pic.png");
+  useModule.resolveURL("./img/pic.png");
 ```
 #### `useModule.getDataFromStore`
  ----
@@ -264,7 +264,7 @@ const ReactCom = props => {
 > * **path** [required] : *Array< String > /  String, **If it's an Array< String >**: to specify the path for the data; **If it's a String**: the string can be convert into an Array< String > after splitting by '.'* 
 ```javascript
   // to get data from the global store
-  useAsModule.getDataFromStore("path_level1.path_level2");
+  useModule.getDataFromStore("path_level1.path_level2");
 ```
 #### `useModule.setDataToStore`
  ----
@@ -276,10 +276,10 @@ const ReactCom = props => {
 >  * **clonePath** [optional] : *Boolean,  Determines whether to clone the path or not. Defalt is false* 
 ```javascript
   // to get data from the global store
-  useAsModule.setDataToStore("path_level1.path_level2", {data:"value"}, false);
+  useModule.setDataToStore("path_level1.path_level2", {data:"value"}, false);
 ```
 
-### For the useModule instance
+### For useModule instance
 #### `getRootModule`
 ----
 > **getRootModule ( )**  
@@ -398,7 +398,7 @@ const ReactCom = props => {
 > * **message** [required] : *Object / Any, The message object, can be any value* 
 ```javascript
   // to broadcast an message to all useModule elements
-  useAsModule.broadcast("channelName","message");
+  useModule.broadcast("channelName","message");
 ```
 #### `useRef`
  ----
@@ -442,9 +442,10 @@ const ReactCom = props => {
   // to get the ref
   const ref = module.getRef("refName");
 ```
+### For useModule instance with material-UI plugin
 #### `showSnackbar`
  ----
-> **showSnackbar( refName, value )**  
+> **showSnackbar ( refName, value )**  
 > &emsp;&emsp;*To show a material-UI snackbar. An advanced function in material-UI plugin ( react-module-hook/plugin_mui )*  
 >  **[return]**  
 > &emsp;&emsp;*Object, The ref*  
@@ -460,7 +461,7 @@ const ReactCom = props => {
 ```
 #### `alert`
  ----
-> **alert( title, description, okCaption )**  
+> **alert ( title, description, okCaption )**  
 > &emsp;&emsp;*To show an material-UI alert window. An advanced function in material-UI plugin ( react-module-hook/plugin_mui ). You must use 'await' to call it, and it must be called in an async function.*  
 > **[parameters]**  
 > * **title** [required] : *String, The title text* 
@@ -478,7 +479,7 @@ const ReactCom = props => {
 ```
 #### `confirm`
  ----
-> **confirm( title, description, okCaption, cancelCaption )**  
+> **confirm ( title, description, okCaption, cancelCaption )**  
 > &emsp;&emsp;*To show an material-UI confirm window. An advanced function in material-UI plugin ( react-module-hook/plugin_mui ). You must use 'await' to call it, and it must be called in an async function.*  
 >  **[return]**  
 > &emsp;&emsp;*Boolean, the confirm result.*  
@@ -499,7 +500,7 @@ const ReactCom = props => {
 ```
 #### `prompt`
  ----
-> **prompt( title, description, defaultValue, okCaption, cancelCaption )**  
+> **prompt ( title, description, defaultValue, okCaption, cancelCaption )**  
 > &emsp;&emsp;*To show an material-UI prompt window. An advanced function in material-UI plugin ( react-module-hook/plugin_mui ). You must use 'await' to call it, and it must be called in an async function.*  
 >  **[return]**  
 > &emsp;&emsp;*String, the input result.*  
@@ -521,7 +522,7 @@ const ReactCom = props => {
 ```
 #### `showBackdrop`
  ----
-> **showBackdrop( id, clickAway, style, transitionDuration, children)**  
+> **showBackdrop ( id, clickAway, style, transitionDuration, children)**  
 > &emsp;&emsp;*To show a backdrop for a given id. An advanced function in material-UI plugin ( react-module-hook/plugin_mui ).*  
 > **[parameters]**  
 > * **id** [optional] : *String, The backdrop id, default is 'default'* 
@@ -538,7 +539,7 @@ const ReactCom = props => {
 ```
 #### `hideBackdrop`
  ----
-> **hideBackdrop( id )**  
+> **hideBackdrop ( id )**  
 > &emsp;&emsp;*To hide a backdrop for a given id. An advanced function in material-UI plugin ( react-module-hook/plugin_mui ).*  
 > **[parameters]**  
 > * **id** [optional] : *String, The backdrop id, default is 'default'* 
@@ -548,6 +549,29 @@ const ReactCom = props => {
   import "react-module-hook/plugin_mui";
   //...
   module.hideBackdrop( );
+```
+### For useModule instance with request plugin
+#### `request`
+ ----
+> **request ( url, data, method, baseURL, AUTH_TOKEN, header, config )**  
+> &emsp;&emsp;*To request data from an remote service service endpoint, by [axios](https://github.com/axios/axios). An advanced function in material-UI plugin ( react-module-hook/plugin_request ). You must use 'await' to call it, and it must be called in an async function.*  
+> **[parameters]**  
+> * **url** [reqired] : *String, The url for an [axios reqeust](https://github.com/axios/axios#request-config)* 
+> * **data** [optional] : *Object/String, The data (ArrayBuffer, ArrayBufferView, URLSearchParams, FormData, File, Blob, or queryString) for an  [axios reqeust](https://github.com/axios/axios#request-config) Default is null* 
+> * **method** [optional] : *String, The method (get/post/put/delete/patch/head/options) for an  [axios reqeust](https://github.com/axios/axios#request-config). Default is 'get'*   
+> * **baseURL** [optional] : *String, The base URL for an  [axios reqeust](https://github.com/axios/axios#request-config). Default is empty string.*  
+> * **AUTH_TOKEN** [optional] : *String, The AUTH_TOKEN for an  [axios reqeust](https://github.com/axios/axios#request-config). Default is null.*  
+> * **header** [optional] : *Object, The header for an  [axios reqeust](https://github.com/axios/axios#request-config). Default is {}.*  
+> * **config** [optional] : *Object, The config object for an  [axios reqeust](https://github.com/axios/axios#request-config).Default is {}.*  
+```javascript
+  import "react-module-hook";
+  // must import request plugin for 
+  import "react-module-hook/plugin_request";
+  //...
+  (async()=>{
+      // to show an confirm dialog
+      const result = await module.request ("service/endpoint" );
+  })();
 ```
 ## Quickstart
 ### Basic Demo
