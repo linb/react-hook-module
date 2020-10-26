@@ -56,7 +56,7 @@ export default (props) => {
 };
 
 export const Module2 = (props) => {
-  const module = useModule(props, {
+  const { module } = useModule(props, {
     props: {
       onMessage: (value) => {
         module.updateState({ value });
