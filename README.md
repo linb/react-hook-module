@@ -116,7 +116,7 @@ const ReactCom = props => {
 ```javascript
   // to get an useModule element with usemodule_uid="global_uid1"
   const module1 = useAsModule.getModule("global_uid1");
-  // to get an useModule element(in the root an useModule element) with usemodule_alias="alias1"
+  // to get an useModule element(in the root useModule element) with usemodule_alias="alias1"
   const module2 = useAsModule.getModule("alias1");
   // to get an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const module3 = useAsModule.getModule("alias_in_root.alias_in_level1.alias_in_level2");  
@@ -124,18 +124,18 @@ const ReactCom = props => {
 #### `useModule.sendMessageTo`
 ----
 > **sendMessageTo ( receiver, message )**  
-> &emsp;&emsp;*Sends a message to the target useModule element*  
+> &emsp;&emsp;*Sends a message to the target useModule element, which can  be received in it's onMessage event*  
 > **[return]**  
 > &emsp;&emsp;*Object, The return value of target useModule element's onMessage event*  
 > **[parameters]**  
-> * **receiver**: *String or Object, The target useModule element, which can be an useModule object, useModule uid or alias (if it's an useModule element added as an element in the root useModule element ).*  
+> * **receiver**: *String or Object, The target useModule element, which can be an useModule object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
 > * **message**: *Object / Any, The message object, can be any value* 
 ```javascript
   // to sent a message to module1
   const result1 = useAsModule.sendMessageTo(module1, "message");
   // to sent a message to an useModule element with usemodule_uid="global_uid1"
   const resul2 = useAsModule.sendMessageTo("global_uid1", "message");
-  // to sent a message to an useModule element(in the root module) with usemodule_alias="alias1"
+  // to sent a message to an useModule element(in the root useModule element) with usemodule_alias="alias1"
   const resul3 = useAsModule.sendMessageTo("alias1", "message");
   // to sent a message to an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
@@ -157,7 +157,7 @@ const ReactCom = props => {
   const result1 = useAsModule.dispatchActionTo(module1, "actionName", [/*parameters*/]);
   // to dispatch an action of an useModule element with usemodule_uid="global_uid1"
   const resul2 = useAsModule.dispatchActionTo("global_uid1", "actionName", [/*parameters*/]);
-  // to dispatch an action of an useModule element(in the root module) with usemodule_alias="alias1"
+  // to dispatch an action of an useModule element(in the root useModule element) with usemodule_alias="alias1"
   const resul3 = useAsModule.dispatchActionTo("alias1", "actionName", [/*parameters*/]);
   // to dispatch an action of an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.dispatchActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
@@ -178,7 +178,7 @@ const ReactCom = props => {
   const result1 = useAsModule.dispatchAsyncActionTo(module1, "asyncActionName", [/*parameters*/]);
   // to dispatch an action of an useModule element with usemodule_uid="global_uid1"
   const resul2 = useAsModule.dispatchAsyncActionTo("global_uid1", "asyncActionName", [/*parameters*/]);
-  // to dispatch an action of an useModule element (in the root module) with usemodule_alias="alias1"
+  // to dispatch an action of an useModule element (in the root useModule element) with usemodule_alias="alias1"
   const resul3 = useAsModule.dispatchAsyncActionTo("alias1", "asyncActionName", [/*parameters*/]);
   // to dispatch an action of an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.dispatchAsyncActionTo("alias_in_root.alias_in_level1.alias_in_level2", "asyncActionName", [/*parameters*/]);
@@ -197,7 +197,7 @@ const ReactCom = props => {
   useAsModule.updateStateFor(module1, { key:"value" });
   // to update state for an useModule element with usemodule_uid="global_uid1"
   useAsModule.updateStateFor("global_uid1", "key", "value");
-  // to update state for an useModule element (in the root module) with usemodule_alias="alias1"
+  // to update state for an useModule element (in the root useModule element) with usemodule_alias="alias1"
   useAsModule.updateStateFor("alias1", "keylevel1.keylevel2.keylevel3", "value");
   // to update state for an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   useAsModule.updateStateFor("alias_in_root.alias_in_level1.alias_in_level2", "key", "value");
@@ -218,7 +218,7 @@ const ReactCom = props => {
   const result1 = useAsModule.fireEventFor(module1, "eventName", [/*parameters*/]);
   // to fire an event for an useModule element with usemodule_uid="global_uid1"
   const resul2 = useAsModule.fireEventFor("global_uid1", "eventName", [/*parameters*/]);
-  // to fire an event for an useModule element (in the root module) with usemodule_alias="alias1"
+  // to fire an event for an useModule element (in the root useModule element) with usemodule_alias="alias1"
   const resul3 = useAsModule.fireEventFor("alias1", "eventName", [/*parameters*/]);
   // to fire an evnt for an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.fireEventFor("alias_in_root.alias_in_level1.alias_in_level2", "eventName", [/*parameters*/]);
@@ -226,7 +226,7 @@ const ReactCom = props => {
 #### `useModule.broadcast`
  ----
 > **broadcast ( channelName, message)**  
-> &emsp;&emsp;*Broadcasts message to all useModule elements via a specified channel*  
+> &emsp;&emsp;*Broadcasts message to all useModule elements via a specified channel, which can be received in all useModule components' onChannelMessage event*  
 >  **[return]**  
 > &emsp;&emsp;*Object, The return value of the target event*  
 > **[parameters]**  
@@ -322,23 +322,17 @@ const ReactCom = props => {
   // to get a module(in the current module) with usemodule_alias="alias1"
   const module2 = module.getModuleByAlias("alias1");
 ```
-#### `sendMessageTo`
+#### `sendMessage`
 ----
-> **sendMessageTo ( message )**  
-> &emsp;&emsp;*Sends a message to the current useModule element*  
+> **sendMessage ( message )**  
+> &emsp;&emsp;*Sends a message to the current useModule element, which can  be received in it's onMessage event*  
 > **[return]**  
 > &emsp;&emsp;*Object, The return value of the module's onMessage event*  
 > **[parameters]**  
 > * **message**: *Object / Any, The message object, can be any value* 
 ```javascript
-  // to sent a message to module1
-  const result1 = module.sendMessageTo(module1, "message");
-  // to sent a message to an useModule element with usemodule_uid="global_uid1"
-  const resul2 = module.sendMessageTo("global_uid1", "message");
-  // to sent a message to an useModule element(in the current module) with usemodule_alias="alias1"
-  const resul3 = module.sendMessageTo("alias1", "message");
-  // to sent a message to an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
-  const resul4 = module.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
+  // to sent a message
+  const result1 = module.sendMessage("message");  
 ```
 #### `dispatchAction`
 ----
@@ -400,7 +394,7 @@ const ReactCom = props => {
 #### broadcast
  ----
 > **broadcast ( channelName, message)**  
-> &emsp;&emsp;*Broadcasts message to all useModule elements via a specified channel*  
+> &emsp;&emsp;*Broadcasts message to all useModule elements via a specified channel, which can be received in all useModule components' onChannelMessage event*  
 >  **[return]**  
 > &emsp;&emsp;*Object, The return value of the target event*  
 ```javascript
