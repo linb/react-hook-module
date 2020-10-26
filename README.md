@@ -15,7 +15,7 @@ import useModule from "react-module-hook";
 ```javascript
 ...
 const ReactComponent = props => {
-  const module = useAsModule(props, {
+  const { module, auth, router, request } = useAsModule(props, {
     // the default state for this module
     state:{},
     // the default props for this module
