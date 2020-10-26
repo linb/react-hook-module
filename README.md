@@ -96,152 +96,152 @@ const ReactCom = props => {
 #### `useModule.getRootModule`
 ----
 > **getRootModule( )**  
-> &emsp;&emsp;*Gets the root useModule*  
+> &emsp;&emsp;*Gets the root useModule element*  
 > **[return]**  
-> &emsp;&emsp;*Object, The target module*  
+> &emsp;&emsp;*Object, The root useModule element*  
 ```javascript
-  // to get the root module
+  // to get the root useModule element
   const rootModule = useAsModule.getRootModule();
-  // to print the module tree in the console
+  // to print the useModule tree in the console
   rootModule.printTree();
 ```
 #### `useModule.getModule`
 ----
 > **getModule ( idOrAlias )**  
-> &emsp;&emsp;*Gets the useModule according to it's uid or alias (if it's a sub useModule added as a component in the root useModule )*  
+> &emsp;&emsp;*Gets the useModule element according to it's uid or alias (if it's an useModule component added as an element in the root useModule element )*  
 > **[return]**  
-> &emsp;&emsp;*Object, The target module*  
+> &emsp;&emsp;*Object, The target useModule element*  
 > **[parameters]**  
-> * **idOrAlias**: *String, The target useModule's uid or alias*  
+> * **idOrAlias**: *String, The target useModule element's uid or alias*  
 ```javascript
-  // to get a module with usemodule_uid="global_uid1"
+  // to get an useModule element with usemodule_uid="global_uid1"
   const module1 = useAsModule.getModule("global_uid1");
-  // to get a module(in the root module) with usemodule_alias="alias1"
+  // to get an useModule element(in the root an useModule element) with usemodule_alias="alias1"
   const module2 = useAsModule.getModule("alias1");
-  // to get a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  // to get an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const module3 = useAsModule.getModule("alias_in_root.alias_in_level1.alias_in_level2");  
 ```
 #### `useModule.sendMessageTo`
 ----
 > **sendMessageTo ( receiver, message )**  
-> &emsp;&emsp;*Sends a message to the target useModule*  
+> &emsp;&emsp;*Sends a message to the target useModule element*  
 > **[return]**  
-> &emsp;&emsp;*Object, The return value of target module's onMessage event*  
+> &emsp;&emsp;*Object, The return value of target useModule element's onMessage event*  
 > **[parameters]**  
-> * **receiver**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's a sub useModule added as a component in the root useModule ).*  
+> * **receiver**: *String or Object, The target useModule element, which can be an useModule object, useModule uid or alias (if it's an useModule element added as an element in the root useModule element ).*  
 > * **message**: *Object / Any, The message object, can be any value* 
 ```javascript
   // to sent a message to module1
   const result1 = useAsModule.sendMessageTo(module1, "message");
-  // to sent a message to a module with usemodule_uid="global_uid1"
+  // to sent a message to an useModule element with usemodule_uid="global_uid1"
   const resul2 = useAsModule.sendMessageTo("global_uid1", "message");
-  // to sent a message to a module(in the root module) with usemodule_alias="alias1"
+  // to sent a message to an useModule element(in the root module) with usemodule_alias="alias1"
   const resul3 = useAsModule.sendMessageTo("alias1", "message");
-  // to sent a message to a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  // to sent a message to an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
 ```
 
 #### `useModule.dispatchActionTo`
 ----
 > **dispatchActionTo ( receiver, actionName, params, from)**  
-> &emsp;&emsp;*Dispatches an action for the target useModule*  
+> &emsp;&emsp;*Dispatches an action for the target useModule element*  
 > **[return]**  
 > &emsp;&emsp;*Object, The target action's return value*  
 > **[parameters]**  
-> * **receiver**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's a sub useModule added as a component in the root useModule ).*  
+> * **receiver**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
 > * **actionName**: *String, The action name to be dispatched* 
 > * **params**: *Array, The parameters for the given action* 
 > * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to dispatch an action of module1
   const result1 = useAsModule.dispatchActionTo(module1, "actionName", [/*parameters*/]);
-  // to dispatch an action of a module with usemodule_uid="global_uid1"
+  // to dispatch an action of an useModule element with usemodule_uid="global_uid1"
   const resul2 = useAsModule.dispatchActionTo("global_uid1", "actionName", [/*parameters*/]);
-  // to dispatch an action of a module (in the root module) with usemodule_alias="alias1"
+  // to dispatch an action of an useModule element(in the root module) with usemodule_alias="alias1"
   const resul3 = useAsModule.dispatchActionTo("alias1", "actionName", [/*parameters*/]);
-  // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  // to dispatch an action of an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.dispatchActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
 ```
 #### `useModule.dispatchAsyncActionTo`
 ----
 > **dispatchAsyncActionTo ( receiver, actionName, params, from)**  
-> &emsp;&emsp;*Dispatches an asynchronous action for the target useModule*  
+> &emsp;&emsp;*Dispatches an asynchronous action for the target useModule element*  
 > **[return]**  
 > &emsp;&emsp;*Object, The target action's return value*  
 > **[parameters]**  
-> * **receiver**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's a sub useModule added as a component in the root useModule ).*  
+> * **receiver**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
 > * **actionName**: *String, The action name to be dispatched* 
 > * **params**: *Array, The parameters for the given action* 
 > * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to dispatch an action of module1, 
   const result1 = useAsModule.dispatchAsyncActionTo(module1, "asyncActionName", [/*parameters*/]);
-  // to dispatch an action of a module with usemodule_uid="global_uid1"
+  // to dispatch an action of an useModule element with usemodule_uid="global_uid1"
   const resul2 = useAsModule.dispatchAsyncActionTo("global_uid1", "asyncActionName", [/*parameters*/]);
-  // to dispatch an action of a module (in the root module) with usemodule_alias="alias1"
+  // to dispatch an action of an useModule element (in the root module) with usemodule_alias="alias1"
   const resul3 = useAsModule.dispatchAsyncActionTo("alias1", "asyncActionName", [/*parameters*/]);
-  // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  // to dispatch an action of an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.dispatchAsyncActionTo("alias_in_root.alias_in_level1.alias_in_level2", "asyncActionName", [/*parameters*/]);
 ```
 #### `useModule.updateStateFor`
 ----
 > **updateStateFor ( target, path, state, force )**  
-> &emsp;&emsp;*Updates the module state for the target useModule*  
+> &emsp;&emsp;*Updates the module state for the target useModule element*  
 > **[parameters]**  
-> * **target**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's a sub useModule added as a component in the root useModule ).*  
+> * **target**: *String or Object, The target useModule element, which can be an useModule element object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
 > * **path**: *Object / Array< String > / String, **If it's an Array< String >: to** specify the path for updating the state; **If it's a string**: the string can be convert into an Array< String > after splitting by '.'; **If it's an object**: to specify the whole object to update the state, ignore the the 2nd parameter - state in this case.* 
 > * **state**: *Object/Any, The object to update the state in the given path* 
 > * **force**: *Boolean, Indicates whether force to update the state* 
 ```javascript
   // to update state for module1
   useAsModule.updateStateFor(module1, { key:"value" });
-  // to update state for a module with usemodule_uid="global_uid1"
+  // to update state for an useModule element with usemodule_uid="global_uid1"
   useAsModule.updateStateFor("global_uid1", "key", "value");
-  // to update state for a module (in the root module) with usemodule_alias="alias1"
+  // to update state for an useModule element (in the root module) with usemodule_alias="alias1"
   useAsModule.updateStateFor("alias1", "keylevel1.keylevel2.keylevel3", "value");
-  // to update state for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  // to update state for an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   useAsModule.updateStateFor("alias_in_root.alias_in_level1.alias_in_level2", "key", "value");
 ```
 #### `useModule.fireEventTo`
  ----
 > **fireEventTo ( target, eventName, params, from)**  
-> &emsp;&emsp;*Fires an event for the target useModule*  
+> &emsp;&emsp;*Fires an event for the target useModule element*  
 >  **[return]**  
 > &emsp;&emsp;*Object, The return value of the target event*  
 > **[parameters]**  
-> * **target**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's a sub useModule added as a component in the root useModule ).*  
+> * **target**: *String or Object, The target useModule element, which can be an useModule element object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
 > * **eventName**: *String, The action name to be dispatched* 
 > * **params**: *Array, The parameters for the given action* 
 > * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to fire an event for module1
   const result1 = useAsModule.fireEventFor(module1, "eventName", [/*parameters*/]);
-  // to fire an event for a module with usemodule_uid="global_uid1"
+  // to fire an event for an useModule element with usemodule_uid="global_uid1"
   const resul2 = useAsModule.fireEventFor("global_uid1", "eventName", [/*parameters*/]);
-  // to fire an event for a module (in the root module) with usemodule_alias="alias1"
+  // to fire an event for an useModule element (in the root module) with usemodule_alias="alias1"
   const resul3 = useAsModule.fireEventFor("alias1", "eventName", [/*parameters*/]);
-  // to fire an evnt for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  // to fire an evnt for an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.fireEventFor("alias_in_root.alias_in_level1.alias_in_level2", "eventName", [/*parameters*/]);
 ```
 #### `useModule.broadcast`
  ----
 > **broadcast ( channelName, message)**  
-> &emsp;&emsp;* Broadcasts message to all useModules via a specified channel*  
+> &emsp;&emsp;*Broadcasts message to all useModule elements via a specified channel*  
 >  **[return]**  
 > &emsp;&emsp;*Object, The return value of the target event*  
 > **[parameters]**  
 > * **channelName**: *String, The channel name*  
 > * **message**: *Object / Any, The message object, can be any value* 
 ```javascript
-  // to broadcast an message to all modules
+  // to broadcast an message to all useModule elements
   useAsModule.broadcast("message");
 ```
 #### `useModule.printModulesTree`
  ----
 > **printModulesTree ( )**  
-> &emsp;&emsp;* Prints the module tree to the console window*  
+> &emsp;&emsp;*Prints the useModule element tree to the console window*  
 ```javascript
-  // to print the module tree onto the console
+  // to print the useModule element tree onto the console
   useAsModule.printModulesTree( );
 ```
 #### `useModule.resolveURL`
@@ -275,7 +275,7 @@ const ReactCom = props => {
 > **[parameters]**  
 > * **path**: *Array< String > /  String, **If it's an Array< String >**: to specify the path for the data; **If it's a String**: the string can be convert into an Array< String > after splitting by '.'* 
 > * **value**: *Object / Any, The object to set* 
->  * **clonePath **: *Boolean,  Determines whether to clone the path or not* 
+>  * **clonePath**: *Boolean,  Determines whether to clone the path or not* 
 ```javascript
   // to get data from the global store
   useAsModule.setDataToStore("path_level1.path_level2", {data:"value"}, false);
@@ -285,39 +285,39 @@ const ReactCom = props => {
 #### `getRootModule`
 ----
 > **getRootModule ( )**  
-> &emsp;&emsp;*Gets the root useModule*  
+> &emsp;&emsp;*Gets the root useModule element*  
 > **[return]**  
-> &emsp;&emsp;*Object, The target module*  
+> &emsp;&emsp;*Object, The root useModule element*  
 ```javascript
-  // to get the root module
+  // to get the root useModule element
   const rootModule = module.getRootModule();
-  // to print the module tree in the console
+  // to print the useModule elements tree in the console
   rootModule.printTree();
 ```
 #### `getModule`
 ----
 > **getModule ( idOrAlias )**  
-> &emsp;&emsp;*Gets the useModule according to it's uid or alias (if it's a sub useModule added as a component in the root useModule )*  
+> &emsp;&emsp;*Gets the useModule element according to it's uid or alias (if it's an useModule component added as an element in the current module )*  
 > **[return]**  
-> &emsp;&emsp;*Object, The target module*  
+> &emsp;&emsp;*Object, The target module element*  
 > **[parameters]**  
-> * **idOrAlias**: *String, The target useModule's uid or alias*  
+> * **idOrAlias**: *String, The target useModule element's uid or alias*  
 ```javascript
-  // to get a module with usemodule_uid="global_uid1"
+  // to get an useModule element with usemodule_uid="global_uid1"
   const module1 = module.getModule("global_uid1");
-  // to get a module(in the current module) with usemodule_alias="alias1"
+  // to get an useModule element(in the current module) with usemodule_alias="alias1"
   const module2 = module.getModule("alias1");
-  // to get a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  // to get an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const module3 = module.getModule("alias_in_root.alias_in_level1.alias_in_level2");  
 ```
 #### getModuleByAlias
  ----
 > **getModuleByAlias ( alias )**  
-> &emsp;&emsp;*Gets a sub component by the given alias, which must be a useModule component and has an alias (usemodule_alias)*  
+> &emsp;&emsp;*Gets an useModule  element by the given alias in the current module, which must be an useModule element and has an alias (usemodule_alias)*  
 > **[return]**  
-> &emsp;&emsp;*Object, The returned component*  
+> &emsp;&emsp;*Object, The returned element*  
 > **[parameters]**  
-> * **alias**: *String, The alias of the sub component* 
+> * **alias**: *String, The alias of the element* 
 ```javascript
   // to get a module(in the current module) with usemodule_alias="alias1"
   const module2 = module.getModuleByAlias("alias1");
@@ -325,7 +325,7 @@ const ReactCom = props => {
 #### `sendMessageTo`
 ----
 > **sendMessageTo ( message )**  
-> &emsp;&emsp;*Sends a message to the current useModule*  
+> &emsp;&emsp;*Sends a message to the current useModule element*  
 > **[return]**  
 > &emsp;&emsp;*Object, The return value of the module's onMessage event*  
 > **[parameters]**  
@@ -333,17 +333,17 @@ const ReactCom = props => {
 ```javascript
   // to sent a message to module1
   const result1 = module.sendMessageTo(module1, "message");
-  // to sent a message to a module with usemodule_uid="global_uid1"
+  // to sent a message to an useModule element with usemodule_uid="global_uid1"
   const resul2 = module.sendMessageTo("global_uid1", "message");
-  // to sent a message to a module(in the current module) with usemodule_alias="alias1"
+  // to sent a message to an useModule element(in the current module) with usemodule_alias="alias1"
   const resul3 = module.sendMessageTo("alias1", "message");
-  // to sent a message to a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  // to sent a message to an useModule element with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = module.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
 ```
 #### `dispatchAction`
 ----
 > **dispatchAction ( actionName, params, from)**  
-> &emsp;&emsp;*Dispatches an action for the target useModule*  
+> &emsp;&emsp;*Dispatches an action for the target useModule element*  
 > **[return]**  
 > &emsp;&emsp;*Object, The target action's return value*  
 > **[parameters]**  
@@ -351,13 +351,13 @@ const ReactCom = props => {
 > * **params**: *Array, The parameters for the given action* 
 > * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
-  // to dispatch an action of module1
+  // to dispatch an action
   const result1 = module.dispatchAction("actionName", [/*parameters*/]);
 ```
 #### `dispatchAsyncAction`
 ----
 > **dispatchAsyncAction ( actionName, params, from)**  
-> &emsp;&emsp;*Dispatches an asynchronous action for the target useModule*  
+> &emsp;&emsp;*Dispatches an asynchronous action for the target useModule element*  
 > **[return]**  
 > &emsp;&emsp;*Object, The target action's return value*  
 > **[parameters]**  
@@ -365,30 +365,28 @@ const ReactCom = props => {
 > * **params**: *Array, The parameters for the given action* 
 > * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
-  // to dispatch an action of module1
+  // to dispatch an async action
   const result1 = module.dispatchAsyncAction("asyncActionName", [/*parameters*/]);
 ``` 
 #### `updateState`
 ----
 > **updateState ( path, state, force )**  
-> &emsp;&emsp;*Updates the module state for the current useModule*  
+> &emsp;&emsp;*Updates the module state for the current useModule element*  
 > **[parameters]**  
 > * **path**: *Object / Array< String > / String, **If it's an Array< String >: to** specify the path for updating the state; **If it's a string**: the string can be convert into an Array< String > after splitting by '.'; **If it's an object**: to specify the whole object to update the state, ignore the the 2nd parameter - state in this case.* 
 > * **state**: *Object/Any, The object to update the state in the given path* 
 > * **force**: *Boolean, Indicates whether force to update the state*
 ```javascript
   // If the old state is {key:'ovalue',key1:{key2:'ovalue'}}
-  // to update the state by the given object
   // the new state will be {key:'nvalue',key1:{key2:'ovalue'}}
   module.updateState({ "key":"nvalue" });
-  // to update state by path "key1,key2"
   // the new state will be {key:'nvalue',key1:{key2:'nvalue'}}
   module.updateState("key1,key2", "nvalue");
 ```
 #### `fireEvent`
 ----
 > **fireEvent ( eventName, params, from  )**  
-> &emsp;&emsp;*Fires a specified event for the current module*  
+> &emsp;&emsp;*Fires a specified event for the current useModule element*  
 >  **[return]**  
 > &emsp;&emsp;*Object, The return value of the target event*  
 > **[parameters]**  
@@ -402,22 +400,22 @@ const ReactCom = props => {
 #### broadcast
  ----
 > **broadcast ( channelName, message)**  
-> &emsp;&emsp;* Broadcasts message to all useModules via a specified channel*  
+> &emsp;&emsp;*Broadcasts message to all useModule elements via a specified channel*  
 >  **[return]**  
 > &emsp;&emsp;*Object, The return value of the target event*  
 ```javascript
-  // to broadcast an message to all modules
+  // to broadcast an message to all useModule elements
   module.broadcast("message");
 ```
 #### useRef
  ----
 > **useRef ( refName, value )**  
-> &emsp;&emsp;* Triggers a React.useRef to create a ref, which initialial value is 'value' , and can be retrieved by module.getRef('refName') .*  
+> &emsp;&emsp;*Triggers a React.useRef to create a ref, which initialial value is 'value' , and can be retrieved by module.getRef('refName') .*  
 >  **[return]**  
 > &emsp;&emsp;*Object, The ref*  
 > **[parameters]**  
-> * **refName **: *String, The ref name* 
-> * **value **: *Object/Any, The given initialial value* 
+> * **refName**: *String, The ref name* 
+> * **value**: *Object/Any, The given initialial value* 
 ```javascript
   // to use a ref
   module.useRef("refName", "init vaule");
