@@ -266,7 +266,7 @@ import React from "react";
 import useModule from "react-module-hook";
 
 export default (props) => {  
-  const module = useModule(props, {
+  const { module } = useModule(props, {
     actions: {
       callback: (msg) => module.updateState({ msg })
     }
@@ -292,7 +292,7 @@ export default (props) => {
 };
 
 export const Module2 = (props) => {
-  const module = useModule(props, {
+  const { module } = useModule(props, {
     props: {
       onMessage: (value) => {
         module.updateState({ value });
@@ -346,7 +346,7 @@ const useStyles4basic = makeStyles(theme => ({ item: { margin: theme.spacing(1) 
 const useStyles4Modal = makeStyles(theme => ({ root: { display: 'flex', alignItems: 'center', justifyContent: 'center' }, paper: { backgroundColor: theme.palette.background.paper, border: '2px solid #000', boxShadow: theme.shadows[5], padding: theme.spacing(2, 4, 3) } }));
 
 const Module_Dialog = props => {
-    const module = useModule(props, { });
+    const { module } = useModule(props, { });
     const styles_basic = useStyles4basic(props || {});
 
     return (
@@ -366,7 +366,7 @@ export default Module_Dialog;
 
 export const Alert = props => {
     const style_modal = useStyles4Modal();
-    const module = useModule(props, {
+    const { module } = useModule(props, {
         props: {
             open: true,
             title: "Title",
