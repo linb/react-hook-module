@@ -13,7 +13,7 @@ const useStyles4basic = makeStyles(theme => ({ item: { margin: theme.spacing(1) 
 const useStyles4Modal = makeStyles(theme => ({ root: { display: 'flex', alignItems: 'center', justifyContent: 'center' }, paper: { backgroundColor: theme.palette.background.paper, border: '2px solid #000', boxShadow: theme.shadows[5], padding: theme.spacing(2, 4, 3) } }));
 
 const Module_Dialog = props => {
-    const module = useModule(props, { });
+    const { module } = useModule(props, { });
     const styles_basic = useStyles4basic(props || {});
 
     return (
@@ -33,7 +33,7 @@ export default Module_Dialog;
 
 export const Alert = props => {
     const style_modal = useStyles4Modal();
-    const module = useModule(props, {
+    const { module } = useModule(props, {
         props: {
             open: true,
             title: "Title",
@@ -72,7 +72,7 @@ export const Alert = props => {
 
 export const Confirm = props => {
     const style_modal = useStyles4Modal();
-    const module = useModule(props, {
+    const { module } = useModule(props, {
         props: {
             open: true,
             title: "Title",
@@ -113,7 +113,7 @@ export const Confirm = props => {
 
 export const Prompt = props => {
     const style_modal = useStyles4Modal();
-    const module = useModule(props, {
+    const { module } = useModule(props, {
         "props": {
             "open": true,
             "title": "Title",
