@@ -112,7 +112,7 @@ const ReactCom = props => {
 > **[return]**  
 > &emsp;&emsp;*Object, The target useModule element*  
 > **[parameters]**  
-> * **idOrAlias**: *String, The target useModule element's uid or alias*  
+> * **idOrAlias** [required] : *String, The target useModule element's uid or alias*  
 ```javascript
   // to get an useModule element with usemodule_uid="global_uid1"
   const module1 = useAsModule.getModule("global_uid1");
@@ -128,8 +128,8 @@ const ReactCom = props => {
 > **[return]**  
 > &emsp;&emsp;*Object, The return value of target useModule element's onMessage event*  
 > **[parameters]**  
-> * **receiver**: *String or Object, The target useModule element, which can be an useModule object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
-> * **message**: *Object / Any, The message object, can be any value* 
+> * **receiver** [required] : *String or Object, The target useModule element, which can be an useModule object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
+> * **message** [required] : *Object / Any, The message object, can be any value* 
 ```javascript
   // to sent a message to module1
   const result1 = useAsModule.sendMessageTo(module1, "message");
@@ -148,10 +148,10 @@ const ReactCom = props => {
 > **[return]**  
 > &emsp;&emsp;*Object, The target action's return value*  
 > **[parameters]**  
-> * **receiver**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
-> * **actionName**: *String, The action name to be dispatched* 
-> * **params**: *Array, The parameters for the given action* 
-> * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
+> * **receiver** [required] : *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
+> * **actionName** [required] : *String, The action name to be dispatched* 
+> * **params** [optional] : *Array, The parameters for the given action* 
+> * **from** [optional] : *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to dispatch an action of module1
   const result1 = useAsModule.dispatchActionTo(module1, "actionName", [/*parameters*/]);
@@ -169,10 +169,10 @@ const ReactCom = props => {
 > **[return]**  
 > &emsp;&emsp;*Object, The target action's return value*  
 > **[parameters]**  
-> * **receiver**: *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
-> * **actionName**: *String, The action name to be dispatched* 
-> * **params**: *Array, The parameters for the given action* 
-> * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
+> * **receiver** [required] : *String or Object, The target useModule, which can be an useModule object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
+> * **actionName** [required] : *String, The action name to be dispatched* 
+> * **params** [optional] : *Array, The parameters for the given action* 
+> * **from** [optional] : *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to dispatch an action of module1, 
   const result1 = useAsModule.dispatchAsyncActionTo(module1, "asyncActionName", [/*parameters*/]);
@@ -188,10 +188,10 @@ const ReactCom = props => {
 > **updateStateFor ( target, path, state, force )**  
 > &emsp;&emsp;*Updates the module state for the target useModule element*  
 > **[parameters]**  
-> * **target**: *String or Object, The target useModule element, which can be an useModule element object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
-> * **path**: *Object / Array< String > / String, **If it's an Array< String >: to** specify the path for updating the state; **If it's a string**: the string can be convert into an Array< String > after splitting by '.'; **If it's an object**: to specify the whole object to update the state, ignore the the 2nd parameter - state in this case.* 
-> * **state**: *Object/Any, The object to update the state in the given path* 
-> * **force**: *Boolean, Indicates whether force to update the state* 
+> * **target** [required] : *String or Object, The target useModule element, which can be an useModule element object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
+> * **path** [required] : *Object / Array< String > / String, **If it's an Array< String >: to** specify the path for updating the state; **If it's a string**: the string can be convert into an Array< String > after splitting by '.'; **If it's an object**: to specify the whole object to update the state, ignore the the 2nd parameter - state in this case.* 
+> * **state** [optional] : *Object/Any, The object to update the state in the given path* 
+> * **force** [optional] : *Boolean, Indicates whether force to update the state. Default is false* 
 ```javascript
   // to update state for module1
   useAsModule.updateStateFor(module1, { key:"value" });
@@ -209,10 +209,10 @@ const ReactCom = props => {
 >  **[return]**  
 > &emsp;&emsp;*Object, The return value of the target event*  
 > **[parameters]**  
-> * **target**: *String or Object, The target useModule element, which can be an useModule element object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
-> * **eventName**: *String, The action name to be dispatched* 
-> * **params**: *Array, The parameters for the given action* 
-> * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
+> * **target** [required] : *String or Object, The target useModule element, which can be an useModule element object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
+> * **eventName** [required] : *String, The action name to be dispatched* 
+> * **params** [optional] : *Array, The parameters for the given action* 
+> * **from** [optional] : *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to fire an event for module1
   const result1 = useAsModule.fireEventFor(module1, "eventName", [/*parameters*/]);
@@ -227,14 +227,12 @@ const ReactCom = props => {
  ----
 > **broadcast ( channelName, message)**  
 > &emsp;&emsp;*Broadcasts message to all useModule elements via a specified channel, which can be received in all useModule components' onChannelMessage event*  
->  **[return]**  
-> &emsp;&emsp;*Object, The return value of the target event*  
 > **[parameters]**  
-> * **channelName**: *String, The channel name*  
-> * **message**: *Object / Any, The message object, can be any value* 
+> * **channelName** [required] : *String, The channel name*  
+> * **message** [required] : *Object / Any, The message object, can be any value* 
 ```javascript
   // to broadcast an message to all useModule elements
-  useAsModule.broadcast("message");
+  useAsModule.broadcast("channelName","message");
 ```
 #### `useModule.printModulesTree`
  ----
@@ -251,7 +249,7 @@ const ReactCom = props => {
 >  **[return]**  
 > &emsp;&emsp;*String, The resolved url*  
 > **[parameters]**  
-> * **relPath**: *String, The relative path for an url* 
+> * **relPath** [required] : *String, The relative path for an url* 
 ```javascript
   // to resolve a relative path for the resource url
   useAsModule.resolveURL("./img/pic.png");
@@ -263,7 +261,7 @@ const ReactCom = props => {
 >  **[return]**  
 > &emsp;&emsp;*Object, The result data*  
 > **[parameters]**  
-> * **path**: *Array< String > /  String, **If it's an Array< String >**: to specify the path for the data; **If it's a String**: the string can be convert into an Array< String > after splitting by '.'* 
+> * **path** [required] : *Array< String > /  String, **If it's an Array< String >**: to specify the path for the data; **If it's a String**: the string can be convert into an Array< String > after splitting by '.'* 
 ```javascript
   // to get data from the global store
   useAsModule.getDataFromStore("path_level1.path_level2");
@@ -273,15 +271,15 @@ const ReactCom = props => {
 > **setDataToStore ( path, value, clonePath )**  
 > &emsp;&emsp;*Sets data to the global store according to the path*    
 > **[parameters]**  
-> * **path**: *Array< String > /  String, **If it's an Array< String >**: to specify the path for the data; **If it's a String**: the string can be convert into an Array< String > after splitting by '.'* 
-> * **value**: *Object / Any, The object to set* 
->  * **clonePath**: *Boolean,  Determines whether to clone the path or not* 
+> * **path** [required] : *Array< String > /  String, **If it's an Array< String >**: to specify the path for the data; **If it's a String**: the string can be convert into an Array< String > after splitting by '.'* 
+> * **value** [required] : *Object / Any, The object to set* 
+>  * **clonePath** [optional] : *Boolean,  Determines whether to clone the path or not. Defalt is false* 
 ```javascript
   // to get data from the global store
   useAsModule.setDataToStore("path_level1.path_level2", {data:"value"}, false);
 ```
 
-### For the module instance
+### For the useModule instance
 #### `getRootModule`
 ----
 > **getRootModule ( )**  
@@ -301,7 +299,7 @@ const ReactCom = props => {
 > **[return]**  
 > &emsp;&emsp;*Object, The target module element*  
 > **[parameters]**  
-> * **idOrAlias**: *String, The target useModule element's uid or alias*  
+> * **idOrAlias** [required] : *String, The target useModule element's uid or alias*  
 ```javascript
   // to get an useModule element with usemodule_uid="global_uid1"
   const module1 = module.getModule("global_uid1");
@@ -317,7 +315,7 @@ const ReactCom = props => {
 > **[return]**  
 > &emsp;&emsp;*Object, The returned element*  
 > **[parameters]**  
-> * **alias**: *String, The alias of the element* 
+> * **alias** [required] : *String, The alias of the element* 
 ```javascript
   // to get a module(in the current module) with usemodule_alias="alias1"
   const module2 = module.getModuleByAlias("alias1");
@@ -325,11 +323,11 @@ const ReactCom = props => {
 #### `sendMessage`
 ----
 > **sendMessage ( message )**  
-> &emsp;&emsp;*Sends a message to the current useModule element, which can  be received in it's onMessage event*  
+> &emsp;&emsp;*Sends a message to the current useModule, which can  be received in it's onMessage event*  
 > **[return]**  
 > &emsp;&emsp;*Object, The return value of the module's onMessage event*  
 > **[parameters]**  
-> * **message**: *Object / Any, The message object, can be any value* 
+> * **message** [required] : *Object / Any, The message object, can be any value* 
 ```javascript
   // to sent a message
   const result1 = module.sendMessage("message");  
@@ -341,9 +339,9 @@ const ReactCom = props => {
 > **[return]**  
 > &emsp;&emsp;*Object, The target action's return value*  
 > **[parameters]**  
-> * **actionName**: *String, The action name to be dispatched* 
-> * **params**: *Array, The parameters for the given action* 
-> * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
+> * **actionName** [required] : *String, The action name to be dispatched* 
+> * **params** [optional] : *Array, The parameters for the given action* 
+> * **from** [optional] : *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to dispatch an action
   const result1 = module.dispatchAction("actionName", [/*parameters*/]);
@@ -355,9 +353,9 @@ const ReactCom = props => {
 > **[return]**  
 > &emsp;&emsp;*Object, The target action's return value*  
 > **[parameters]**  
-> * **actionName**: *String, The action name to be dispatched* 
-> * **params**: *Array, The parameters for the given action* 
-> * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
+> * **actionName** [required] : *String, The action name to be dispatched* 
+> * **params** [optional] : *Array, The parameters for the given action* 
+> * **from** [optional] : *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to dispatch an async action
   const result1 = module.dispatchAsyncAction("asyncActionName", [/*parameters*/]);
@@ -365,11 +363,11 @@ const ReactCom = props => {
 #### `updateState`
 ----
 > **updateState ( path, state, force )**  
-> &emsp;&emsp;*Updates the module state for the current useModule element*  
+> &emsp;&emsp;*Updates the module state for the current useModule*  
 > **[parameters]**  
-> * **path**: *Object / Array< String > / String, **If it's an Array< String >: to** specify the path for updating the state; **If it's a string**: the string can be convert into an Array< String > after splitting by '.'; **If it's an object**: to specify the whole object to update the state, ignore the the 2nd parameter - state in this case.* 
-> * **state**: *Object/Any, The object to update the state in the given path* 
-> * **force**: *Boolean, Indicates whether force to update the state*
+> * **path** [required] : *Object / Array< String > / String, **If it's an Array< String >: to** specify the path for updating the state; **If it's a string**: the string can be convert into an Array< String > after splitting by '.'; **If it's an object**: to specify the whole object to update the state, ignore the the 2nd parameter - state in this case.* 
+> * **state** [optional] : *Object/Any, The object to update the state in the given path* 
+> * **force** [optional] : *Boolean, Indicates whether force to update the state*
 ```javascript
   // If the old state is {key:'ovalue',key1:{key2:'ovalue'}}
   // the new state will be {key:'nvalue',key1:{key2:'ovalue'}}
@@ -380,36 +378,37 @@ const ReactCom = props => {
 #### `fireEvent`
 ----
 > **fireEvent ( eventName, params, from  )**  
-> &emsp;&emsp;*Fires a specified event for the current useModule element*  
+> &emsp;&emsp;*Fires a specified event for the current useModule*  
 >  **[return]**  
 > &emsp;&emsp;*Object, The return value of the target event*  
 > **[parameters]**  
-> * **eventName**: *String, The action name to be dispatched* 
-> * **params**: *Array, The parameters for the given action* 
-> * **from**: *Object/Any, The from info that indicate who dispatch the action or can be other info* 
+> * **eventName** [required] : *String, The action name to be dispatched* 
+> * **params** [optional] : *Array, The parameters for the given action* 
+> * **from** [optional] : *Object/Any, The from info that indicate who dispatch the action or can be other info* 
 ```javascript
   // to fire an event 
   const result1 = module.fireEvent("eventName", [/*parameters*/]);
 ```
-#### broadcast
+#### `broadcast`
  ----
 > **broadcast ( channelName, message)**  
 > &emsp;&emsp;*Broadcasts message to all useModule elements via a specified channel, which can be received in all useModule components' onChannelMessage event*  
->  **[return]**  
-> &emsp;&emsp;*Object, The return value of the target event*  
+> **[parameters]**  
+> * **channelName** [required] : *String, The channel name*  
+> * **message** [required] : *Object / Any, The message object, can be any value* 
 ```javascript
   // to broadcast an message to all useModule elements
-  module.broadcast("message");
+  useAsModule.broadcast("channelName","message");
 ```
-#### useRef
+#### `useRef`
  ----
 > **useRef ( refName, value )**  
 > &emsp;&emsp;*Triggers a React.useRef to create a ref, which initialial value is 'value' , and can be retrieved by module.getRef('refName') .*  
 >  **[return]**  
 > &emsp;&emsp;*Object, The ref*  
 > **[parameters]**  
-> * **refName**: *String, The ref name* 
-> * **value**: *Object/Any, The given initialial value* 
+> * **refName** [required] : *String, The ref name* 
+> * **value** [optional] : *Object/Any, The given initialial value* 
 ```javascript
   // to use a ref
   module.useRef("refName", "init vaule");
@@ -418,19 +417,138 @@ const ReactCom = props => {
   // or
   const ref = module.getRef("refName");  
 ```
-#### getRef
+#### `getRef`
  ----
 > **useRef ( refName, value )**  
 > &emsp;&emsp;*Gets a specified ref by the given name, this ref was created by module.useRef('refName', 'value').*  
 >  **[return]**  
 > &emsp;&emsp;*Object, The ref*  
 > **[parameters]**  
-> * **refName**: *String, The ref name* 
+> * **refName** [required] : *String, The ref name* 
 ```javascript
   // to get the ref
   const ref = module.getRef("refName");
 ```
-
+#### `renderComAs`
+ ----
+> **renderComAs ( x_id, replace, beforeNodes, afterNodes )**  
+> &emsp;&emsp;*Renders an enhanced component (with a specified 'x_id') as a different  component or a set of components, which can be used as element replacement, or inserting additional elements before or after the element.*  
+> **[parameters]**  
+> * **x_id** [required] : *String, The target element's x_id. The target element must be an enhanced component which powered by module.enhanceCom()* 
+> * **replace** [optional] : *Object/Array,  A React element or React elements array. The React element(s) to replace the current element. If specified [false], this replacement function will be ignored. If specified [null], the original element will be restored. Default is null.* 
+> * **beforeNodes** [optional] : *Object/Array,  A React element or React elements array. The React element(s) to be inserted before the target element. If specified [false], the 'inserting before function' will be ignored. If specified [null], all beforeNodes will be removed. Default is null.* 
+> * **afterNodes** [optional] : *Object/Array,  A React element or React elements array. The React element(s) to be inserted after the target element. If specified [false], the 'inserting after function' will be ignored. If specified [null], all afterNodes will be removed. Default is null.* 
+```javascript
+  // to get the ref
+  const ref = module.getRef("refName");
+```
+#### `showSnackbar`
+ ----
+> **showSnackbar( refName, value )**  
+> &emsp;&emsp;*To show a material-UI snackbar. An advanced function in material-UI plugin ( react-module-hook/plugin_mui )*  
+>  **[return]**  
+> &emsp;&emsp;*Object, The ref*  
+> **[parameters]**  
+> * **message** [required] : *String/Object, The message (String), or the properties (Object) of the [Snackbar]( https://material-ui.com/api/snackbar )* 
+```javascript
+  import "react-module-hook";
+  // must import material-UI plugin
+  import "react-module-hook/plugin_mui";
+  //...
+  // to show a snack bar
+  module.showSnackbar("snack message");
+```
+#### `alert`
+ ----
+> **alert( title, description, okCaption )**  
+> &emsp;&emsp;*To show an material-UI alert window. An advanced function in material-UI plugin ( react-module-hook/plugin_mui ). You must use 'await' to call it, and it must be called in an async function.*  
+> **[parameters]**  
+> * **title** [required] : *String, The title text* 
+> * **description** [optional] : *String, The description text* 
+> * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK"* 
+```javascript
+  import "react-module-hook";
+  // must import material-UI plugin
+  import "react-module-hook/plugin_mui";
+  //...
+  (async()=>{
+      // to show an alert dialog
+      await module.alert("title", "desc", "O K");
+  })();
+```
+#### `confirm`
+ ----
+> **confirm( title, description, okCaption, cancelCaption )**  
+> &emsp;&emsp;*To show an material-UI confirm window. An advanced function in material-UI plugin ( react-module-hook/plugin_mui ). You must use 'await' to call it, and it must be called in an async function.*  
+>  **[return]**  
+> &emsp;&emsp;*Boolean, the confirm result.*  
+> **[parameters]**  
+> * **title** [required] : *String, The title text* 
+> * **description** [optional] : *String, The description text* 
+> * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK"* 
+> * **cancelCaption** [optional] : *String, The caption text for cancel button. Default is "Cancel"* 
+```javascript
+  import "react-module-hook";
+  // must import material-UI plugin
+  import "react-module-hook/plugin_mui";
+  //...
+  (async()=>{
+      // to show an confirm dialog
+      const result = await module.cofirm("title", "desc");
+  })();
+```
+#### `prompt`
+ ----
+> **prompt( title, description, defaultValue, okCaption, cancelCaption )**  
+> &emsp;&emsp;*To show an material-UI prompt window. An advanced function in material-UI plugin ( react-module-hook/plugin_mui ). You must use 'await' to call it, and it must be called in an async function.*  
+>  **[return]**  
+> &emsp;&emsp;*String, the input result.*  
+> **[parameters]**  
+> * **title** [required] : *String, The title text* 
+> * **description** [optional] : *String, The description text* 
+> * **defaultValue** [optional] : *String, The default value text* 
+> * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK"* 
+> * **cancelCaption** [optional] : *String, The caption text for cancel button). Default is "Cancel"* 
+```javascript
+  import "react-module-hook";
+  // must import material-UI plugin
+  import "react-module-hook/plugin_mui";
+  //...
+  (async()=>{
+      // to show an confirm dialog
+      const result = await module.prompt("title", "desc");
+  })();
+```
+#### `showBackdrop`
+ ----
+> **showBackdrop( id, clickAway, style, transitionDuration, children)**  
+> &emsp;&emsp;*To show a backdrop for a given id. An advanced function in material-UI plugin ( react-module-hook/plugin_mui ).*  
+> **[parameters]**  
+> * **id** [optional] : *String, The backdrop id, default is 'default'* 
+> * **clickAway** [optional] : *Boolean, To determine whether 'click' to hide the backdrop or not, default is true.* 
+> * **style** [optional] : *Object, To determine the backdrop's style, default is {}*   
+> * **transitionDuration** [optional] : *Number, The transition duration in ms. Default is 300.* 
+> * **children** [optional] : *Array/Boolean, The children elements in the backdrop. Default is true > there'll be an CircularProgress in the backdrop.* 
+```javascript
+  import "react-module-hook";
+  // must import material-UI plugin
+  import "react-module-hook/plugin_mui";
+  //...
+  module.showBackdrop( );
+```
+#### `hideBackdrop`
+ ----
+> **hideBackdrop( id )**  
+> &emsp;&emsp;*To hide a backdrop for a given id. An advanced function in material-UI plugin ( react-module-hook/plugin_mui ).*  
+> **[parameters]**  
+> * **id** [optional] : *String, The backdrop id, default is 'default'* 
+```javascript
+  import "react-module-hook";
+  // must import material-UI plugin
+  import "react-module-hook/plugin_mui";
+  //...
+  module.hideBackdrop( );
+```
 ## Quickstart
 ### Basic Demo
 ```javascript
