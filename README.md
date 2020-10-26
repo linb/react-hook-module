@@ -103,7 +103,7 @@ To get the root module
 ```
 #### getModule
 ----
-**getModule (idOrAlias / * String * /)**
+getModule (idOrAlias / * String * /)
 ```javascript
   // to get a module with usemodule_uid="global_uid1"
   const module1 = useAsModule.getModule("global_uid1");
