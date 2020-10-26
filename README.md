@@ -16,10 +16,27 @@ import useModule from "react-module-hook";
 ...
 const ReactComponent = props => {
   const module = useAsModule(props, {
-    state:{}     // the default state for this module
-    props:{},    // the default props for this module
-    actions:{"actionName":()=>()},  // actions for this module,
-    tagVar:{}    // for extra data
+    // the default state for this module
+    state:{},
+    // the default props for this module
+    props:{},
+    // actions for this module
+    actions:{"actionName":()=>()},
+    // for extra data
+    tagVar:{},
+    // enable router
+    router: true,
+    // enable auth
+    auth: true,
+    // the request configure
+    req_url : `${useModule.resolveURL( "data/demo.json" ) }`,
+    req_data : { key : "value" },
+    req_method : "post",
+    req_baseURL : null,
+    req_AUTH_TOKEN : null,
+    req_header : null,
+    req_config : null,
+    req_execute : true
   }); 
 
   // ...
