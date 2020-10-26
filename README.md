@@ -191,7 +191,7 @@ const ReactCom = props => {
 > * **target** [required] : *String or Object, The target useModule element, which can be an useModule element object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
 > * **path** [required] : *Object / Array< String > / String, **If it's an Array< String >: to** specify the path for updating the state; **If it's a string**: the string can be convert into an Array< String > after splitting by '.'; **If it's an object**: to specify the whole object to update the state, ignore the the 2nd parameter - state in this case.* 
 > * **state** [optional] : *Object/Any, The object to update the state in the given path* 
-> * **force** [optional] : *Boolean, Indicates whether force to update the state. Default is false* 
+> * **force** [optional] : *Boolean, Indicates whether force to update the state. Default is false.* 
 ```javascript
   // to update state for module1
   useModule.updateStateFor(module1, { key:"value" });
@@ -273,7 +273,7 @@ const ReactCom = props => {
 > **[parameters]**  
 > * **path** [required] : *Array< String > /  String, **If it's an Array< String >**: to specify the path for the data; **If it's a String**: the string can be convert into an Array< String > after splitting by '.'* 
 > * **value** [required] : *Object / Any, The object to set* 
->  * **clonePath** [optional] : *Boolean,  Determines whether to clone the path or not. Defalt is false* 
+>  * **clonePath** [optional] : *Boolean,  Determines whether to clone the path or not. Defalt is false.* 
 ```javascript
   // to get data from the global store
   useModule.setDataToStore("path_level1.path_level2", {data:"value"}, false);
@@ -367,7 +367,7 @@ const ReactCom = props => {
 > **[parameters]**  
 > * **path** [required] : *Object / Array< String > / String, **If it's an Array< String >: to** specify the path for updating the state; **If it's a string**: the string can be convert into an Array< String > after splitting by '.'; **If it's an object**: to specify the whole object to update the state, ignore the the 2nd parameter - state in this case.* 
 > * **state** [optional] : *Object/Any, The object to update the state in the given path* 
-> * **force** [optional] : *Boolean, Indicates whether force to update the state*
+> * **force** [optional] : *Boolean, Indicates whether force to update the state. Default is false.*
 ```javascript
   // If the old state is {key:'ovalue',key1:{key2:'ovalue'}}
   // the new state will be {key:'nvalue',key1:{key2:'ovalue'}}
@@ -465,8 +465,8 @@ const ReactCom = props => {
 > &emsp;&emsp;*To show an material-UI alert window. An advanced function in material-UI plugin ( react-module-hook/plugin_mui ). You must use 'await' to call it, and it must be called in an async function.*  
 > **[parameters]**  
 > * **title** [required] : *String, The title text* 
-> * **description** [optional] : *String, The description text* 
-> * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK"* 
+> * **description** [required] : *String, The description text* 
+> * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK".* 
 ```javascript
   import "react-module-hook";
   // must import material-UI plugin
@@ -485,9 +485,9 @@ const ReactCom = props => {
 > &emsp;&emsp;*Boolean, the confirm result.*  
 > **[parameters]**  
 > * **title** [required] : *String, The title text* 
-> * **description** [optional] : *String, The description text* 
-> * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK"* 
-> * **cancelCaption** [optional] : *String, The caption text for cancel button. Default is "Cancel"* 
+> * **description** [required] : *String, The description text* 
+> * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK".* 
+> * **cancelCaption** [optional] : *String, The caption text for cancel button. Default is "Cancel".* 
 ```javascript
   import "react-module-hook";
   // must import material-UI plugin
@@ -506,10 +506,10 @@ const ReactCom = props => {
 > &emsp;&emsp;*String, the input result.*  
 > **[parameters]**  
 > * **title** [required] : *String, The title text* 
-> * **description** [optional] : *String, The description text* 
-> * **defaultValue** [optional] : *String, The default value text* 
-> * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK"* 
-> * **cancelCaption** [optional] : *String, The caption text for cancel button). Default is "Cancel"* 
+> * **description** [required] : *String, The description text* 
+> * **defaultValue** [optional] : *String, The default value text. Default is empty string.* 
+> * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK".* 
+> * **cancelCaption** [optional] : *String, The caption text for cancel button). Default is "Cancel".* 
 ```javascript
   import "react-module-hook";
   // must import material-UI plugin
@@ -527,9 +527,9 @@ const ReactCom = props => {
 > **[parameters]**  
 > * **id** [optional] : *String, The backdrop id, default is 'default'* 
 > * **clickAway** [optional] : *Boolean, To determine whether 'click' to hide the backdrop or not, default is true.* 
-> * **style** [optional] : *Object, To determine the backdrop's style, default is {}*   
+> * **style** [optional] : *Object, To determine the backdrop's style, default is {}.*   
 > * **transitionDuration** [optional] : *Number, The transition duration in ms. Default is 300.* 
-> * **children** [optional] : *Array/Boolean, The children elements in the backdrop. Default is true > there'll be an CircularProgress in the backdrop.* 
+> * **children** [optional] : *Array/Boolean, The children elements in the backdrop. Default is true > there'll be an CircularProgress in the backdrop. Default is true.* 
 ```javascript
   import "react-module-hook";
   // must import material-UI plugin
@@ -542,7 +542,7 @@ const ReactCom = props => {
 > **hideBackdrop ( id )**  
 > &emsp;&emsp;*To hide a backdrop for a given id. An advanced function in material-UI plugin ( react-module-hook/plugin_mui ).*  
 > **[parameters]**  
-> * **id** [optional] : *String, The backdrop id, default is 'default'* 
+> * **id** [optional] : *String, The backdrop id, default is 'default'.* 
 ```javascript
   import "react-module-hook";
   // must import material-UI plugin
@@ -557,8 +557,8 @@ const ReactCom = props => {
 > &emsp;&emsp;*To request data from an remote service service endpoint, by [axios](https://github.com/axios/axios). An advanced function in material-UI plugin ( react-module-hook/plugin_request ). You must use 'await' to call it, and it must be called in an async function.*  
 > **[parameters]**  
 > * **url** [reqired] : *String, The url for an [axios reqeust](https://github.com/axios/axios#request-config)* 
-> * **data** [optional] : *Object/String, The data (ArrayBuffer, ArrayBufferView, URLSearchParams, FormData, File, Blob, or queryString) for an  [axios reqeust](https://github.com/axios/axios#request-config) Default is null* 
-> * **method** [optional] : *String, The method (get/post/put/delete/patch/head/options) for an  [axios reqeust](https://github.com/axios/axios#request-config). Default is 'get'*   
+> * **data** [optional] : *Object/String, The data (ArrayBuffer, ArrayBufferView, URLSearchParams, FormData, File, Blob, or queryString) for an  [axios reqeust](https://github.com/axios/axios#request-config) Default is null.* 
+> * **method** [optional] : *String, The method (get/post/put/delete/patch/head/options) for an  [axios reqeust](https://github.com/axios/axios#request-config). Default is 'get'.*   
 > * **baseURL** [optional] : *String, The base URL for an  [axios reqeust](https://github.com/axios/axios#request-config). Default is empty string.*  
 > * **AUTH_TOKEN** [optional] : *String, The AUTH_TOKEN for an  [axios reqeust](https://github.com/axios/axios#request-config). Default is null.*  
 > * **header** [optional] : *Object, The header for an  [axios reqeust](https://github.com/axios/axios#request-config). Default is {}.*  
