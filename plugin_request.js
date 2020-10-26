@@ -19,7 +19,7 @@ const useRequest = ( url, data="", method="get", baseURL="", AUTH_TOKEN="", head
   }else{
   data && (config.data = data);
   }
-  config.header = Object.assign(header, config.header);
+  config.header = Object.assign({}, header, config.header);
   AUTH_TOKEN && (config.header['Authorization'] = AUTH_TOKEN);
   if(!config.cancelToken){
     source = axios.CancelToken.source();
@@ -53,7 +53,7 @@ useModule.refPlugIn("request", module => {
       }else{
     data && (config.data = data);
       }
-      config.header = Object.assign(header, config.header);
+      config.header = Object.assign({}, header, config.header);
       AUTH_TOKEN && (config.header['Authorization'] = AUTH_TOKEN);
     return await axios( config );
   }
