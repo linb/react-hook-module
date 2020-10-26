@@ -11,6 +11,7 @@ const useRequest = ( url, data="", method="get", baseURL="", AUTH_TOKEN="", head
   // eslint-disable-next-line
   React.useEffect(() => execute && fetch(), []);
 
+  config = Object.assign({}, config);
   url && (config.url = url);
   method && (config.method = method);
   baseURL && (config.baseURL = baseURL);
@@ -45,18 +46,19 @@ const useRequest = ( url, data="", method="get", baseURL="", AUTH_TOKEN="", head
 useModule.refPlugIn("request", module => {
   return {
     request: async ( url, data, method="get", baseURL="", AUTH_TOKEN="", header={}, config = {} ) => {
-    url && (config.url = url);
-    method && (config.method = method);
-    baseURL && (config.baseURL = baseURL);
-      if(!config.method || config.method==="get"){
-        data && (config.params = data);
-      }else{
-    data && (config.data = data);
-      }
-      config.header = Object.assign({}, header, config.header);
-      AUTH_TOKEN && (config.header['Authorization'] = AUTH_TOKEN);
-    return await axios( config );
-  }
+      config = Object.assign({}, config);
+      url && (config.url = url);
+      method && (config.method = method);
+      baseURL && (config.baseURL = baseURL);
+        if(!config.method || config.method==="get"){
+          data && (config.params = data);
+        }else{
+          data && (config.data = data);
+        }
+        config.header = Object.assign({}, header, config.header);
+        AUTH_TOKEN && (config.header['Authorization'] = AUTH_TOKEN);
+      return await axios( config );
+    }
   };
 });
 
