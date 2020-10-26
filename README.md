@@ -50,7 +50,15 @@ const ReactComSub1 = props => {
   const module = useAsModule(props, { }); 
   return (
     <div>
-      {props.name}
+      ReactComSub1
+    </div>
+  );
+};
+const ReactComSub2 = props => {
+  const module = useAsModule(props, { }); 
+  return (
+    <div>
+      ReactComSub2 - {props.name}
     </div>
   );
 };
