@@ -10,7 +10,7 @@ npm install react-module-hook
 
 ### 2. Import
 ```javascript
-import useModule from "react-module-hook";
+import { useModule } from "react-module-hook";
 ```
 ### 3. Call it in a render function
 ```javascript
@@ -452,7 +452,7 @@ const ReactCom = props => {
 > **[parameters]**  
 > * **message** [required] : *String/Object, The message (String), or the properties (Object) of the [Snackbar]( https://material-ui.com/api/snackbar )* 
 ```javascript
-  import "react-module-hook";
+  import { useModule } from "react-module-hook";
   // must import material-UI plugin
   import "react-module-hook/plugin_mui";
   //...
@@ -468,7 +468,7 @@ const ReactCom = props => {
 > * **description** [required] : *String, The description text* 
 > * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK".* 
 ```javascript
-  import "react-module-hook";
+  import { useModule } from "react-module-hook";
   // must import material-UI plugin
   import "react-module-hook/plugin_mui";
   //...
@@ -489,7 +489,7 @@ const ReactCom = props => {
 > * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK".* 
 > * **cancelCaption** [optional] : *String, The caption text for cancel button. Default is "Cancel".* 
 ```javascript
-  import "react-module-hook";
+  import { useModule } from "react-module-hook";
   // must import material-UI plugin
   import "react-module-hook/plugin_mui";
   //...
@@ -511,7 +511,7 @@ const ReactCom = props => {
 > * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK".* 
 > * **cancelCaption** [optional] : *String, The caption text for cancel button). Default is "Cancel".* 
 ```javascript
-  import "react-module-hook";
+  import { useModule } from "react-module-hook";
   // must import material-UI plugin
   import "react-module-hook/plugin_mui";
   //...
@@ -531,7 +531,7 @@ const ReactCom = props => {
 > * **transitionDuration** [optional] : *Number, The transition duration in ms. Default is 300.* 
 > * **children** [optional] : *Array/Boolean, The children elements in the backdrop. Default is true > there'll be an CircularProgress in the backdrop. Default is true.* 
 ```javascript
-  import "react-module-hook";
+  import { useModule } from "react-module-hook";
   // must import material-UI plugin
   import "react-module-hook/plugin_mui";
   //...
@@ -544,7 +544,7 @@ const ReactCom = props => {
 > **[parameters]**  
 > * **id** [optional] : *String, The backdrop id, default is 'default'.* 
 ```javascript
-  import "react-module-hook";
+  import { useModule } from "react-module-hook";
   // must import material-UI plugin
   import "react-module-hook/plugin_mui";
   //...
@@ -555,6 +555,8 @@ const ReactCom = props => {
  ----
 > **request ( url, data, method, baseURL, AUTH_TOKEN, header, config )**  
 > &emsp;&emsp;*To request data from an remote service service endpoint, by [axios](https://github.com/axios/axios). An advanced function in material-UI plugin ( react-module-hook/plugin_request ). You must use 'await' to call it, and it must be called in an async function.*  
+>  **[return]**  
+> &emsp;&emsp;*Object, the request result.*  
 > **[parameters]**  
 > * **url** [reqired] : *String, The url for an [axios reqeust](https://github.com/axios/axios#request-config)* 
 > * **data** [optional] : *Object/String, The data (ArrayBuffer, ArrayBufferView, URLSearchParams, FormData, File, Blob, or queryString) for an  [axios reqeust](https://github.com/axios/axios#request-config) Default is null.* 
@@ -564,20 +566,90 @@ const ReactCom = props => {
 > * **header** [optional] : *Object, The header for an  [axios reqeust](https://github.com/axios/axios#request-config). Default is {}.*  
 > * **config** [optional] : *Object, The config object for an  [axios reqeust](https://github.com/axios/axios#request-config).Default is {}.*  
 ```javascript
-  import "react-module-hook";
+  import { useModule } from "react-module-hook";
   // must import request plugin for 
   import "react-module-hook/plugin_request";
   //...
-  (async()=>{
-      // to show an confirm dialog
-      const result = await module.request ("service/endpoint" );
-  })();
+  const App = props => {
+	  // If no 'req_url', the request will be undefined 
+	  const { module } = useModule(props, { }); 
+      return (
+        <div>
+          <button onClick={async () => {
+	        const  result  =  await  module.request(useModule.resolveURL("./service/endpointn"));
+            console.log( result );
+          }}>request</button>
+        </div>
+      );
+  };
+``` 
+#### `request.fetch`
+ ----
+> **request.fetch(  )**  
+> &emsp;&emsp;*[for useModule request plugin] To fetch data for the useModule's default request, only for the props with req_execute=false. You must use 'await' to call it, and it must be called in an async function.*  
+>  **[return]**  
+> &emsp;&emsp;*Object, the request result.*  
+```javascript
+  import { useModule } from "react-module-hook";
+  import { If } from "react-module-hook";
+  // must import request plugin
+  import "react-module-hook/plugin_request";
+  //...
+  const App = props => {
+	  // If no 'req_url', the request will be undefined 
+	  const { module, request } = useModule(props, {
+		  props:{
+			  req_url: useModule.resolveUrl("./service/endpoint"),
+			  req_execute: false
+		  }
+	  }); 
+      return (
+        <div>
+          <div>Status: [{request.status}]</div>
+          <If condition={request.error} >
+            error: {request.error && JSON.stringify(request.error)}
+          </If>
+          <If condition={request.response} >
+            data: {request.response && JSON.stringify(request.response)}
+          </If>
+          <button onClick={async () => {
+	        const result = await request.fetch();
+            console.log( result );
+          }}>request again</button>
+        </div>
+      );
+  };
+```
+#### `request.cancel`
+ ----
+> **request.cancel(  )**  
+> &emsp;&emsp;*[for useModule request plugin] To cancel the useModule's default request.*  
+```javascript
+  import { useModule } from "react-module-hook";
+  // must import request plugin
+  import "react-module-hook/plugin_request";
+  //...
+  const App = props => {
+	  // If no 'req_url', the request will be undefined 
+	  const { module, request } = useModule(props, {
+		  props:{
+			  req_url: useModule.resolveUrl("./service/endpoint")
+		  }
+	  }); 
+	  // cancel the useModule's default request
+	  React.useEffect(() => request.cancel(), [request]);
+      return (
+        <div>
+          <div>Status: [{request.status}]</div>
+        </div>
+      );
+  };
 ```
 ## Quickstart
 ### Basic Demo
 ```javascript
 import React from "react";
-import useModule from "react-module-hook";
+import { useModule } from "react-module-hook";
 
 export default (props) => {  
   const { module } = useModule(props, {
@@ -646,7 +718,7 @@ export const Module2 = (props) => {
 ### Meterial UI Demo
 ```javascript
 import React from "react";
-import useModule from "react-module-hook";
+import { useModule } from "react-module-hook";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
