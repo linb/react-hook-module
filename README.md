@@ -235,6 +235,13 @@ getModule (idOrAlias / * String * /)
   // to get a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const module3 = module.getModule("alias_in_root.alias_in_level1.alias_in_level2");  
 ```
+#### getModuleByAlias
+----
+getModuleByAlias (alias / * String * /) 
+```javascript
+  // to get a module(in the current module) with usemodule_alias="alias1"
+  const module2 = module.getModuleByAlias("alias1");
+```
 #### sendMessageTo
 ----
 sendMessageTo (receiver / * String, or Object * /, message / * Any * /) 
@@ -338,16 +345,23 @@ fireEvent (eventName / * String * /, params / * Array * /)
   // to fire an event
   const result = module.fireEvent("eventName", [/*parameters*/]);
 ```
-#### useModuleRef
+#### useRef
 ----
-useModuleRef (refName / * String * /, value / * Any * /) 
+useRef (refName / * String * /, value / * Any * /) 
 ```javascript
   // to use a ref
   module.useModuleRef("refName", "init vaule");
   // to get the ref
   const ref = module.refs["refName"];
 ```
-  
+#### getRef
+----
+getRef (refName / * String * / ) 
+```javascript
+  // to get the ref
+  const ref = module.refs["refName"];
+```
+
 ## Quickstart
 ### Basic Demo
 ```javascript
