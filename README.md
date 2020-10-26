@@ -46,19 +46,42 @@ const ReactComponent = props => {
 ### 4. Use the component
 ```javascript
 ...
-const ReactApp = props => {
+const ReactComSub1 = props => {
   const module = useAsModule(props, { }); 
-  // module.updateStateFor("alias", "key", "value");
-  // module.postMessageTo("alias", "message");
-  // moudle.dispatchActionTo("uid", "actionName", []);
-  // module.getModule("uid").fireEvent("onXXX",[]);
   return (
     <div>
-      <ReactComponent usemodule_alias="alias" usemodule_uid="uid" usemodule_parent={module}/>
+      {props.name}
+    </div>
+  );
+};
+const ReactCom = props => {
+  const module = useAsModule(props, {
+    state:{
+      items:[{"name":"v1"},{"name":"v2"}]
+    }
+  }); 
+  const XReactComSub2 = module.enhanceCom(ReactComSub2);
+  return (
+    <div>
+      <ReactComSub1 usemodule_alias="alias1" usemodule_uid="uid1" usemodule_parent={module}/>
+      <ReactComSub2 usemodule_alias="alias2" usemodule_uid="uid2" usemodule_parent={module}/>
+      <XReactComSub2 usemodule_alias="alias3" usemodule_uid="uid3" x_id="x_id1" x_iterator="items"/>
     </div>
   );
 };
 ```
+```
+[root]
+  │  
+  └─<ReactCom >
+         │  
+         ├<ReactComSub1 usemodule_alias="alias1">
+         │  
+         ├<ReactComSub2 usemodule_alias="alias2">
+         │  
+         └<XReactComSub2 usemodule_uid="alias3" x_id="x_id1">
+```
+
 ### API 
 ### For the global variable useAsModule
 #### getRootModule
