@@ -2,7 +2,7 @@ import React from "react";
 import useModule from "react-module-hook";
 
 export default (props) => {
-  const module = useModule(props, {
+  const { module } = useModule(props, {
     actions: {
       callback: (msg) => module.updateState({ msg })
     }
