@@ -90,7 +90,7 @@ const ReactCom = props => {
          └<XReactComSub2 usemodule_uid="alias3" x_id="x_id1">
 ```
 
-### API 
+## API 
 ### For the global variable useAsModule
 #### useModule.getRootModule
 ----
