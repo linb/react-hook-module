@@ -96,7 +96,8 @@ const ReactCom = props => {
 ----
 getRootModule( )
 > *Gets the root useModule*
->> [return] *The target module*
+> [return]
+>> *The target module*
 ```javascript
   // to get the root module
   const rootModule = useAsModule.getRootModule();
@@ -106,6 +107,11 @@ getRootModule( )
 #### useModule.getModule
 ----
 getModule (idOrAlias / * String * /)
+> *Gets the useModule according to it's uid or alias (if it's a sub useModule added as a component in the root useModule )*
+> [return]
+>> *The target module*
+> [parameters]
+>> idOrAlias: *String, The target useModule's uid or alias*
 ```javascript
   // to get a module with usemodule_uid="global_uid1"
   const module1 = useAsModule.getModule("global_uid1");
