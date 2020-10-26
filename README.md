@@ -92,7 +92,7 @@ const ReactCom = props => {
 
 ### API 
 ### For the global variable useAsModule
-#### getRootModule
+#### useModule.getRootModule
 ----
 To get the root module
 ```javascript
@@ -101,7 +101,7 @@ To get the root module
   // to print the module tree in the console
   rootModule.printTree();
 ```
-#### getModule
+#### useModule.getModule
 ----
 getModule (idOrAlias / * String * /)
 ```javascript
@@ -112,7 +112,9 @@ getModule (idOrAlias / * String * /)
   // to get a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const module3 = useAsModule.getModule("alias_in_root.alias_in_level1.alias_in_level2");  
 ```
-###### </> sendMessageTo (receiver / * String, or Object * /, message / * Any * /) 
+#### useModule.sendMessageTo
+----
+sendMessageTo (receiver / * String, or Object * /, message / * Any * /) 
 ```javascript
   // to sent a message to module1
   const result1 = useAsModule.sendMessageTo(module1, "message");
@@ -124,7 +126,9 @@ getModule (idOrAlias / * String * /)
   const resul4 = useAsModule.sendMessageTo("alias_in_root.alias_in_level1.alias_in_level2", "message");  
 ```
 
-###### </> dispatchActionTo (receiver / * String, or Object * /, message / * Any * /) 
+#### useModule.dispatchActionTo
+----
+dispatchActionTo (receiver / * String, or Object * /, message / * Any * /) 
 ```javascript
   // to dispatch an action of module1
   const result1 = useAsModule.dispatchActionTo(module1, "actionName", [/*parameters*/]);
@@ -135,7 +139,22 @@ getModule (idOrAlias / * String * /)
   // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.dispatchActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
 ```
- ###### </> updateStateFor (target / * String, or Object * /, path / * Object, or [String...] * /, state / * Any * /, force / * Booelan * /) 
+#### useModule.dispatchAsyncActionTo
+----
+dispatchAsyncActionTo (receiver / * String, or Object * /, message / * Any * /) 
+```javascript
+  // to dispatch an action of module1, asynchronously
+  const result1 = useAsModule.dispatchAsyncActionTo(module1, "actionName", [/*parameters*/]);
+  // to dispatch an action of a module with usemodule_uid="global_uid1"
+  const resul2 = useAsModule.dispatchAsyncActionTo("global_uid1", "actionName", [/*parameters*/]);
+  // to dispatch an action of a module (in the root module) with usemodule_alias="alias1"
+  const resul3 = useAsModule.dispatchAsyncActionTo("alias1", "actionName", [/*parameters*/]);
+  // to dispatch an action of a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
+  const resul4 = useAsModule.dispatchAsyncActionTo("alias_in_root.alias_in_level1.alias_in_level2", "actionName", [/*parameters*/]);
+```
+#### useModule.updateStateFor
+----
+updateStateFor (target / * String, or Object * /, path / * Object, or [String...] * /, state / * Any * /, force / * Booelan * /) 
 ```javascript
   // to update state for module1
   useAsModule.updateStateFor(module1, { key:"value" });
@@ -146,7 +165,9 @@ getModule (idOrAlias / * String * /)
   // to update state for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   useAsModule.updateStateFor("alias_in_root.alias_in_level1.alias_in_level2", "key", "value");
 ```
-  ###### </> fireEventFor (target / * String, or Object * /, eventName/ * String * /, params / * Array * /) 
+#### useModule.fireEventFor
+----
+fireEventFor (target / * String, or Object * /, eventName/ * String * /, params / * Array * /) 
 ```javascript
   // to fire an event for module1
   const result1 = useAsModule.fireEventFor(module1, "eventName", [/*parameters*/]);
@@ -157,14 +178,18 @@ getModule (idOrAlias / * String * /)
   // to dispatch an action for a module with alias path: ["alias_in_root", "alias_in_level1", "alias_in_level2"]
   const resul4 = useAsModule.fireEventFor("alias_in_root.alias_in_level1.alias_in_level2", "eventName", [/*parameters*/]);
 ```
-  ###### </> broadcast (message / * Any * /) 
+#### useModule.broadcast
+----
+broadcast (message / * Any * /) 
 ```javascript
   // to broadcast an message to all modules
   useAsModule.broadcast("message");
 ```
 
 #### For the module instance
-###### </> getRootModule ()
+#### getRootModule
+----
+getRootModule ()
 ```javascript
   // to get the root module
   const rootModule = module.getRootModule();
