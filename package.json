@@ -1,5 +1,5 @@
 {
-  "name": "react-module-hook",
+  "name": "react-hook-module",
   "version": "0.2.0",
   "description": "A react module hook for real configurable app with stateful persistent module tree and peer-to-peer messaging mechanism",
   "main": "index.js",
@@ -38,5 +38,6 @@
     "hotkeys-js": "3.8.1",
     "axios": "0.21.0",
     "@material-ui/core": "4.11.0"
-  }
+  },
+  "devDependencies": {}
 }

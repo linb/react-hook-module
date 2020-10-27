@@ -98,8 +98,8 @@ const getEmptyDiv = (pid, sequence) => {
 };
 
 const showSnackbar = (props/*message*/ = {
-  message: "Snackbar", 
-  anchorOrigin: { vertical:"top", horizontal:"center" } 
+  message: "Snackbar",
+  anchorOrigin: { vertical:"top", horizontal:"center" }
 }, control) => {
   if(typeof(props)==="string")
     props = { message: props };
@@ -123,7 +123,7 @@ const alert = async (title, description, okCaption) =>{
       resolve();
     };
     ReactDOM.render((
-        <Dialog open={true} onClose={() => onClose(false)} fullWidth aria-labelledby="alert_9za5tayt_title" aria-describedby="alert_9za5tayt_description">
+        <Dialog open={true} onClose={() => onClose(false)} fullWidth={true} aria-labelledby="alert_9za5tayt_title" aria-describedby="alert_9za5tayt_description">
             <DialogTitle id="alert_9za5tayt_title">
                 {title}
             </DialogTitle>
@@ -139,7 +139,7 @@ const alert = async (title, description, okCaption) =>{
             </DialogActions>
           </Dialog>
     ), div);
-  });      
+  });
 }
 const confirm = async (title, description, okCaption, cancelCaption) =>{
   return new Promise( resolve => {
@@ -149,7 +149,7 @@ const confirm = async (title, description, okCaption, cancelCaption) =>{
       resolve(result);
     };
     ReactDOM.render((
-        <Dialog open={true} onClose={() => onClose(false)} fullWidth aria-labelledby="confirm_jlh80pil_title" aria-describedby="confirm_jlh80pil_description">
+        <Dialog open={true} onClose={() => onClose(false)} fullWidth={true} aria-labelledby="confirm_jlh80pil_title" aria-describedby="confirm_jlh80pil_description">
             <DialogTitle id="confirm_jlh80pil_title">
                 {title}
             </DialogTitle>
@@ -168,7 +168,7 @@ const confirm = async (title, description, okCaption, cancelCaption) =>{
             </DialogActions>
         </Dialog>
     ), div);
-  });      
+  });
 }
 const prompt = async (title, description, defaultValue, okCaption, cancelCaption) =>{
   return new Promise( resolve => {
@@ -179,7 +179,7 @@ const prompt = async (title, description, defaultValue, okCaption, cancelCaption
       resolve(result);
     };
     ReactDOM.render((
-        <Dialog open={true} onClose={() => onClose(null)} fullWidth aria-labelledby="prompt_fn69vqpc_title" aria-describedby="prompt_fn69vqpc_description" key="blg87o2c">
+        <Dialog open={true} onClose={() => onClose(null)} fullWidth={true} aria-labelledby="prompt_fn69vqpc_title" aria-describedby="prompt_fn69vqpc_description" key="blg87o2c">
             <DialogTitle id="prompt_fn69vqpc_title">
                 {title}
             </DialogTitle>
@@ -187,7 +187,7 @@ const prompt = async (title, description, defaultValue, okCaption, cancelCaption
                 <DialogContentText id="prompt_fn69vqpc_description">
                     {description}
                 </DialogContentText>
-                <TextField autoFocus margin="dense" defaultValue={defaultValue} fullWidth onChange={(e) => {input = e.target.value;}}>
+                <TextField autoFocus={true} margin="dense" defaultValue={defaultValue} fullWidth={true} onChange={(e) => {input = e.target.value;}}>
                 </TextField>
             </DialogContent>
             <DialogActions>
@@ -200,7 +200,7 @@ const prompt = async (title, description, defaultValue, okCaption, cancelCaption
             </DialogActions>
         </Dialog>
     ), div);
-  });      
+  });
 }
 
 const showBackdrop = (id="default", clickAway = true, style={}, transitionDuration = 300, children = true) => {
@@ -243,7 +243,7 @@ const hideBackdrop = (id="default") => {
   if(cache && cache.hide && useModule.utils.isFunction(cache.hide)){
     cache.hide();
   }
-} 
+}
 
 useModule.refPlugIn("mui", module => {
   return { getEmptyDiv, showSnackbar, showBackdrop, hideBackdrop, alert, confirm, prompt };

@@ -263,7 +263,7 @@ const getRand = (a) => (a || "") + parseInt(10e8 * Math.random(), 10).toString(3
   utils = {
     isBoolean, isString, isNumber, isNumeric, isDate, isFunction, isRegexp, isObject, isArray, isEmptyArray, isEmptyObject, isReactCom, isUseModuleCom, isEvent, isDomElem, isReactClassCom, isReactFunCom, isReactElem, isReactHTMLElem, isReactObjElem, isUseModuleElem,
     deepGet, deepSet, deepEquals, deepClone, getRand, getNo, promise, asyncExecute,
-    getCookie, setCookie, removeCookie, clearCookie, getLocalStorage, setLocalStorage, removeLocalStorage, clearLocalStorage, 
+    getCookie, setCookie, removeCookie, clearCookie, getLocalStorage, setLocalStorage, removeLocalStorage, clearLocalStorage,
     toUTF8, fromUTF8, idleExecute, makeURLQueryString, getURLParams, selectLocalFiles, postH5ChannelMessage
   },
   REPO = {},
@@ -347,7 +347,7 @@ class Module {
     return REPO[this.symbol];
   }
   _log(...params) {
-    if (this._getRoot().debug) console.log.apply(console, params);
+    if (useModule.CONF.debug) console.log.apply(console, params);
   }
   _destroy(type, deep) {
     let ns = this;
@@ -734,12 +734,11 @@ class Module {
   };
 }
 
-const pickBranch = (symbol, debug) => {
+const pickBranch = symbol => {
   const root = REPO[symbol] || (REPO[symbol] = Object.assign(new Module("*"), {
       alias: symbol,
       _uid: symbol,
       _globalChildrenMap: {},
-      debug: !!debug,
 
       map_props: new Map(),
       map_ref: new Map(),
@@ -855,6 +854,7 @@ const useModule = (props, options, branch) => {
 };
 const STORE = {};
 Object.freeze(Object.assign(useModule, {
+  CONF:{debug:false},
   _CACHE:{},
   refPlugIn: (key, plugIn)=>{
     RefPlugins[key] = plugIn;
@@ -877,7 +877,7 @@ Object.freeze(Object.assign(useModule, {
   resolveURL: relPath => /^([\w]+:)?\/\//.test(relPath) ? relPath : ("./" + relPath.replace(/^[./]*/,"")),
   getDataFromStore: path => deepGet(STORE, path),
   setDataToStore: (path, value, clonePath) => deepSet(STORE, path, value, clonePath),
-  useBranch: (symbol, debug) => (REPO._ = pickBranch(symbol || "$", debug)),
+  useBranch: symbol => (REPO._ = pickBranch(symbol || "$")),
   removeBranch: symbol => {
     // protect the current one
     if (symbol !== "_" && REPO[symbol]) {
@@ -913,7 +913,7 @@ Object.freeze(Object.assign(useModule, {
   updateStateFor: (target, path, state, force) => REPO._ && REPO._.updateStateFor(target, path, state, force),
   fireEventFor: (target, eventName, params) => REPO._ && REPO._.fireEventFor(target, eventName, params)
 }));
-useModule.useBranch("$", true);
+useModule.useBranch("$");
 
 class LazyErrorBoundary extends React.Component {
   constructor(props) {
@@ -1006,3 +1006,5 @@ const Iterator = ({iterator, _usemodule_in_design, children, ...props} ) =>{
     }
 }
 export { useModule, utils, LazyComponent, If, Iterator };
+
+(typeof window!=='undefined'? window : {}).useModule = useModule;
