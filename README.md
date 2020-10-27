@@ -49,7 +49,7 @@ const ReactComponent = props => {
 ```javascript
 ...
 const ReactComSub1 = props => {
-  const module = useModule(props, { }); 
+  const { module } = useModule(props, { }); 
   return (
     <div>
       ReactComSub1
@@ -57,7 +57,7 @@ const ReactComSub1 = props => {
   );
 };
 const ReactComSub2 = props => {
-  const module = useModule(props, { }); 
+  const { module } = useModule(props, { }); 
   return (
     <div>
       ReactComSub2 - {props.name}
@@ -65,7 +65,7 @@ const ReactComSub2 = props => {
   );
 };
 const ReactCom = props => {
-  const module = useModule(props, {
+  const { module } = useModule(props, {
     state:{
       items:[{"name":"v1"},{"name":"v2"}]
     }
