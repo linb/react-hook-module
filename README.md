@@ -321,7 +321,7 @@ const ReactCom = props => {
 ```
 #### `useModule.utils.deepSet`
  ----
-> **useModule.utils.deepSet( object, path )**  
+> **useModule.utils.deepSet ( object, path )**  
 > &emsp;&emsp;*Sets data to the given object according to the path.*    
 >  **[return]**  
 > &emsp;&emsp;*Object/Any, The target object.*  
@@ -338,7 +338,7 @@ const ReactCom = props => {
 ```
 #### `useModule.utils.deepClone`
  ----
-> **useModule.utils.deepClone( object )**  
+> **useModule.utils.deepClone ( object )**  
 > &emsp;&emsp;*Clones the given object deeply.*    
 >  **[return]**  
 > &emsp;&emsp;*Object/Any, The cloned object.*  
@@ -350,6 +350,183 @@ const ReactCom = props => {
   // cloned.a === source.a      > false
   // cloned.a.b === source.a.b  > false
   const cloned = useModule.utils.deepClone(source);
+```
+#### `useModule.utils.toUTF8`
+ ----
+> **useModule.utils.toUTF8 ( source )**  
+> &emsp;&emsp;*Converts a string to UTF-8 string.*    
+>  **[return]**  
+> &emsp;&emsp;*String, The result UTF-8 string .*  
+> **[parameters]**  
+> * **utf8string** [required] : *String, The target string to be converted.*
+```javascript
+  const source = '漢字';
+  // "\u6f22\u5b57"
+  const utf8 = useModule.utils.toUTF8(source);
+  // source === back
+  const back = useModule.utils.fromUTF8(utf8 );
+  console.log(utf8, back);
+```
+#### `useModule.utils.fromUTF8`
+ ----
+> **useModule.utils.fromUTF8 ( utf8string )**  
+> &emsp;&emsp;*Converts an UTF-8 string back.*    
+>  **[return]**  
+> &emsp;&emsp;*String, The result string .*  
+> **[parameters]**  
+> * **utf8string** [required] : *String, The target string to be converted.*
+```javascript
+  const source = '漢字';
+  // "\u6f22\u5b57"
+  const utf8 = useModule.utils.toUTF8(source);
+  // source === back
+  const back = useModule.utils.fromUTF8(utf8 );
+  console.log(utf8, back);
+```
+#### `useModule.utils.makeURLQueryString`
+ ----
+> **useModule.utils.makeURLQueryString ( hash )**  
+> &emsp;&emsp;*Converts an object into an url query string.*    
+>  **[return]**  
+> &emsp;&emsp;*String, The result query string.*  
+> **[parameters]**  
+> * **hash** [required] : *Object, The target object to be converted.*
+```javascript
+  const hash = {k1:"v1",k2:"v2"};
+  // "k1=v1&k2=v2"
+  const qs= useModule.utils.makeURLQueryString(hash);
+  // {k1:"v1",k2:"v2"}
+  const back = useModule.utils.getURLParams(utf8 );
+  // "v2"
+  const value = useModule.utils.getURLParams(utf8, "k2" );
+  console.log(qs, back, value );
+```
+#### `useModule.utils.getURLParams`
+ ----
+> **useModule.utils.getURLParams ( querystring )**  
+> &emsp;&emsp;*Converts an object into an url query string.*    
+>  **[return]**  
+> &emsp;&emsp;*String, The result query string.*  
+> **[parameters]**  
+> * **querystring** [required] : *Object, The target querystring.*
+> * **parameter** [optional] : *String, The parameter key string. If don't specify this, will return an object that presents all parameters.*
+```javascript
+  const hash = {k1:"v1",k2:"v2"};
+  // "k1=v1&k2=v2"
+  const qs= useModule.utils.makeURLQueryString(hash);
+  // {k1:"v1",k2:"v2"}
+  const back = useModule.utils.getURLParams(utf8 );
+  // "v2"
+  const value = useModule.utils.getURLParams(utf8, "k2" );
+  console.log(qs, back, value );
+```
+#### `useModule.utils.getCookie`
+ ----
+> **useModule.utils.getCookie ( name )**  
+> &emsp;&emsp;*Gets a specified cookie with the given name.*    
+>  **[return]**  
+> &emsp;&emsp;*String/Object/Array, The result cookie for the given name. If it's a stringified object or array, it will return the object or array.*  
+> **[parameters]**  
+> * **name** [required] : *String, The cookie name.*
+#### `useModule.utils.setCookie`
+ ----
+> **useModule.utils.setCookie ( name, value, options )**  
+> &emsp;&emsp;*Creates a cookie with the given name, value, and other options.*    
+> **[parameters]**  
+> * **name** [required] : *String, The cookie name.*
+> * **value** [required] : *String/Object/Array, The value of cookie. If it's an Object or Array, a stringified string will be saved into Cookie.*
+> * **options** [options] : *Object, The cookie options. { expires: Number for seconds, path: String, domain: String, maxAge: String, sameSite: Boolean, secure: Boolean, httpOnly: Boolean }.*
+#### `useModule.utils.removeCookie`
+ ----
+> **useModule.utils.removeCookie ( name )**  
+> &emsp;&emsp;*Remove a specified cookie with the given name.*    
+> **[parameters]**  
+> * **name** [required] : *String, The cookie name.*
+#### `useModule.utils.clearCookie`
+ ----
+> **useModule.utils.clearCookie ( )**  
+> &emsp;&emsp;*Clears all cookies.*    
+```javascript
+  useModule.utils.setCookie("c1", "v1");
+  useModule.utils.setCookie("c2", {k1:"v1",k2:"v2"});
+  // "v1"
+  const cookie1 = useModule.utils.getCookie( "c1" );
+  // {k1:"v1",k2:"v2"}
+  const cookie2 = useModule.utils.getCookie( "c2" );
+  console.log( cookie1, cookie2 );
+  useModule.utils.removeCookie( "c1" );
+  useModule.utils.clearCookie( );
+```
+#### `useModule.utils.getLocalStorage`
+ ----
+> **useModule.utils.getLocalStorage ( name )**  
+> &emsp;&emsp;*Gets a specified local storage with the given name.*    
+>  **[return]**  
+> &emsp;&emsp;*String/Object/Array, The result local storage for the given name. If it's a stringified object or array, it will return the object or array.*  
+> **[parameters]**  
+> * **name** [required] : *String, The local storage name.*
+#### `useModule.utils.setLocalStorage`
+ ----
+> **useModule.utils.setLocalStorage ( name, value )**  
+> &emsp;&emsp;*Creates a local storage data with the given name and value.*    
+> **[parameters]**  
+> * **name** [required] : *String, The local storage name.*
+> * **value** [required] : *String/Object/Array, The value of local storage. If it's an Object or Array, a stringified string will be saved into local storage.*
+#### `useModule.utils.removeLocalStorage`
+ ----
+> **useModule.utils.removeLocalStorage ( name )**  
+> &emsp;&emsp;*Removes a specified local storage with the given name.*    
+> **[parameters]**  
+> * **name** [required] : *String, The local storage name.*
+#### `useModule.utils.clearLocalStorage`
+ ----
+> **useModule.utils.clearLocalStorage (  )**  
+> &emsp;&emsp;*Clears all local storage.*    
+```javascript
+  useModule.utils.setLocalStorage ("c1", "v1");
+  useModule.utils.setLocalStorage ("c2", {k1:"v1",k2:"v2"});
+  // "v1"
+  const sto1 = useModule.utils.getLocalStorage( "c1" );
+  // {k1:"v1",k2:"v2"}
+  const sto2 = useModule.utils.getLocalStorage( "c2" );
+  console.log( sto1, sto2);
+  useModule.utils.removeLocalStorage( "c1" );
+  useModule.utils.clearLocalStorage( );
+```
+#### `useModule.utils.postH5ChannelMessage`
+ ----
+> **useModule.utils.postH5ChannelMessage ( channelName, message)**  
+> &emsp;&emsp;*Posts HTML5 message to all browser windows via a specified channel, via window.BroadcastChannel object, which can be received in all useModule components' onH5ChannelMessage event*  
+> **[parameters]**  
+> * **channelName** [required] : *String, The channel name*  
+> * **message** [required] : *Object / Any, The message object, can be any value* 
+```javascript
+  // to pose HTML5 message to all browser windows via "channel1"
+  useModule.utils.postH5ChannelMessage ("channel1","message");
+```
+#### `useModule.utils.selectLocalFiles`
+ ----
+> **useModule.utils.selectLocalFiles ( contentType, multiple )**  
+> &emsp;&emsp;*To show an browser's file dialog for selecting files. You must use 'await' to call it, and it must be called in an async function.*  
+>  **[return]**  
+> &emsp;&emsp;*Array < File >, The result files.*  
+> **[parameters]**  
+> * **contentType** [optional] : *String, The content type. e.g. 'image/png', 'image/\*'*  
+> * **multiple** [optional] : *Boolean, The message object, can be any value. Default is false* 
+```javascript
+  import { useModule } from "react-module-hook";
+  //...
+  const App = props => {
+      const { module } = useModule(props, { }); 
+      return (
+        <div>
+          <button onClick={async () => {
+            const files = await useModule.utils.selectLocalFiles();
+            console.log(files);
+          }}>module.request</button>
+        </div>
+      );
+  };
 ```
 ### useModule instance - module functions
 #### `getRootModule`
@@ -643,12 +820,11 @@ const ReactCom = props => {
   import "react-module-hook/plugin_request";
   //...
   const App = props => {
-      // If no 'req_url', the request will be undefined 
       const { module } = useModule(props, { }); 
       return (
         <div>
           <button onClick={async () => {
-            const  result  =  await  module.request(useModule.resolveURL("./service/endpoint"));
+            const result = await  module.request(useModule.resolveURL("./service/endpoint"));
             console.log( result );
           }}>module.request</button>
         </div>
