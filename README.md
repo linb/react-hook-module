@@ -93,10 +93,10 @@ const ReactCom = props => {
 ```
 
 ## API 
-### For the global variable useModule
+### useModule static functions
 #### `useModule.getRootModule`
 ----
-> **getRootModule( )**  
+> **useModule.getRootModule( )**  
 > &emsp;&emsp;*Gets the root useModule element*  
 > **[return]**  
 > &emsp;&emsp;*Object, The root useModule element*  
@@ -108,7 +108,7 @@ const ReactCom = props => {
 ```
 #### `useModule.getModule`
 ----
-> **getModule ( idOrAlias )**  
+> **useModule.getModule ( idOrAlias )**  
 > &emsp;&emsp;*Gets the useModule element according to it's uid or alias (if it's an useModule component added as an element in the root useModule element )*  
 > **[return]**  
 > &emsp;&emsp;*Object, The target useModule element*  
@@ -124,7 +124,7 @@ const ReactCom = props => {
 ```
 #### `useModule.sendMessageTo`
 ----
-> **sendMessageTo ( receiver, message )**  
+> **useModule.sendMessageTo ( receiver, message )**  
 > &emsp;&emsp;*Sends a message to the target useModule element, which can  be received in it's onMessage event*  
 > **[return]**  
 > &emsp;&emsp;*Object, The return value of target useModule element's onMessage event*  
@@ -144,7 +144,7 @@ const ReactCom = props => {
 
 #### `useModule.dispatchActionTo`
 ----
-> **dispatchActionTo ( receiver, actionName, params, from)**  
+> **useModule.dispatchActionTo ( receiver, actionName, params, from)**  
 > &emsp;&emsp;*Dispatches an action for the target useModule element*  
 > **[return]**  
 > &emsp;&emsp;*Object, The target action's return value*  
@@ -165,7 +165,7 @@ const ReactCom = props => {
 ```
 #### `useModule.dispatchAsyncActionTo`
 ----
-> **dispatchAsyncActionTo ( receiver, actionName, params, from)**  
+> **useModule.dispatchAsyncActionTo ( receiver, actionName, params, from)**  
 > &emsp;&emsp;*Dispatches an asynchronous action for the target useModule element*  
 > **[return]**  
 > &emsp;&emsp;*Object, The target action's return value*  
@@ -186,7 +186,7 @@ const ReactCom = props => {
 ```
 #### `useModule.updateStateFor`
 ----
-> **updateStateFor ( target, path, state, force )**  
+> **useModule.updateStateFor ( target, path, state, force )**  
 > &emsp;&emsp;*Updates the module state for the target useModule element*  
 > **[parameters]**  
 > * **target** [required] : *String or Object, The target useModule element, which can be an useModule element object, useModule uid or alias (if it's an useModule component added as an element in the root useModule element ).*  
@@ -205,7 +205,7 @@ const ReactCom = props => {
 ```
 #### `useModule.fireEventTo`
  ----
-> **fireEventTo ( target, eventName, params, from)**  
+> **useModule.fireEventTo ( target, eventName, params, from)**  
 > &emsp;&emsp;*Fires an event for the target useModule element*  
 >  **[return]**  
 > &emsp;&emsp;*Object, The return value of the target event*  
@@ -226,7 +226,7 @@ const ReactCom = props => {
 ```
 #### `useModule.broadcast`
  ----
-> **broadcast ( channelName, message)**  
+> **useModule.broadcast ( channelName, message)**  
 > &emsp;&emsp;*Broadcasts message to all useModule elements via a specified channel, which can be received in all useModule components' onChannelMessage event*  
 > **[parameters]**  
 > * **channelName** [required] : *String, The channel name*  
@@ -237,7 +237,7 @@ const ReactCom = props => {
 ```
 #### `useModule.printModulesTree`
  ----
-> **printModulesTree ( )**  
+> **useModule.printModulesTree ( )**  
 > &emsp;&emsp;*Prints the useModule element tree to the console window*  
 ```javascript
   // to print the useModule element tree onto the console
@@ -245,7 +245,7 @@ const ReactCom = props => {
 ```
 #### `useModule.resolveURL`
 ----
-> **resolveURL ( relPath )**  
+> **useModule.resolveURL ( relPath )**  
 > &emsp;&emsp;*Resolves an url from a relative path. You must use this to get the right url in the designer*  
 >  **[return]**  
 > &emsp;&emsp;*String, The resolved url*  
@@ -257,7 +257,7 @@ const ReactCom = props => {
 ```
 #### `useModule.getDataFromStore`
  ----
-> **getDataFromStore ( path )**  
+> **useModule.getDataFromStore ( path )**  
 > &emsp;&emsp;*Gets data from the global store according to the path*  
 >  **[return]**  
 > &emsp;&emsp;*Object, The result data*  
@@ -269,7 +269,7 @@ const ReactCom = props => {
 ```
 #### `useModule.setDataToStore`
  ----
-> **setDataToStore ( path, value, clonePath )**  
+> **useModule.setDataToStore ( path, value, clonePath )**  
 > &emsp;&emsp;*Sets data to the global store according to the path*    
 > **[parameters]**  
 > * **path** [required] : *Array< String > /  String, **If it's an Array< String >**: to specify the path for the data; **If it's a String**: the string can be convert into an Array< String > after splitting by '.'* 
@@ -279,8 +279,79 @@ const ReactCom = props => {
   // to get data from the global store
   useModule.setDataToStore("path_level1.path_level2", {data:"value"}, false);
 ```
-
-### For useModule instance
+### useModule utils functions
+#### `useModule.utils.getRand`
+ ----
+> **useModule.utils.getRand ( preTag )**  
+> &emsp;&emsp;*Gets a random string. The result like 'ca1gis'.*    
+>  **[return]**  
+> &emsp;&emsp;*String, The random string.*  
+> **[parameters]**  
+> * **preTag** [optional] : *String, The previous tag for the random string. Default is empty string.* 
+```javascript
+  // to get a random string
+  useModule.getRand( );
+```
+#### `useModule.utils.getNo`
+ ----
+> **useModule.utils.getNo ( preTag )**  
+> &emsp;&emsp;*Gets a No. string. The result like 'a'.*    
+>  **[return]**  
+> &emsp;&emsp;*String, The No. string.*  
+> **[parameters]**  
+> * **preTag** [optional] : *String, The previous tag for the No. string. Default is empty string.* 
+```javascript
+  // to get a No. string
+  useModule.utils.getNo();
+```
+#### `useModule.utils.deepGet`
+ ----
+> **useModule.utils.deepGet ( object, path )**  
+> &emsp;&emsp;*Gets data from the given object according to the path.*    
+>  **[return]**  
+> &emsp;&emsp;*Object/Any, The result data.*  
+> **[parameters]**  
+> * **object** [required] : *Object, The target object.* 
+> * **path** [required] : *Array< String > / String, The path. **If it's an array**: to specify the path for the data; **If it's a string**: the string can be convert into an Array< String > after splitting by '.'* 
+```javascript
+  // return 1
+  useModule.utils.deepGet({a:{b:{c:1}}},'a.b.c');
+  // return 1
+  useModule.utils.deepGet({a:{b:{c:1}}},["a","b","c"]);
+```
+#### `useModule.utils.deepSet`
+ ----
+> **useModule.utils.deepSet( object, path )**  
+> &emsp;&emsp;*Sets data to the given object according to the path.*    
+>  **[return]**  
+> &emsp;&emsp;*Object/Any, The target object.*  
+> **[parameters]**  
+> * **object** [required] : *Object, The target object.* 
+> * **path** [required] : *Array< String > / String, The path. **If it's an array**: to specify the path for the data; **If it's a string**: the string can be convert into an Array< String > after splitting by '.'* 
+> * **value** [required] : *Object/Any, The value to set.*  
+> * **clonePath** [optional] : *Boolean, Determines whether to clone the path or not. Default is false.*  
+```javascript
+  // result : {a:{b:{c:2}}}
+  useModule.utils.deepSet({a:{b:{c:1}}},'a.b.c', 2);
+  // result : {a:{b:{c:[1,2,3]}}}
+  useModule.utils.deepSet({a:{b:{c:1}}},["a","b","c"], [1,2,3]);
+```
+#### `useModule.utils.deepClone`
+ ----
+> **useModule.utils.deepClone( object )**  
+> &emsp;&emsp;*Clones the given object deeply.*    
+>  **[return]**  
+> &emsp;&emsp;*Object/Any, The cloned object.*  
+> **[parameters]**  
+> * **object** [required] : *Object, The target object to be cloned.*
+```javascript
+  const source = {a:{b:{c:1}}};
+  // cloned : {a:{b:{c:1}}}
+  // cloned.a === source.a      > false
+  // cloned.a.b === source.a.b  > false
+  const cloned = useModule.utils.deepClone(source);
+```
+### useModule instance - module functions
 #### `getRootModule`
 ----
 > **getRootModule ( )**  
