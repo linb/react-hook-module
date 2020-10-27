@@ -1,17 +1,17 @@
 
 
-# react-module-hook
+# react-hook-module
 A react module hook for real configurable app with stateful persistent module tree and peer-to-peer messaging mechanism
 
 ## 1. Usage
 ### 1.1. Install
 ```javascript
-npm install react-module-hook
+npm install react-hook-module
 ```
 
 ### 1.2. Import
 ```javascript
-import { useModule } from "react-module-hook";
+import { useModule } from "react-hook-module";
 ```
 ### 1.3. Call it in a render function
 ```javascript
@@ -496,7 +496,7 @@ const ReactCom = props => {
 > * **contentType** [optional] : *String, The content type. e.g. 'image/png', 'image/\*'*  
 > * **multiple** [optional] : *Boolean, Allows multiple files or not. Default is false* 
 ```javascript
-  import { useModule } from "react-module-hook";
+  import { useModule } from "react-hook-module";
   //...
   const App = props => {
       const { module } = useModule(props, { }); 
@@ -689,13 +689,13 @@ const ReactCom = props => {
 #### `showSnackbar`
  ----
 > **showSnackbar ( message )**  
-> &emsp;&emsp;*To show a material-UI snackbar. It's an advanced function in material-UI plugin ( react-module-hook/plugin_mui )*  
+> &emsp;&emsp;*To show a material-UI snackbar. It's an advanced function in material-UI plugin ( react-hook-module/plugin_mui )*  
 > **[parameters]**  
 > * **message** [required] : *String/Object, The message (String), or the props (Object) of the [Snackbar]( https://material-ui.com/api/snackbar )* 
 ```javascript
-  import { useModule } from "react-module-hook";
+  import { useModule } from "react-hook-module";
   // must import material-UI plugin
-  import "react-module-hook/plugin_mui";
+  import "react-hook-module/plugin_mui";
   //...
   // to show a snack bar
   module.showSnackbar("snack message");
@@ -703,15 +703,15 @@ const ReactCom = props => {
 #### `alert`
  ----
 > **alert ( title, description, okCaption )**  
-> &emsp;&emsp;*To show an material-UI alert window. It's an advanced function in material-UI plugin ( react-module-hook/plugin_mui ). You must use 'await' to call it, and it must be in an async function.*  
+> &emsp;&emsp;*To show an material-UI alert window. It's an advanced function in material-UI plugin ( react-hook-module/plugin_mui ). You must use 'await' to call it, and it must be in an async function.*  
 > **[parameters]**  
 > * **title** [required] : *String, The title text* 
 > * **description** [required] : *String, The description text* 
 > * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK".* 
 ```javascript
-  import { useModule } from "react-module-hook";
+  import { useModule } from "react-hook-module";
   // must import material-UI plugin
-  import "react-module-hook/plugin_mui";
+  import "react-hook-module/plugin_mui";
   //...
   (async()=>{
       // to show an alert dialog
@@ -721,7 +721,7 @@ const ReactCom = props => {
 #### `confirm`
  ----
 > **confirm ( title, description, okCaption, cancelCaption )**  
-> &emsp;&emsp;*To show an material-UI confirm window. It's an advanced function in material-UI plugin ( react-module-hook/plugin_mui ). You must use 'await' to call it, and it must be in an async function.*  
+> &emsp;&emsp;*To show an material-UI confirm window. It's an advanced function in material-UI plugin ( react-hook-module/plugin_mui ). You must use 'await' to call it, and it must be in an async function.*  
 >  **[return]**  
 > &emsp;&emsp;*Boolean, the confirm result.*  
 > **[parameters]**  
@@ -730,9 +730,9 @@ const ReactCom = props => {
 > * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK".* 
 > * **cancelCaption** [optional] : *String, The caption text for cancel button. Default is "Cancel".* 
 ```javascript
-  import { useModule } from "react-module-hook";
+  import { useModule } from "react-hook-module";
   // must import material-UI plugin
-  import "react-module-hook/plugin_mui";
+  import "react-hook-module/plugin_mui";
   //...
   (async()=>{
       // to show an confirm dialog
@@ -742,7 +742,7 @@ const ReactCom = props => {
 #### `prompt`
  ----
 > **prompt ( title, description, defaultValue, okCaption, cancelCaption )**  
-> &emsp;&emsp;*To show an material-UI prompt window. It's an advanced function in material-UI plugin ( react-module-hook/plugin_mui ). You must use 'await' to call it, and it must be in an async function.*  
+> &emsp;&emsp;*To show an material-UI prompt window. It's an advanced function in material-UI plugin ( react-hook-module/plugin_mui ). You must use 'await' to call it, and it must be in an async function.*  
 >  **[return]**  
 > &emsp;&emsp;*String, the input text.*  
 > **[parameters]**  
@@ -752,9 +752,9 @@ const ReactCom = props => {
 > * **okCaption** [optional] : *String, The caption text for OK button. Default is "OK".* 
 > * **cancelCaption** [optional] : *String, The caption text for cancel button). Default is "Cancel".* 
 ```javascript
-  import { useModule } from "react-module-hook";
+  import { useModule } from "react-hook-module";
   // must import material-UI plugin
-  import "react-module-hook/plugin_mui";
+  import "react-hook-module/plugin_mui";
   //...
   (async()=>{
       // to show an confirm dialog
@@ -764,7 +764,7 @@ const ReactCom = props => {
 #### `showBackdrop`
  ----
 > **showBackdrop ( id, clickAway, style, transitionDuration, children)**  
-> &emsp;&emsp;*To show a backdrop for a given id. It's an advanced function in material-UI plugin ( react-module-hook/plugin_mui ).*  
+> &emsp;&emsp;*To show a backdrop for a given id. It's an advanced function in material-UI plugin ( react-hook-module/plugin_mui ).*  
 > **[parameters]**  
 > * **id** [optional] : *String, The backdrop id, default is 'default'* 
 > * **clickAway** [optional] : *Boolean, To determine whether 'click' to hide the backdrop or not, default is true.* 
@@ -772,22 +772,22 @@ const ReactCom = props => {
 > * **transitionDuration** [optional] : *Number, The transition duration in ms. Default is 300.* 
 > * **children** [optional] : *Array/Boolean, The children elements in the backdrop. Default is true > there'll be an CircularProgress in the backdrop.* 
 ```javascript
-  import { useModule } from "react-module-hook";
+  import { useModule } from "react-hook-module";
   // must import material-UI plugin
-  import "react-module-hook/plugin_mui";
+  import "react-hook-module/plugin_mui";
   //...
   module.showBackdrop( );
 ```
 #### `hideBackdrop`
  ----
 > **hideBackdrop ( id )**  
-> &emsp;&emsp;*To hide a backdrop for a given id. It's an advanced function in material-UI plugin ( react-module-hook/plugin_mui ).*  
+> &emsp;&emsp;*To hide a backdrop for a given id. It's an advanced function in material-UI plugin ( react-hook-module/plugin_mui ).*  
 > **[parameters]**  
 > * **id** [optional] : *String, The backdrop id, default is 'default'.* 
 ```javascript
-  import { useModule } from "react-module-hook";
+  import { useModule } from "react-hook-module";
   // must import material-UI plugin
-  import "react-module-hook/plugin_mui";
+  import "react-hook-module/plugin_mui";
   //...
   module.hideBackdrop( );
 ```
@@ -795,7 +795,7 @@ const ReactCom = props => {
 #### `request`
  ----
 > **request ( url, data, method, baseURL, AUTH_TOKEN, header, config )**  
-> &emsp;&emsp;*To request data from a remote service endpoint, by [axios](https://github.com/axios/axios). It's an advanced function in request  plugin ( react-module-hook/plugin_request ). You must use 'await' to call it, and it must be in an async function.*  
+> &emsp;&emsp;*To request data from a remote service endpoint, by [axios](https://github.com/axios/axios). It's an advanced function in request  plugin ( react-hook-module/plugin_request ). You must use 'await' to call it, and it must be in an async function.*  
 >  **[return]**  
 > &emsp;&emsp;*Object, the request result.*  
 > **[parameters]**  
@@ -807,9 +807,9 @@ const ReactCom = props => {
 > * **header** [optional] : *Object, The header option for an  [axios reqeust](https://github.com/axios/axios#request-config). Default is {}.*  
 > * **config** [optional] : *Object, The config option for an  [axios reqeust](https://github.com/axios/axios#request-config).Default is {}.*  
 ```javascript
-  import { useModule } from "react-module-hook";
+  import { useModule } from "react-hook-module";
   // must import request plugin for 
-  import "react-module-hook/plugin_request";
+  import "react-hook-module/plugin_request";
   //...
   const App = props => {
       const { module } = useModule(props, { }); 
@@ -830,10 +830,10 @@ const ReactCom = props => {
 >  **[return]**  
 > &emsp;&emsp;*Object, the request result.*  
 ```javascript
-  import { useModule } from "react-module-hook";
-  import { If } from "react-module-hook";
+  import { useModule } from "react-hook-module";
+  import { If } from "react-hook-module";
   // must import request plugin
-  import "react-module-hook/plugin_request";
+  import "react-hook-module/plugin_request";
   //...
   const App = props => {
       // If no 'req_url', the request will be undefined 
@@ -862,10 +862,10 @@ const ReactCom = props => {
 ```
 Normally, you don't need to set 'req_execute' to false for the default request in an useModule. The default request will be executed automatically.
 ```javascript
-  import { useModule } from "react-module-hook";
-  import { If } from "react-module-hook";
+  import { useModule } from "react-hook-module";
+  import { If } from "react-hook-module";
   // must import request plugin
-  import "react-module-hook/plugin_request";
+  import "react-hook-module/plugin_request";
   //...
   const App = props => {
       // If no 'req_url', the request will be undefined 
@@ -892,9 +892,9 @@ Normally, you don't need to set 'req_execute' to false for the default request i
 > **request.cancel(  )**  
 > &emsp;&emsp;*To cancel the useModule's default request.*  
 ```javascript
-  import { useModule } from "react-module-hook";
+  import { useModule } from "react-hook-module";
   // must import request plugin
-  import "react-module-hook/plugin_request";
+  import "react-hook-module/plugin_request";
   //...
   const App = props => {
     // If no 'req_url', the request will be undefined 
@@ -936,9 +936,9 @@ Normally, you don't need to set 'req_execute' to false for the default request i
 > **[parameters]**  
 > * **params** [required] : *Object/String, The search params. Object or queryString.* 
 ```javascript
-  import { useModule } from "react-module-hook";
+  import { useModule } from "react-hook-module";
   // must import request plugin
-  import { BrowserRouter as  Router, RelativeRouter } from  "react-module-hook/plugin_router";
+  import { BrowserRouter as  Router, RelativeRouter } from  "react-hook-module/plugin_router";
   //...
   const App = props => {
       // If no 'router' in props, or 'props.router' is false, the router will be undefined 
@@ -983,7 +983,7 @@ Normally, you don't need to set 'req_execute' to false for the default request i
 
 **File - auth_fake.js**
 ```javascript
-  import {utils} from "react-module-hook";
+  import {utils} from "react-hook-module";
   // singIn function
   const signIn = function(){
     const auth = this;
@@ -1016,8 +1016,8 @@ Normally, you don't need to set 'req_execute' to false for the default request i
 ```javascript
   import React from "react";
   import ReactDOM from "react-dom";
-  import { useModule } from "react-module-hook";
-  import { ProvideAuth } from "react-module-hook/plugin_auth";
+  import { useModule } from "react-hook-module";
+  import { ProvideAuth } from "react-hook-module/plugin_auth";
   import App from "./App";
   import configure from "./auth_fake.js";
   ReactDOM.render( (
@@ -1031,8 +1031,8 @@ Normally, you don't need to set 'req_execute' to false for the default request i
 **File - App.js**
 ```javascript
   import React from "react";
-  import { useModule } from "react-module-hook";
-  import { If } from "react-module-hook";
+  import { useModule } from "react-hook-module";
+  import { If } from "react-hook-module";
   const App = props => {
       // If no 'auth' in props, or 'props.auth' is false, the auth will be undefined 
       const { module, auth } = useModule(props, { auth: true });
@@ -1054,7 +1054,7 @@ Normally, you don't need to set 'req_execute' to false for the default request i
 ### 3.1. Basic Demo
 ```javascript
 import React from "react";
-import { useModule } from "react-module-hook";
+import { useModule } from "react-hook-module";
 
 export default (props) => {  
   const { module } = useModule(props, {
@@ -1105,7 +1105,7 @@ export const Module2 = (props) => {
 };
 ```
 #### Screenshot
-<img src="https://raw.githubusercontent.com/linb/react-module-hook/master/image/demo1.png"  width="600">
+<img src="https://raw.githubusercontent.com/linb/react-hook-module/master/image/demo1.png"  width="600">
 
 #### Module Tree
 ```
@@ -1117,13 +1117,13 @@ export const Module2 = (props) => {
   │      
   └<Module2 usemodule_uid="global_uid">
  ```
-[Open the demo in CodeSandbox](https://codesandbox.io/s/thirsty-swirles-4iomy "react-module-hook basic demo")
+[Open the demo in CodeSandbox](https://codesandbox.io/s/thirsty-swirles-4iomy "react-hook-module basic demo")
 
 
 ### 3.2. Meterial UI Demo
 ```javascript
 import React from "react";
-import { useModule } from "react-module-hook";
+import { useModule } from "react-hook-module";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
@@ -1295,7 +1295,7 @@ export const Prompt = props => {
 };
 ```
 #### Screenshot
-<img src="https://raw.githubusercontent.com/linb/react-module-hook/master/image/demo2.png"  width="600">
+<img src="https://raw.githubusercontent.com/linb/react-hook-module/master/image/demo2.png"  width="600">
 
 #### Module Tree
 ```
@@ -1310,7 +1310,7 @@ export const Prompt = props => {
          └<Prompt usemodule_uid="Prompt_uid">
 ```
 
-[Open the demo in CodeSandbox](https://codesandbox.io/s/strange-thompson-g4op5 "react-module-hook Materail-UI demo")
+[Open the demo in CodeSandbox](https://codesandbox.io/s/strange-thompson-g4op5 "react-hook-module Materail-UI demo")
  
 ## npm
-[npm link](https://www.npmjs.com/package/react-module-hook "react-module-hook NPM")
+[npm link](https://www.npmjs.com/package/react-hook-module "react-hook-module NPM")
