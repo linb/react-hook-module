@@ -3,17 +3,17 @@
 # react-module-hook
 A react module hook for real configurable app with stateful persistent module tree and peer-to-peer messaging mechanism
 
-## Usage
-### 1. Install
+## 1. Usage
+### 1.1. Install
 ```javascript
 npm install react-module-hook
 ```
 
-### 2. Import
+### 1.2. Import
 ```javascript
 import { useModule } from "react-module-hook";
 ```
-### 3. Call it in a render function
+### 1.3. Call it in a render function
 ```javascript
 ...
 const ReactComponent = props => {
@@ -45,7 +45,7 @@ const ReactComponent = props => {
   // return JSX;
 };
 ```
-### 4. Use the component
+### 1.4. Use the component
 ```javascript
 ...
 const ReactComSub1 = props => {
@@ -92,8 +92,8 @@ const ReactCom = props => {
          └<XReactComSub2 usemodule_uid="alias3" x_id="x_id1">
 ```
 
-## API 
-### useModule static functions
+## 2. API 
+### 2.1. useModule static functions
 #### `useModule.getRootModule`
 ----
 > **useModule.getRootModule( )**  
@@ -279,7 +279,7 @@ const ReactCom = props => {
   // to get data from the global store
   useModule.setDataToStore("path_level1.path_level2", {data:"value"}, false);
 ```
-### useModule utils functions
+### 2.2. useModule utils functions
 #### `useModule.utils.getRand`
  ----
 > **useModule.utils.getRand ( preTag )**  
@@ -528,7 +528,7 @@ const ReactCom = props => {
       );
   };
 ```
-### useModule instance - module functions
+### 2.3. useModule instance - module functions
 #### `getRootModule`
 ----
 > **getRootModule ( )**  
@@ -691,7 +691,7 @@ const ReactCom = props => {
   // to get the ref
   const ref = module.getRef("refName");
 ```
-### For useModule instance with material-UI plugin
+### 2.4. useModule instance - material-UI plugin functions
 #### `showSnackbar`
  ----
 > **showSnackbar ( refName, value )**  
@@ -799,7 +799,7 @@ const ReactCom = props => {
   //...
   module.hideBackdrop( );
 ```
-### For useModule instance with request plugin
+### 2.5. useModule instance - request  plugin functions
 #### `request`
  ----
 > **request ( url, data, method, baseURL, AUTH_TOKEN, header, config )**  
@@ -893,7 +893,7 @@ const ReactCom = props => {
       );
   };
 ```
-### For useModule instance with router plugin
+### 2.6. useModule instance - router plugin functions
 #### `router.navigate`
  ----
 > **router.navigate ( route, state )**  
@@ -976,7 +976,7 @@ const ReactCom = props => {
       );
   };
 ```
-### For useModule instance with auth plugin
+### 2.7. useModule instance - auth plugin functions
 #### `auth.signIn`
  ----
 > **auth.signIn (  )**  
@@ -1059,8 +1059,8 @@ const ReactCom = props => {
     );
   };
 ```
-## Quickstart
-### Basic Demo
+## 3. Quickstart
+### 3.1. Basic Demo
 ```javascript
 import React from "react";
 import { useModule } from "react-module-hook";
@@ -1129,7 +1129,7 @@ export const Module2 = (props) => {
 [Open the demo in CodeSandbox](https://codesandbox.io/s/thirsty-swirles-4iomy "react-module-hook basic demo")
 
 
-### Meterial UI Demo
+### 3.2. Meterial UI Demo
 ```javascript
 import React from "react";
 import { useModule } from "react-module-hook";
