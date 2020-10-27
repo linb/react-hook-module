@@ -170,7 +170,7 @@ const confirm = async (title, description, okCaption, cancelCaption) =>{
     ), div);
   });      
 }
-const prompt = async (title, description, okCaption, cancelCaption) => {
+const prompt = async (title, description, defaultValue, okCaption, cancelCaption) =>{
   return new Promise( resolve => {
     let input = "";
     const div = getEmptyDiv();
@@ -187,7 +187,7 @@ const prompt = async (title, description, okCaption, cancelCaption) => {
                 <DialogContentText id="prompt_fn69vqpc_description">
                     {description}
                 </DialogContentText>
-                <TextField autoFocus margin="dense" defaultValue="" fullWidth onChange={(e) => {input = e.target.value;}}>
+                <TextField autoFocus margin="dense" defaultValue={defaultValue} fullWidth onChange={(e) => {input = e.target.value;}}>
                 </TextField>
             </DialogContent>
             <DialogActions>

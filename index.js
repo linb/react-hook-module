@@ -209,6 +209,7 @@ const getRand = (a) => (a || "") + parseInt(10e8 * Math.random(), 10).toString(3
     return value;
   },
   removeLocalStorage = key => window.localStorage.removeItem(key),
+  clearLocalStorage = key => window.localStorage.clear(),
   postH5ChannelMessage = (channelName, message) => {
     const channel = new BroadcastChannel(channelName);
     channel.postMessage(message);
@@ -262,7 +263,7 @@ const getRand = (a) => (a || "") + parseInt(10e8 * Math.random(), 10).toString(3
   utils = {
     isBoolean, isString, isNumber, isNumeric, isDate, isFunction, isRegexp, isObject, isArray, isEmptyArray, isEmptyObject, isReactCom, isUseModuleCom, isEvent, isDomElem, isReactClassCom, isReactFunCom, isReactElem, isReactHTMLElem, isReactObjElem, isUseModuleElem,
     deepGet, deepSet, deepEquals, deepClone, getRand, getNo, promise, asyncExecute,
-    getCookie, setCookie, removeCookie, clearCookie, getLocalStorage, setLocalStorage, removeLocalStorage,
+    getCookie, setCookie, removeCookie, clearCookie, getLocalStorage, setLocalStorage, removeLocalStorage, clearLocalStorage, 
     toUTF8, fromUTF8, idleExecute, makeURLQueryString, getURLParams, selectLocalFiles, postH5ChannelMessage
   },
   REPO = {},
