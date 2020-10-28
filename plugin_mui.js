@@ -122,23 +122,17 @@ const alert = async (title, description, okCaption) =>{
       ReactDOM.unmountComponentAtNode(div);
       resolve();
     };
-    ReactDOM.render((
-        <Dialog open={true} onClose={() => onClose(false)} fullWidth={true} aria-labelledby="alert_9za5tayt_title" aria-describedby="alert_9za5tayt_description">
-            <DialogTitle id="alert_9za5tayt_title">
-                {title}
-            </DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert_9za5tayt_description">
-                {description}
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => onClose(true) }  color="primary">
-                {okCaption || "O K" }
-              </Button>
-            </DialogActions>
-          </Dialog>
-    ), div);
+    ReactDOM.render(React.createElement(Dialog, {
+        key:"alert", open:true, onClose:() => onClose(false), fullWidth:true, 'aria-labelledby':"alert_9za5tayt_title", 'aria-describedby':"alert_9za5tayt_description"
+    },[
+        React.createElement(DialogTitle, { key:"alert_title", id:"alert_9za5tayt_title"}, title),
+        React.createElement(DialogContent, {key:"alert_con"} , [
+          React.createElement(DialogContentText, { key:"alert_contxt", id:"alert_9za5tayt_description" }, description)
+        ]),
+        React.createElement(DialogActions, {key:"alert_actions" }, [
+          React.createElement(Button, { key:"alert_btn", onClick:() => onClose(true), color:"primary" }, okCaption || "O K")
+        ])
+    ]), div);
   });
 }
 const confirm = async (title, description, okCaption, cancelCaption) =>{
@@ -148,26 +142,18 @@ const confirm = async (title, description, okCaption, cancelCaption) =>{
       ReactDOM.unmountComponentAtNode(div);
       resolve(result);
     };
-    ReactDOM.render((
-        <Dialog open={true} onClose={() => onClose(false)} fullWidth={true} aria-labelledby="confirm_jlh80pil_title" aria-describedby="confirm_jlh80pil_description">
-            <DialogTitle id="confirm_jlh80pil_title">
-                {title}
-            </DialogTitle>
-            <DialogContent>
-                <DialogContentText id="confirm_jlh80pil_description">
-                    {description}
-                </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={() => onClose(false)} color="secondary">
-                  {cancelCaption || "Cancel"}
-                </Button>
-                <Button onClick={() => onClose(true)} color="primary">
-                  {okCaption || "O K"}
-                </Button>
-            </DialogActions>
-        </Dialog>
-    ), div);
+    ReactDOM.render(React.createElement(Dialog, {
+        key:"confirm", open:true, onClose:() => onClose(false), fullWidth:true, 'aria-labelledby':"confirm_jlh80pil_title", 'aria-describedby':"confirm_jlh80pil_description"
+    },[
+        React.createElement(DialogTitle, { key:"confirm_title", id:"confirm_jlh80pil_title"}, title),
+        React.createElement(DialogContent, {key:"confirm_con" } , [
+          React.createElement(DialogContentText, { key:"confirm_contxt", id:"confirm_jlh80pil_description" }, description)
+        ]),
+        React.createElement(DialogActions, {key:"confirm_act" }, [
+          React.createElement(Button, { key:"confirm_btn1", onClick:() => onClose(false), color:"secondary" }, cancelCaption || "Cancel"),
+          React.createElement(Button, { key:"confirm_btn2", onClick:() => onClose(true), color:"primary" }, okCaption || "O K")
+        ])
+    ]), div);
   });
 }
 const prompt = async (title, description, defaultValue, okCaption, cancelCaption) =>{
@@ -178,28 +164,19 @@ const prompt = async (title, description, defaultValue, okCaption, cancelCaption
       ReactDOM.unmountComponentAtNode(div);
       resolve(result);
     };
-    ReactDOM.render((
-        <Dialog open={true} onClose={() => onClose(null)} fullWidth={true} aria-labelledby="prompt_fn69vqpc_title" aria-describedby="prompt_fn69vqpc_description" key="blg87o2c">
-            <DialogTitle id="prompt_fn69vqpc_title">
-                {title}
-            </DialogTitle>
-            <DialogContent>
-                <DialogContentText id="prompt_fn69vqpc_description">
-                    {description}
-                </DialogContentText>
-                <TextField autoFocus={true} margin="dense" defaultValue={defaultValue} fullWidth={true} onChange={(e) => {input = e.target.value;}}>
-                </TextField>
-            </DialogContent>
-            <DialogActions>
-                <Button color="secondary" onClick={() => onClose(null)}>
-                    {cancelCaption || "Cancel"}
-                </Button>
-                <Button color="primary" onClick={() => onClose(input)}>
-                    {okCaption || "O K"}
-                </Button>
-            </DialogActions>
-        </Dialog>
-    ), div);
+    ReactDOM.render(React.createElement(Dialog, {
+        key:"prompt", open:true, onClose:() => onClose(null), fullWidth:true, 'aria-labelledby':"prompt_fn69vqpc_title", 'aria-describedby':"prompt_fn69vqpc_description"
+    },[
+        React.createElement(DialogTitle, { key:"prompt_tt", id:"prompt_fn69vqpc_title"}, title),
+        React.createElement(DialogContent, {key:"prompt_con"} , [
+          React.createElement(DialogContentText, { key:"prompt_contxt", id:"prompt_fn69vqpc_description" }, description),
+          React.createElement(TextField, { key:"prompt_txtf", autoFocus:true, margin:"dense", fullWidth:true, defaultValue:defaultValue, onChange:(e) => {input = e.target.value} })
+        ]),
+        React.createElement(DialogActions, {key:"prompt_act"}, [
+          React.createElement(Button, { key:"confirm_btn1", onClick:() => onClose(null), color:"secondary" }, cancelCaption || "Cancel"),
+          React.createElement(Button, { key:"confirm_btn2", onClick:() => onClose(input), color:"primary" }, okCaption || "O K")
+        ])
+    ]), div);
   });
 }
 
@@ -226,11 +203,11 @@ const showBackdrop = (id="default", clickAway = true, style={}, transitionDurati
     delete useModule._CACHE["backdrop:"+id];
   }
 
-  ReactDOM.render(
-    <Backdrop style={style} open={true} onClick={ ()=> clickAway && close() } transitionDuration={transitionDuration}>
-      { ( children===true ? <CircularProgress color="inherit" /> : children ) || null }
-    </Backdrop>
-  , div);
+  ReactDOM.render(React.createElement(Backdrop, {
+      style:style, open:true, onClick:()=>{clickAway && close()}, transitionDuration:transitionDuration
+    },
+    ( children===true ? React.createElement(CircularProgress, {color:"inherit"}) : children ) || null
+  ), div);
 
   useModule._CACHE["backdrop:"+id] = {
     hide: ()=>{
