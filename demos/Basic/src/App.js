@@ -1,5 +1,5 @@
 import React from "react";
-import useModule from "react-module-hook";
+import { useModule } from "react-hook-module";
 
 export default (props) => {
   const { module } = useModule(props, {
