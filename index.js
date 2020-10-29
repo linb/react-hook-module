@@ -272,7 +272,7 @@ const getRand = (a) => (a || "") + parseInt(10e8 * Math.random(), 10).toString(3
   USE_MODULE_SYMBOL = Symbol('This is an useModule Component'),
   ReactError = error => Object.assign(error, { name: "Invariant Violation" }),
   arrProp = ["children"],
-  hashProp = "options,_childrenMap,_uidMapAlias,_aliasMapUid,dftProps,dftState,props,refs,tagVar,actions,_enhancedComs,_CACHE".split(","),
+  hashProp = "options,_childrenMap,_uidMapAlias,_aliasMapUid,dftProps,dftState,props,_props,refs,tagVar,actions,_enhancedComs,_CACHE".split(","),
   all_events = Object.freeze({
     beforeMergeState: "stateToMerge/*Object*/, force/*Boolean*/",
     onStateChanged: "state/*Object*/, force/*Boolean*/",
@@ -298,7 +298,8 @@ class Module {
     var ns = this;
     ns._destroyed = false;
     ns.realState = [{}, ()=>{}];
-    ns.domRef = ns.rendering = null;
+    ns.domRef = null;
+    ns.rendered = ns.rendering = 0;
     ns._enhancedIndex = 1;
     ns._wrapperMap = new Map();
     ns._useModuleSymbol = USE_MODULE_SYMBOL;
@@ -406,6 +407,7 @@ class Module {
 
     ns.rendering = 1;
     React.useEffect(() => {
+      ns.rendering = 0;
       if (ns.onceUpdate) {
         let once = ns.onceUpdate;
         delete ns.onceUpdate;
@@ -413,7 +415,6 @@ class Module {
       }
       ns.$onUpdate && ns.$onUpdate();
       ns.fireEvent("onUpdate");
-      ns.rendering = null;
     });
 
     ns.$onReady && ns.$onReady();
@@ -754,7 +755,8 @@ const pickBranch = symbol => {
 const useModule = (props, options, branch) => {
   const ref = React.useRef( );
   let module = null, msg, uid, parent,
-    root = REPO[(branch = branch && typeof branch === "string" ? branch : "_")];
+    // when props.usemodule_uid includes ".", it's not a user specified one definitely
+    root = REPO[(branch = (branch && typeof branch) === "string" ? branch : (props && props.usemodule_uid && props.usemodule_uid.indexOf(".")!==-1) ? props.usemodule_uid.split(".")[0] : "_")];
   if (!root) root = useModule.pickBranch(branch);
 
   module = root.map_ref.get(ref);
@@ -776,7 +778,7 @@ const useModule = (props, options, branch) => {
       parent = null;
     uid = ref.current = (props && props.usemodule_uid) || getRand("UID_");
     // if re-rendered by React
-    if(parent && !parent.rendering){
+    if(parent && parent.rendered){
       module = root._globalChildrenMap[uid];
       if(module){
         msg = `Got by uid = ${uid}`;
