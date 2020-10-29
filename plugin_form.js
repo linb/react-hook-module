@@ -3,15 +3,18 @@ import { utils } from "./";
 import { useForm  } from "react-hook-form";
 export * from "react-hook-form";
 
-const Form = ({ children, onSubmit, onReset, onError, onInit, onWatch, onFormState, defaultValues, rules, ...props }) => {
+const Form = ({ children, onSubmit, onReset, onError, onInit, onWatch, onFormState, defaultValues, rules, formOptions, ...props }) => {
   const id = React.useRef( utils.getRand() ),
     ref = React.useRef(),
-    instance = useForm({ defaultValues }),
+    instance = useForm( formOptions ),
     { handleSubmit, register, watch, formState, reset } = instance;
+  formOptions = formOptions || {};
+  formOptions.defaultValues = defaultValues;    
   if ( typeof onWatch === "function") utils.asyncExecute(onWatch, 0, "react-hook-form_" + id, [ watch() ]);
   if ( typeof onFormState === "function") {
-    const { isDirty,isValid, dirtyFields, isSubmitting, isSubmitted, touched, submitCount, errors } = formState;
-    onFormState({ isDirty,isValid, dirtyFields, isSubmitting, isSubmitted, touched, submitCount, errors });
+    // isValid is only applicable with formOptions.mode=onChange or formOptions.mode=onBlur.
+    const { isDirty, isValid, dirtyFields, isSubmitting, isSubmitted, touched, submitCount, errors } = formState;
+    onFormState({ isDirty, isValid, dirtyFields, isSubmitting, isSubmitted, touched, submitCount, errors }, formState);
   }
   React.useEffect(() => {
       for ( let name, field, elements = ref.current.elements, i = 0, l = elements.length; i < l; i++ ) {
