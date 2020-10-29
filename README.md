@@ -1,4 +1,4 @@
-# react-hook-module
+# react-hook-module - version 0.2.2
 A react module hook for real configurable app with stateful persistent module tree and peer-to-peer messaging mechanism
 
 ## 1. Usage
