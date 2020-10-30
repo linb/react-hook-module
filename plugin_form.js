@@ -36,4 +36,4 @@ const Form = ({ children, onSubmit, onReset, onError, onInit, onWatch, onFormSta
     }, children);
   }, [children, handleSubmit, onSubmit, onError, reset, props, ref, defaultValues]);
 }
-export { Form as UMForm };
+export { Form as RHForm };
