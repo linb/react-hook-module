@@ -454,8 +454,8 @@ class Module {
       }
     }
 
-    ns.domRef = ns.rendering = ns.parent = ns._useModuleSymbol = ns._ref = null;
-    ns.rendered = 0;
+    ns.domRef = ns.parent = ns._useModuleSymbol = ns._ref = null;
+    ns.rendered = ns.rendering = 0;
     ns.realState = [{}, ()=>{}];
     hashProp.forEach(key => (ns[key] = {}));
     arrProp.forEach(key => (ns[key].length = 0));
@@ -468,7 +468,7 @@ class Module {
   }
   _addChild(uid, alias, ref, props) {
     const ns = this, root = ns._getRoot();
-    let mdl = ns._childrenMap[alias], msg;
+    let mdl = root._globalChildrenMap[alias], msg;
     if (mdl) {
       // clear old
       delete root._uidMapAlias[mdl._uid];
