@@ -185,16 +185,11 @@ const showBackdrop = (id="default", clickAway = true, style={}, transitionDurati
     return;
   }
   const div = getEmptyDiv();
-  if(!style.zIndex){
-    const useStyle = makeStyles(theme => {
+  const theme = useTheme();
+  if(!style.hasOwnProperty("zIndex")){
       style.zIndex = theme.zIndex.drawer + 1;
-    });
-    ReactDOM.render(React.createElement(() => {
-      useStyle();
-      return "";
-    }),div);
   }
-  if(!style.color){
+  if(!style.hasOwnProperty("color")){
     style.color = "#fff"
   }
 

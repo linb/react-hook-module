@@ -9,7 +9,7 @@ const RelativeRouter = ({ children, _usemodule_in_design }) =>{
     const routes = [];
     children.forEach(child => {
       if(child.props && child.props.path && typeof(child.props.path)==="string"){
-        routes.push({ path: child.props.path, element : child });
+        routes.push({ path: child.props.path, element : React.createElement(React.Fragment,null,child.props.children) });
       }
     });
     return useRoutes(routes);
@@ -17,19 +17,25 @@ const RelativeRouter = ({ children, _usemodule_in_design }) =>{
     children.forEach(child => {
       if(child.props && Array.isArray(child.props.children)){
         child.props.children = child.props.children.map( c => {
-            const { children, ...others } = c.props; 
-            return (c.props && !/^[AB]_/.test(c.props.id) && c.props.path) ? React.createElement( "div",
-              { ...others, style:{border:'dotted #444 1px',padding:"4px",margin:"4px",background:(c.props._usemodule_lastsel?"#fffbd4":"")}},
-              !c.props._usemodule_lastsel
-                ? "{ path : '" + (c.props.path||"") + "', title : '" + (c.props.title||"") + "', component: <"+c.props._usemodule_vartag+">" + (children&&children.length===1&&children[0]&&children[0].type==='usemoduletext'?children[0].props.children[0]:"...") + "</"+c.props._usemodule_vartag+"> }" 
-                : c
-            ) : c;
-          })
+          let { children, ...others } = c.props; 
+          if (others && !/^[AB]_/.test(others.id) && others.path){
+              if(!Array.isArray(children)) children = [children];
+              children.unshift(React.createElement("div",
+                {style:{'font-size':'75%',border:'dashed #444 1px',padding:"4px",margin:"4px 0",background:others._usemodule_lastsel?"#fffbd4":""}},
+                "{ path : '" + (others.path||"") + "', title : '" + (others.title||"") + "', component: <"+others._usemodule_vartag+">" + (children&&children.length===1&&children[0]&&children[0].type==='usemoduletext'?children[0].props.children[0]:"...") + "</"+others._usemodule_vartag+"> }" 
+              ));
+              return React.createElement( "div", others, others._usemodule_lastsel ? children: children[0] );
+            }else{
+              return c;
       }
     });
-    return React.createElement("div", {style:{"font-size":"75%",border:'dashed #444 1px',padding:"4px",margin:"4px"}}, children);
+      }
+    });
+    return React.createElement("div", null, children);
   }
 };
+RelativeRouter._usemodule_nowrap = 1;
+RelativeRouter._usemodule_nostyle = 1;
 
 const useRouter = () => {
   const params = useParams();
@@ -38,7 +44,16 @@ const useRouter = () => {
   const navigate = useNavigate();
 
   return React.useMemo(() => {
-    return { params, searchParams, setSearchParams, location, navigate, replace: route=>navigate(route, {replace: true}) };
+    return { params, searchParams, setSearchParams, location, navigate, 
+      pathname: location.pathname,
+      relativePath: "/" + params["*"].split("/").pop(),
+      query: {
+        ...useModule.utils.getURLParams(location.search),
+        ...params
+      },
+      push: route=>navigate(route),
+      replace: route=>navigate(route, {replace: true}) 
+    };
   }, [params, searchParams, setSearchParams, location, navigate ]);
 };
 
@@ -46,7 +61,7 @@ useModule.statePlugIn("router", module => {
   const opt = module.options;
   if(opt.props && opt.props.router){
     return opt._usemodule_in_design
-        ? { params:{}, searchParams:{},setSearchParams:(searchParams)=>{}, location:{hash: "",key: "default",pathname: "/",search: "",state: null}, navigate:(route, option)=>{}, replace:(route)=>{} }
+        ? { params:{}, searchParams:{},setSearchParams:(searchParams)=>{}, location:{hash: "",key: "default",pathname: "/",search: "",state: null}, pathname:"/", relativePath:"/", query:{"*":"/"}, navigate:(route, option)=>{}, push:(route)=>{}, replace:(route)=>{} }
       : useRouter();
   }
 });

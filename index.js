@@ -56,7 +56,7 @@ const getRand = (a) => (a || "") + parseInt(10e8 * Math.random(), 10).toString(3
   isEmptyArray = value => isArray(value) && value.length===0,
   isEmptyObject = value => isObject(value) && value.keys.length===0,
 
-  isDomElem = value =>  typeof HTMLElement === "object" ? value instanceof HTMLElement : value && typeof value === "object" && (value.nodeType === 1||value.nodeType === 11) && typeof value.nodeName==="string",
+  isDomElem = value =>  typeof Element === "object" ? value instanceof Element : typeof HTMLElement === "object" ? value instanceof HTMLElement : value && typeof value === "object" && (value.nodeType === 1||value.nodeType === 11) && typeof value.nodeName==="string",
   isEvent = value => value instanceof Event,
 
   isReactClassCom = value =>  typeof value === 'function' && value.prototype && !!value.prototype.isReactComponent,
@@ -987,19 +987,21 @@ const LazyComponent = React.forwardRef(({component, _usemodule_in_design, _rende
     return com;
   }
 });
-const If = ({condition, exact, _usemodule_in_design, children, ...props} ) => {
+const If = ({condition, exact, _usemodule_in_design, _usemodule_lastsel, children, ...props} ) => {
   if(_usemodule_in_design){
     if(!isArray(children)) children = [children];
-    children.unshift(React.createElement("div",null,`<If condition='${props['data-usemodule_condition']}'>`));
-    return React.createElement("div",{style:{'font-size':'75%',border:'dashed #444 1px',padding:"4px",margin:"4px"}},children);
+    children.unshift(React.createElement("div",{style:{'font-size':'75%',border:'dashed #444 1px',padding:"4px",margin:"4px 0",background:_usemodule_lastsel?"#fffbd4":""}},`<If condition='${props['data-usemodule_condition']}'>`));
+    children.push(React.createElement("div",{style:{'font-size':'75%',border:'dashed #444 1px',padding:"4px",margin:"4px 0",background:_usemodule_lastsel?"#fffbd4":""}},`</If>`));
+    return React.createElement("div", null, children );
   }else
-    return exact?condition===true:condition ? utils.isArray(children)? React.Children.map(children, child => child): (children || null) : null;
+    return (exact ? condition===true : condition) ? (utils.isArray(children)? React.Children.map(children, child => child): (children || null)) : null;
 }
 const Iterator = ({iterator, _usemodule_in_design, children, ...props} ) =>{
   if(_usemodule_in_design){
     if(!isArray(children)) children = [children];
-    children.unshift(React.createElement("div",null,`<Iterator iterator='${props['data-usemodule_iterator']}'>`));
-    return React.createElement("div",{style:{'font-size':'75%',border:'dashed #444 1px',padding:"4px",margin:"4px"}},children);
+    children.unshift(React.createElement("div",{style:{'font-size':'75%',border:'dashed #444 1px',padding:"4px 0",margin:"4px"}},`<Iterator iterator='${props['data-usemodule_iterator']}'>`));
+    children.push(React.createElement("div",{style:{'font-size':'75%',border:'dashed #444 1px',padding:"4px 0",margin:"4px"}},`</Iterator>`));
+    return React.createElement("div", null, _usemodule_lastsel ? children: children[0] );
   }else
     if(isArray(iterator)){
       return iterator.map( item => isObject(item) ? React.Children.map(children, child => React.cloneElement(child, item)) : null );
