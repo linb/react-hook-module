@@ -14,11 +14,9 @@ const RelativeRouter = ({ children, _usemodule_in_design }) =>{
     });
     return useRoutes(routes);
   }else{
-    children.forEach(child => {
-      if(child.props && Array.isArray(child.props.children)){
-        child.props.children = child.props.children.map( c => {
-          let { children, ...others } = c.props; 
-          if (others && !/^[AB]_/.test(others.id) && others.path){
+    children = children.map(child => {
+      let { children, ...others } = child.props; 
+      if (others && others.path){
               if(!Array.isArray(children)) children = [children];
               children.unshift(React.createElement("div",
                 {style:{'font-size':'75%',border:'dashed #444 1px',padding:"4px",margin:"4px 0",background:others._usemodule_lastsel?"#fffbd4":""}},
@@ -26,15 +24,12 @@ const RelativeRouter = ({ children, _usemodule_in_design }) =>{
               ));
               return React.createElement( "div", others, others._usemodule_lastsel ? children: children[0] );
             }else{
-              return c;
-      }
-    });
+          return child;
       }
     });
     return React.createElement("div", null, children);
   }
 };
-RelativeRouter._usemodule_nowrap = 1;
 RelativeRouter._usemodule_nostyle = 1;
 
 const useRouter = () => {
