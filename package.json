@@ -1,6 +1,6 @@
 {
   "name": "react-hook-module",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "A react module hook for real configurable app with stateful persistent module tree and peer-to-peer messaging mechanism",
   "main": "index.js",
   "scripts": {

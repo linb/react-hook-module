@@ -41,7 +41,7 @@ const useRouter = () => {
   return React.useMemo(() => {
     return { params, searchParams, setSearchParams, location, navigate, 
       pathname: location.pathname,
-      relativePath: "/" + params["*"].split("/").pop(),
+      relativePath: "/" + (params["*"]||"").split("/").pop(),
       query: {
         ...useModule.utils.getURLParams(location.search),
         ...params

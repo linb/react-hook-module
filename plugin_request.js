@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useModule } from "./";
 
-const useRequest = ( url, data="", method="get", baseURL="", AUTH_TOKEN="", header={}, config = {}, execute=true ) => {
+const useRequest = ( url, params="", data="", method="get", baseURL="", AUTH_TOKEN="", header={}, config = {}, execute=true ) => {
   let source;
   const [status, setStatus] = React.useState("idle");
   const [error, setError] = React.useState(null);
@@ -15,11 +15,8 @@ const useRequest = ( url, data="", method="get", baseURL="", AUTH_TOKEN="", head
   url && (config.url = url);
   method && (config.method = method);
   baseURL && (config.baseURL = baseURL);
-  if(!config.method || config.method==="get"){
-    data && (config.params = data);
-  }else{
+  params && (config.params = params);
   data && (config.data = data);
-  }
   config.header = Object.assign({}, header, config.header);
   AUTH_TOKEN && (config.header['Authorization'] = AUTH_TOKEN);
   if(!config.cancelToken){
@@ -67,7 +64,7 @@ useModule.statePlugIn("request", module => {
   if(props && props.req_url){
     return  opt._usemodule_in_design
         ? { status:"idle", data:{}, error:null, execute: props.req_execute, fetch:()=>{}, cancel:()=>{} }
-        : useRequest( props.req_url, props.req_data, props.req_method, props.req_baseURL, props.req_AUTH_TOKEN, props.req_header, props.req_config, props.req_execute );
+        : useRequest( props.req_url, props.req_params, props.req_data, props.req_method, props.req_baseURL, props.req_AUTH_TOKEN, props.req_header, props.req_config, props.req_execute );
   }
 });
 
