@@ -2,7 +2,12 @@ import React from "react";
 import axios from "axios";
 import { useModule } from "./";
 
-const useRequest = ( url, params="", data="", method="get", baseURL="", AUTH_TOKEN="", header={}, config = {}, execute=true ) => {
+let BASE_URL = "";
+let MOCK_FETCH = null;
+const setGlobalBaseURL = url => (BASE_URL = url);
+const setMockFetch = fun => (MOCK_FETCH = fun);
+
+const useRequest = ( url, params="", data="", method="get", baseURL="", AUTH_TOKEN="", header={}, config = {}, execute=false ) => {
   let source;
   const [status, setStatus] = React.useState("idle");
   const [error, setError] = React.useState(null);
@@ -14,7 +19,7 @@ const useRequest = ( url, params="", data="", method="get", baseURL="", AUTH_TOK
   config = Object.assign({}, config);
   url && (config.url = url);
   method && (config.method = method);
-  baseURL && (config.baseURL = baseURL);
+  config.baseURL = ((baseURL || BASE_URL || "") + "") || undefined;
   params && (config.params = params);
   data && (config.data = data);
   config.header = Object.assign({}, header, config.header);
@@ -27,7 +32,7 @@ const useRequest = ( url, params="", data="", method="get", baseURL="", AUTH_TOK
   const fetch = () => {
     if (config.url) {
       setStatus("loading");
-      axios(config).then(response => {
+      (MOCK_FETCH || axios)(config).then(response => {
         setResponse(response);
         setStatus("success");
       }).catch(error => {
@@ -61,11 +66,13 @@ useModule.refPlugIn("request", module => {
 
 useModule.statePlugIn("request", module => {
   const opt = module.options, props = opt && opt.props;
-  if(props && props.req_url){
+  if(props){
     return  opt._usemodule_in_design
-        ? { status:"idle", data:{}, error:null, execute: props.req_execute, fetch:()=>{}, cancel:()=>{} }
-        : useRequest( props.req_url, props.req_params, props.req_data, props.req_method, props.req_baseURL, props.req_AUTH_TOKEN, props.req_header, props.req_config, props.req_execute );
+        ? { status:"idle", params:{}, data:{}, response:{}, error:null, execute: props.req_execute, fetch:()=>{}, cancel:()=>{} }
+        : useRequest( props.req_url, props.req_params, props.req_data, props.req_method, props.req_baseURL, props.req_AUTH_TOKEN, props.req_header, props.req_config, 
+          props.req_execute===true ? true:props.req_execute===false ? false: !!props.req_url
+        );
   }
 });
 
-export { useRequest, axios };
+export { useRequest, axios, setGlobalBaseURL, setMockFetch };

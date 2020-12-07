@@ -539,7 +539,7 @@ class Module {
     if(false !== ns.fireEvent("beforeMergeState", [state, force])){
       state = { ...ns.state, ...state };
       if (force || !deepEquals(state, ns.realState[0])) {
-        ns.realState[1](state);
+        ns.realState[1]( Object.assign({}, ns.realState[0], state) );
         ns.fireEvent("onStateChanged", [state, force]);
       }
     }
@@ -678,8 +678,6 @@ class Module {
     const comDisplayName = typeof(component)=="string" ? component : (component.displayName || component.name || ("Unknown_" + module._enhancedIndex++));
     // useCallback not allowed here
     const Wrapper = React.forwardRef(function({children, ...props}, ref) {
-      if(ref)props.ref=ref;
-
       const x_id = props.x_id;
       const realTag = isString(component)&&props.usemodule_tag&&isString(props.usemodule_tag) ? props.usemodule_tag: component;
       if(!x_id) return React.createElement(realTag, props, children);
@@ -687,14 +685,8 @@ class Module {
         const msg = `The same x_id '${x_id}' already exists in the useModule`;
         setTimeout(function () { console.warn(msg) });
       }
-
-      if(Wrapper._$enhancedUseModule) props.usemodule_parent = module;
-
-      const realState = module.realState[0],
-        replace = realState.$_replace_$[x_id],
-        x_iterator = props.x_iterator;
-      let iterator = x_iterator && (deepGet(module,['state',x_iterator]) || deepGet(module,['props',x_iterator]));
-
+      const realState = module.realState[0], replace = realState.$_replace_$[x_id];
+      let iterator = props.x_iterator;
       if(iterator && !isArray(iterator))
         iterator = null;
 
@@ -851,7 +843,7 @@ const useModule = (props, options, branch) => {
   var exp = { module };
   for(let p in StatePlugins)
     exp[p] = StatePlugins[p](module);
-  return exp;
+  return module.stateContext = exp;
   //  },[]);
 };
 const STORE = {};

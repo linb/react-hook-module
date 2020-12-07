@@ -2,18 +2,18 @@ import React from "react";
 import { useModule } from "./";
 
 const authContext = React.createContext();
-const ProvideAuth = ({ signIn, signOut, signUp, authInit, authClean, children }) => {
+const ProvideAuth = ({ signIn, signOut, signUp, user, token, authInit, authClean, children, ...tagVar }) => {
   return React.createElement(authContext.Provider, {
-      value: useProvideAuth(signIn, signOut, signUp, authInit, authClean)
+      value: useProvideAuth(signIn, signOut, signUp, user, token, authInit, authClean, tagVar)
     }, children);
 }
 const useAuth = () => {
   return React.useContext(authContext);
 };
 
-function useProvideAuth(signIn, signOut, signUp, authInit, authClean) {
-  const [user, setUser] = React.useState(null);
-  const [token, setToken] = React.useState(null);
+function useProvideAuth(signIn, signOut, signUp, dftUser, dftToken, authInit, authClean, tagVar) {
+  const [user, setUser] = React.useState(dftUser!==undefined ? dftUser : false);
+  const [token, setToken] = React.useState(dftToken!==undefined ? dftToken : false);
 
   // initial & cleanup
   React.useEffect(() => {
@@ -25,14 +25,14 @@ function useProvideAuth(signIn, signOut, signUp, authInit, authClean) {
   //eslint-disable-next-line
   }, []); 
 
-  return { user, setUser, token, setToken, signIn, signOut, signUp };
+  return { user, setUser, token, setToken, signIn, signOut, signUp, ...tagVar };
 }
 
 useModule.statePlugIn("auth", module => {
   const opt = module.options;
   if(opt.props && opt.props.auth){
     return opt._usemodule_in_design
-    ? {user:{token:"auth_token", name:"auth_name"}, signIn:()=>{}, signUp:()=>{}, signOut:()=>{}}
+      ? {user:{token:false, name:false, user:false}, signIn:()=>{}, signUp:()=>{}, signOut:()=>{}}
     : useAuth();
   }
 });
