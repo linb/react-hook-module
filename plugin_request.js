@@ -66,13 +66,12 @@ useModule.refPlugIn("request", module => {
 
 useModule.statePlugIn("request", module => {
   const opt = module.options, props = opt && opt.props;
-  if(props){
     return  opt._usemodule_in_design
-        ? { status:"idle", params:{}, data:{}, response:{}, error:null, execute: props.req_execute, fetch:()=>{}, cancel:()=>{} }
-        : useRequest( props.req_url, props.req_params, props.req_data, props.req_method, props.req_baseURL, props.req_AUTH_TOKEN, props.req_header, props.req_config, 
+    ? { status:"idle", params:{}, data:{}, response:{}, error:null, execute: props && props.req_execute || false, fetch:()=>{}, cancel:()=>{} }
+    : (props && (props.enableRequest || props.req_url))
+        ? useRequest( props.req_url, props.req_params, props.req_data, props.req_method, props.req_baseURL, props.req_AUTH_TOKEN, props.req_header, props.req_config, 
           props.req_execute===true ? true:props.req_execute===false ? false: !!props.req_url
-        );
-  }
+        ) : {};
 });
 
 export { useRequest, axios, setGlobalBaseURL, setMockFetch };

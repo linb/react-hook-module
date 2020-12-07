@@ -27,14 +27,11 @@ function useProvideAuth(signIn, signOut, signUp, dftUser, dftToken, authInit, au
 
   return { user, setUser, token, setToken, signIn, signOut, signUp, ...tagVar };
 }
-
 useModule.statePlugIn("auth", module => {
   const opt = module.options;
-  if(opt.props && opt.props.auth){
     return opt._usemodule_in_design
       ? {user:{token:false, name:false, user:false}, signIn:()=>{}, signUp:()=>{}, signOut:()=>{}}
-    : useAuth();
-  }
+    : (opt.props && opt.props.enableAuth) ? useAuth() : {};
 });
 
 export { ProvideAuth, useAuth };

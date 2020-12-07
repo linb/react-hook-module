@@ -54,11 +54,10 @@ const useRouter = () => {
 
 useModule.statePlugIn("router", module => {
   const opt = module.options;
-  if(opt.props && opt.props.router){
     return opt._usemodule_in_design
         ? { params:{}, searchParams:{},setSearchParams:(searchParams)=>{}, location:{hash: "",key: "default",pathname: "/",search: "",state: null}, pathname:"/", relativePath:"/", query:{"*":"/"}, navigate:(route, option)=>{}, push:(route)=>{}, replace:(route)=>{} }
-      : useRouter();
-  }
+    : (opt.props && opt.props.enableRouter)
+        ? useRouter() : {};
 });
 
 export { RelativeRouter, useRouter };
