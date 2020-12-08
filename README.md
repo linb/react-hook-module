@@ -25,10 +25,11 @@ const ReactComponent = props => {
     // for extra data
     tagVar:{},
     // enable router
-    router: true,
+    enableRouter: true,
     // enable auth
-    auth: true,
+    enableAuth: true,
     // the request configure
+    enableRequest: true,
     req_url : `${useModule.resolveURL( "data/demo.json" ) }`,
     req_data : { key : "value" },
     req_method : "post",
