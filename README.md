@@ -24,6 +24,8 @@ const ReactComponent = props => {
     actions:{"actionName":()=>()},
     // for extra data
     tagVar:{},
+    // enable HotKeys
+    enableHotKeys: true,
     // enable router
     enableRouter: true,
     // enable auth
