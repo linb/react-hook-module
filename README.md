@@ -19,27 +19,28 @@ const ReactComponent = props => {
     // the default state for this module
     state:{},
     // the default props for this module
-    props:{},
+    props:{
+        // enable HotKeys
+        enableHotKeys: true,
+        // enable router
+        enableRouter: true,
+        // enable auth
+        enableAuth: true,
+        // the request configure
+        enableRequest: true,
+        req_url : `${useModule.resolveURL( "data/demo.json" ) }`,
+        req_data : { key : "value" },
+        req_method : "post",
+        req_baseURL : null,
+        req_AUTH_TOKEN : null,
+        req_header : null,
+        req_config : null,
+        req_execute : true
+    },
     // actions for this module
     actions:{"actionName":()=>()},
     // for extra data
-    tagVar:{},
-    // enable HotKeys
-    enableHotKeys: true,
-    // enable router
-    enableRouter: true,
-    // enable auth
-    enableAuth: true,
-    // the request configure
-    enableRequest: true,
-    req_url : `${useModule.resolveURL( "data/demo.json" ) }`,
-    req_data : { key : "value" },
-    req_method : "post",
-    req_baseURL : null,
-    req_AUTH_TOKEN : null,
-    req_header : null,
-    req_config : null,
-    req_execute : true
+    tagVar:{}    
   }); 
 
   // ...
@@ -945,7 +946,7 @@ Normally, you don't need to set 'req_execute' to false for the default request i
       // If no 'router' in props, or 'props.router' is false, the router will be undefined 
       const { module, router } = useModule(props, {
         props:{
-          router : true
+          enableRouter : true
         }
       }); 
       return (
@@ -1036,7 +1037,7 @@ Normally, you don't need to set 'req_execute' to false for the default request i
   import { If } from "react-hook-module";
   const App = props => {
       // If no 'auth' in props, or 'props.auth' is false, the auth will be undefined 
-      const { module, auth } = useModule(props, { auth: true });
+      const { module, auth } = useModule(props, { enableAuth: true });
       return (
       <React.Fragment>
         <If condition={auth && auth.user} >
