@@ -1,6 +1,8 @@
 # react-hook-module - version 0.3
 A react module hook for real configurable app with stateful persistent module tree and peer-to-peer messaging mechanism
 
+Created for https://crossui.com/ReactBuilder, but can power any React project.
+
 ## 1. Usage
 ### 1.1. Install
 ```javascript
